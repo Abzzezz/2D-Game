@@ -23,9 +23,9 @@ public class ObjectManager {
     }
 
 
-    public Prevent getPrevent(Class<? extends Prevent> prevent)  {
+    public Prevent getPrevent(String ID)  {
         for (Prevent prevent1 : getPrevents()) {
-            if(prevent1.getClass() == prevent) {
+            if(prevent1.getID() == ID) {
                 return prevent1;
             }
         }

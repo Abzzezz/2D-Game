@@ -15,12 +15,12 @@ import java.io.IOException;
 
 public class TextureRenderer {
 
-    private static Texture texture;
+    private Texture texture;
 
     /*
     Call before rendering.
      */
-    public static void initTexture(String textureName, String format) {
+    public void initTexture(String textureName, String format) {
         try {
             texture = TextureLoader.getTexture(format, Main.class.getResourceAsStream("maingame/images/" + textureName));
         } catch (IOException e) {
@@ -30,8 +30,9 @@ public class TextureRenderer {
 
     }
 
-    public static void drawImage(float xPos, float yPos) {
-        GL11.glBindTexture(1, texture.getTextureID());
+    public void drawImage(float xPos, float yPos) {
+        GL11.glEnable(GL11.GL_BLEND);
+        texture.bind();
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glTexCoord2f(0,0);
         GL11.glVertex2f(xPos, yPos);
@@ -42,10 +43,13 @@ public class TextureRenderer {
         GL11.glTexCoord2f(0,1);
         GL11.glVertex2f(xPos ,yPos + texture.getTextureHeight());
         GL11.glEnd();
+        GL11.glDisable(GL11.GL_BLEND);
+
     }
 
-    public static void drawResizedImage(float xPos, float yPos, int newWidth, int newHeight) {
-        GL11.glBindTexture(1, texture.getTextureID());
+    public void drawResizedImage(float xPos, float yPos, int newWidth, int newHeight) {
+        GL11.glEnable(GL11.GL_BLEND);
+        texture.bind();
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glTexCoord2f(0,0);
         GL11.glVertex2f(xPos, yPos);
@@ -56,5 +60,13 @@ public class TextureRenderer {
         GL11.glTexCoord2f(0,1);
         GL11.glVertex2f(xPos ,yPos + newHeight);
         GL11.glEnd();
+        GL11.glDisable(GL11.GL_BLEND);
+    }
+
+    public int getTextureWidth() {
+        return texture.getTextureWidth();
+    }
+    public int getTextureHeight() {
+        return texture.getTextureHeight();
     }
 }

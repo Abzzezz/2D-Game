@@ -5,6 +5,7 @@
 
 package ga.abzzezz.game.maingame.gui.screens;
 
+import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.collision.Collision;
 import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
@@ -18,8 +19,12 @@ public class MainMenu extends GuiScreen {
 
     @Override
     public void buttonPressed(int buttonID) {
-        if(buttonID == 0) {
-            System.out.println("Pressed");
+        if (buttonID == 0) {
+            Main.getMain().setCurrentScreen(null);
+        }
+
+       else if (buttonID == 1) {
+            Main.getMain().setCurrentScreen(new LevelBuilder());
         }
         super.buttonPressed(buttonID);
     }
@@ -28,10 +33,13 @@ public class MainMenu extends GuiScreen {
     public void initialiseGui() {
         int buttonWidth = 100;
         guiButtons.add(new GuiButton("Play", display()[0] / 2 - buttonWidth / 2, display()[1] / 2, buttonWidth, 30, 0));
+        guiButtons.add(new GuiButton("Build", display()[0] / 2 - buttonWidth / 2, display()[1] / 2 + 50, buttonWidth, 30, 1));
+
         super.initialiseGui();
     }
 
     FontUtil fontUtil = new FontUtil(40, "OpenSans");
+
     @Override
     public void drawScreen() {
         fontUtil.drawText("PONG", display()[0] / 2 - fontUtil.getStringWidth("PONG") / 2, display()[1] / 6, Color.BLACK);

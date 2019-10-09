@@ -21,6 +21,7 @@ public class Prevent {
         this.width = width;
         this.height = height;
         this.ID = ID;
+        this.color = Color.RED;
     }
 
     public Prevent(String ID, float xPos, float yPos, float width, float height,  Color color) {

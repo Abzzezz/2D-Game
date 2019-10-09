@@ -29,6 +29,13 @@ public class GuiButton extends Gui {
         this.buttonID = buttonID;
     }
 
+    public GuiButton(String buttonText, float xPos, float yPos, int buttonID) {
+        this.buttonText = buttonText;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.buttonID = buttonID;
+    }
+
     private FontUtil fontUtil = new FontUtil(30, "BrutalType");
     private FontUtil fontUtil1 = new FontUtil(25, "BrutalType");
 
@@ -55,14 +62,11 @@ public class GuiButton extends Gui {
 
         if (slide > 13)
             fontUtil1.drawText(">>", xPos + width / 4 - slide + fontUtil.getStringWidth(buttonText) + 5, yPos, Color.BLACK);
+
         RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.getBlackTransparent());
         super.drawScreen();
     }
 
-
-    public void buttonPressed() {
-        slide -= 10;
-    }
 
     public boolean buttonHovered() {
         return Collision.mouseHovered(xPos, yPos, width, height);

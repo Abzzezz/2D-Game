@@ -32,8 +32,8 @@ public class Main {
     private static Main main;
     private ObjectManager objectManager;
     private LevelSystem levelSystem;
-
     private GuiScreen currentScreen;
+    private byte version;
 
 
     public static void main(String[] args) {
@@ -64,17 +64,6 @@ public class Main {
         setCurrentScreen(new MainMenu());
     }
 
-    /*
-    Menu rendering, keyHook etc.
-     */
-    public void renderMenu() {
-        currentScreen.drawScreen();
-
-        while(Mouse.next()) {
-            currentScreen.mousePress(Mouse.getEventButton());
-        }
-    }
-
 
     public GuiScreen getCurrentScreen() {
         return currentScreen;
@@ -82,6 +71,8 @@ public class Main {
 
     public void setCurrentScreen(GuiScreen currentScreen) {
         this.currentScreen = currentScreen;
+
+        if(currentScreen != null)
         currentScreen.initialiseGui();
     }
 

@@ -27,7 +27,6 @@ public class Player {
         physicsCore.setup();
         jumpAirTime = new TimeUtil();
         timeBeforeJump = new TimeUtil();
-        TextureRenderer.initTexture("PixelArt.png", "PNG");
         Logger.log("Player set up", Logger.LogType.INFO);
 
     }

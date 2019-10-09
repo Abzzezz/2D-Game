@@ -24,16 +24,12 @@ import java.awt.*;
 
 public class Renderer extends Core {
 
-    private PhysicsCore testPhysics;
 
     public void setupRenderer() {
         Logger.log("Core Renderer setting up", Logger.LogType.INFO);
-        testPhysics = new PhysicsCore();
-        testPhysics.setup();
-        testPhysics.setPosition(100);
         Logger.log("test Physics set up", Logger.LogType.INFO);
         PlayerUtil.mainPlayer.setXPos(20);
-        PlayerUtil.mainPlayer.setYPos(testPhysics.ground);
+        PlayerUtil.mainPlayer.setYPos(300);
         Logger.log("Renderer Set up", Logger.LogType.INFO);
     }
 
@@ -50,7 +46,6 @@ public class Renderer extends Core {
     public void render() {
         //Draw All Objects
         Main.getMain().getObjectManager().drawAll();
-        Main.getMain().getObjectManager().getPrevent(Block.class).setyPos(testPhysics.positionWithGravity());
     }
 
 }

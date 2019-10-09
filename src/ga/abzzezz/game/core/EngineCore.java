@@ -63,11 +63,7 @@ public class EngineCore {
         while (true) {
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (!(Main.getMain().getCurrentScreen() == null)) {
-                Main.getMain().renderMenu();
-            } else {
-                cycle();
-            }
+            cycle();
 
             Display.update();
             Display.sync(100);
@@ -114,28 +110,35 @@ public class EngineCore {
     Game cycle: Rendering, input detection etc.
      */
 
+    Main main = Main.getMain();
+
     public void cycle() {
-        PlayerUtil.mainPlayer.update();
-        PlayerUtil.mainPlayer.drawPlayer();
-        
-
         /*
-        Moves everything to the right
+        All hooks in main and separated from the main game.
          */
-        glPushMatrix();
-        getCamera().move(PlayerUtil.mainPlayer.getXPos(), PlayerUtil.mainPlayer.getYPos());
-        while (Keyboard.next()) {
-            core.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
-            renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+
+        if (main.getCurrentScreen() == null) {
+
+            PlayerUtil.mainPlayer.update();
+            PlayerUtil.mainPlayer.drawPlayer();
+
+            while (Keyboard.next()) {
+                renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+            }
+
+            while (Mouse.next()) {
+                System.out.println(2);
+                core.mouseClicked(Mouse.getEventButton());
+            }
+
+            renderer.render();
+        } else {
+            main.getCurrentScreen().drawScreen();
+
+            while (Mouse.next()) {
+                main.getCurrentScreen().mousePress(Mouse.getEventButton());
+            }
         }
-
-        while (Mouse.next()) {
-            core.mouseClicked(Mouse.getEventButton());
-        }
-
-        renderer.render();
-        glPopMatrix();
-
 
     }
 

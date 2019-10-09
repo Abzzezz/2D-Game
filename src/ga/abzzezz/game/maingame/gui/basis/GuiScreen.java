@@ -31,7 +31,11 @@ public class GuiScreen extends Gui {
 
 
     public void mousePress(int mouseButton) {
-
+        for (GuiButton guiButton : getGuiButtons()) {
+            if(guiButton.buttonHovered() && mouseButton == 0) {
+                buttonPressed(guiButton.getButtonID());
+            }
+        }
     }
 
     public int[] display() {
