@@ -117,6 +117,7 @@ public class EngineCore {
     public void cycle() {
         PlayerUtil.mainPlayer.update();
         PlayerUtil.mainPlayer.drawPlayer();
+        
 
         /*
         Moves everything to the right

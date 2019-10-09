@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lwjgl_util">
+    <CLASSES>
+      <root url="jar://E:/Libraries/lwjgl_util.jar!/" />
+      <root url="jar://E:/Libraries/jnativehook-2.1.0.jar!/" />
+      <root url="jar://E:/Libraries/slick.jar!/" />
+      <root url="jar://E:/Libraries/slick-util.jar!/" />
+      <root url="jar://E:/Libraries/lwjgl.jar!/" />
+      <root url="jar://E:/Libraries/joml-1.9.18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
