@@ -1,0 +1,21 @@
+Level Syntax
+
+
+[Obj] für Objekte mit Objekt ID und obj name
+[P] für Player
+: für syntax
+
+Objekt ID
+
+Quadrat:
+1
+
+
+Example
+
+[Obj]:1:Test:0:10:100:20
+
+Objekt:ID:Name:X:Y:W:H:Color(optional ansonsten Black)
+
+[P]:X:Y
+
