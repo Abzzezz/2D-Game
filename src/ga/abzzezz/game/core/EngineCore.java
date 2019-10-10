@@ -9,17 +9,16 @@ Includes Code form the LWJGL Wik cause im Lazy .-.
 package ga.abzzezz.game.core;
 
 import ga.abzzezz.game.Main;
-import ga.abzzezz.game.core.pysics.PhysicsCore;
 import ga.abzzezz.game.core.rendering.Camera;
 import ga.abzzezz.game.core.rendering.Renderer;
 import ga.abzzezz.game.core.utils.Logger;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
+import ga.abzzezz.game.maingame.utility.TimeUtil;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -112,32 +111,34 @@ public class EngineCore {
 
     Main main = Main.getMain();
 
+    private TimeUtil mouseClick = new TimeUtil();
+
     public void cycle() {
         /*
         All hooks in main and separated from the main game.
          */
 
         if (main.getCurrentScreen() == null) {
-
             PlayerUtil.mainPlayer.update();
             PlayerUtil.mainPlayer.drawPlayer();
-
             while (Keyboard.next()) {
-                renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+                if (Keyboard.getEventKeyState())
+                    renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
             }
 
             while (Mouse.next()) {
-                System.out.println(2);
                 core.mouseClicked(Mouse.getEventButton());
             }
 
             renderer.render();
         } else {
-            main.getCurrentScreen().drawScreen();
-
             while (Mouse.next()) {
-                main.getCurrentScreen().mousePress(Mouse.getEventButton());
+                if (mouseClick.isTimeOver(200)) {
+                    main.getCurrentScreen().mousePress(Mouse.getEventButton());
+                    mouseClick.reset();
+                }
             }
+            main.getCurrentScreen().drawScreen();
         }
 
     }

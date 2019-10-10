@@ -7,19 +7,23 @@ package ga.abzzezz.game.maingame.gui;
 
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Gui {
 
 
-    public ArrayList<GuiButton> guiButtons = new ArrayList<>();
+    public LinkedList<GuiButton> guiButtons = new LinkedList<>();
 
 
     public void drawScreen() {
 
     }
 
-    public ArrayList<GuiButton> getGuiButtons() {
+    public void buttonPressed(int buttonID) {
+    }
+
+
+    public LinkedList<GuiButton> getGuiButtons() {
         return guiButtons;
     }
 }

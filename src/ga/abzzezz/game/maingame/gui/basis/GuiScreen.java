@@ -6,17 +6,15 @@
 package ga.abzzezz.game.maingame.gui.basis;
 
 import ga.abzzezz.game.maingame.gui.Gui;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 
 public class GuiScreen extends Gui {
 
     public void initialiseGui() {
     }
 
-    public void onGuiClosed() {        guiButtons.clear();
+    public void onGuiClosed() {
+        guiButtons.clear();
     }
-
 
 
     @Override
@@ -28,20 +26,18 @@ public class GuiScreen extends Gui {
         super.drawScreen();
     }
 
-    public void buttonPressed(int buttonID) {
-    }
-
 
     public void mousePress(int mouseButton) {
-        for (GuiButton guiButton : getGuiButtons()) {
-            if(guiButton.buttonHovered() && mouseButton == 0) {
-                buttonPressed(guiButton.getButtonID());
-                System.out.println("Pressed");
+        if (mouseButton == 0) {
+            for (GuiButton guiButton : getGuiButtons()) {
+                if (guiButton.buttonHovered()) {
+                    buttonPressed(guiButton.getButtonID());
+                }
             }
         }
     }
 
     public int[] display() {
-        return new int[] {800, 600};
+        return new int[]{800, 600};
     }
 }

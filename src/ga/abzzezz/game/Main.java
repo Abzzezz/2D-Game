@@ -12,11 +12,6 @@ import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.gui.screens.MainMenu;
 import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.object.ObjectManager;
-import ga.abzzezz.game.maingame.object.impl.Block;
-import ga.abzzezz.game.maingame.object.impl.Ground;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 
 import java.io.IOException;
 
@@ -70,12 +65,11 @@ public class Main {
     }
 
     public void setCurrentScreen(GuiScreen currentScreen) {
-
-        this.currentScreen = currentScreen;
-
-        if(currentScreen != null) {
+        if (this.currentScreen != null) {
             this.currentScreen.onGuiClosed();
         }
+
+        this.currentScreen = currentScreen;
 
         if(currentScreen != null)
         currentScreen.initialiseGui();
