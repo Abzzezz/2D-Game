@@ -12,7 +12,6 @@ import java.awt.*;
 
 public class Block extends Prevent {
 
-
     public Block(String ID, float xPos, float yPos, float width, float height) {
         super(ID, xPos, yPos, width, height);
     }
@@ -20,7 +19,6 @@ public class Block extends Prevent {
     public Block(String ID, float xPos, float yPos, float width, float height, Color color) {
         super(ID, xPos, yPos, width, height, color);
     }
-
 
     @Override
     public void draw() {

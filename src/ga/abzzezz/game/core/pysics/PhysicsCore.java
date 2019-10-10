@@ -16,11 +16,11 @@ public class PhysicsCore {
      */
     public int ground;
     private float gravity;
-    private float dY = 1, acceleratedY;
+    private float dY, acceleratedY;
     public boolean done, doneAccelerating;
 
     public void setup() {
-        ground = Display.getHeight() / 2;
+        ground = Display.getHeight();
         gravity = 1F;
     }
 
@@ -32,12 +32,13 @@ public class PhysicsCore {
      */
 
     public float positionWithGravity() {
-        if (position < ground) {
+        System.out.println(position);
+        if (position < 50) {
             dY *= 1.5F;
             position += dY;
             done = false;
         } else {
-            position = ground;
+            position = 50;
             done = true;
         }
 

@@ -14,9 +14,6 @@ public class Collision {
 
 
     public static boolean isCollided(float xPosObj, float yPosObj, float widthObj, float heightObj, float playerX, float playerY) {
-        boolean flagY = playerY < yPosObj - heightObj && playerY < yPosObj;
-
-
         return false;
     }
 

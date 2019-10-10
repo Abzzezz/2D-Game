@@ -84,4 +84,36 @@ public class RenderHelper {
         glVertex2d(xPos, yPos + height);
     }
 
+    public static void drawCircle(float xPos, float yPos, int radius, int segments, int part, Color color, Color outlineColor) {
+
+        setupGL();
+        glColor4f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
+        glEnable(GL_POLYGON);
+        {
+            drawCircle(xPos, yPos, segments, part, radius);
+        }
+        glEnd();
+
+        glColor4f(outlineColor.getRed() / 255.0F, outlineColor.getGreen() / 255.0F, outlineColor.getBlue() / 255.0F, outlineColor.getAlpha() / 255.0F);
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(3);
+        glBegin(GL_LINES);
+        {
+            drawCircle(xPos, yPos, segments, part, radius);
+        }
+        glEnd();
+        endGL();
+    }
+
+
+    private static void drawCircle(float xPos, float yPos, int segments, int part, int radius) {
+        for (float i = 0; i <= 360; i++) {
+            double PI = Math.PI;
+            double x = xPos + (Math.sin(i * PI / 180) * radius);
+            double y = yPos + (Math.cos(i * PI / 180) * radius);
+            glVertex2d(x, y);
+        }
+    }
+
+
 }

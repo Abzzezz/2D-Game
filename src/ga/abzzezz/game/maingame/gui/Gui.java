@@ -6,13 +6,15 @@
 package ga.abzzezz.game.maingame.gui;
 
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
+import ga.abzzezz.game.maingame.gui.basis.TextBox;
 
 import java.util.LinkedList;
 
 public class Gui {
 
 
-    public LinkedList<GuiButton> guiButtons = new LinkedList<>();
+    protected LinkedList<GuiButton> guiButtons = new LinkedList<>();
+    protected LinkedList<TextBox> textBoxes = new LinkedList<>();
 
 
     public void drawScreen() {
@@ -20,6 +22,22 @@ public class Gui {
     }
 
     public void buttonPressed(int buttonID) {
+    }
+
+    public void keyPressed(int keyCode, char keyChar, boolean hold) {
+        for (TextBox textBox : textBoxes) {
+            textBox.keyPressed(keyCode, keyChar, hold);
+        }
+    }
+
+    public void mousePress(int mouseButton) {
+        if (mouseButton == 0) {
+            for (GuiButton guiButton : guiButtons) {
+                if (guiButton.buttonHovered()) {
+                    buttonPressed(guiButton.getButtonID());
+                }
+            }
+        }
     }
 
 

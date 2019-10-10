@@ -11,6 +11,7 @@ import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.gui.basis.ImageButton;
+import ga.abzzezz.game.maingame.gui.basis.TextBox;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
@@ -32,11 +33,9 @@ public class LevelBuilder extends GuiScreen {
 
         guiButtons.add(new ImageButton("Block", "block.png", x, 0, 0));
         guiButtons.add(new ImageButton("Player", "player.png", x, 100, 1));
-
-
-        guiButtons.add(new GuiButton("Save", x - 20, display()[1] - 30, 3));
-        guiButtons.add(new GuiButton("Clear", x - 150, display()[1] - 30, 4));
-
+        guiButtons.add(new GuiButton("Save", 0, display()[1] - 30, 3));
+        guiButtons.add(new GuiButton("Clear", 100, display()[1] - 30, 4));
+        textBoxes.add(new TextBox(x - 100, display()[1] - 100, false));
         super.initialiseGui();
     }
 
@@ -54,18 +53,23 @@ public class LevelBuilder extends GuiScreen {
         super.buttonPressed(buttonID);
     }
 
+    Prevent selected;
     @Override
     public void drawScreen() {
         for (Prevent prevent : prevents) {
-            if (drag && prevent.getID() == dragID) {
-                prevent.setxPos(Collision.getMousePosition()[0]);
-                prevent.setyPos(Collision.getMousePosition()[1]);
+            if(prevent.getID() == dragID) {
+                if (drag) {
+                    prevent.setxPos(Collision.getMousePosition()[0]);
+                    prevent.setyPos(Collision.getMousePosition()[1]);
+                } else if (edit) {
+                    selected = prevent;
+                }
             }
-
             prevent.draw();
         }
 
-        RenderHelper.drawQuad(display()[0] - 80, 0, 80, 200, ColorHelper.colorFormHex(0xf1c40f));
+
+        RenderHelper.drawQuad(display()[0] - 80, 0, 80, display()[1], ColorHelper.colorFormHex(0xf1c40f));
         super.drawScreen();
     }
 
@@ -76,14 +80,21 @@ public class LevelBuilder extends GuiScreen {
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
         for (Prevent prevent : prevents) {
             if (edit && prevent.getID() == dragID) {
-                if(keyCode == Keyboard.KEY_RIGHT) {
-                    prevent.setWidth(prevent.getWidth() + 1);
-                } else if(keyCode == Keyboard.KEY_LEFT) {
-                    prevent.setWidth(prevent.getWidth() - 1);
-                } else if(keyCode == Keyboard.KEY_UP) {
-                    prevent.setHeight(prevent.getHeight() + 1);
-                }else if(keyCode == Keyboard.KEY_DOWN) {
-                    prevent.setHeight(prevent.getHeight() - 1);
+                switch (keyCode) {
+                    case Keyboard.KEY_RIGHT:
+                        prevent.setWidth(prevent.getWidth() + 1);
+                        break;
+                    case Keyboard.KEY_LEFT:
+                        prevent.setWidth(prevent.getWidth() - 1);
+                        break;
+                    case Keyboard.KEY_UP:
+                        prevent.setHeight(prevent.getHeight() + 1);
+                        break;
+                    case Keyboard.KEY_DOWN:
+                        prevent.setHeight(prevent.getHeight() - 1);
+                        break;
+                    default:
+                    break;
                 }
             }
         }

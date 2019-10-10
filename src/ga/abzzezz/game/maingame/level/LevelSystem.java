@@ -47,9 +47,6 @@ public class LevelSystem {
                 }
             }
         }
-
-        System.out.println(Main.getMain().getObjectManager().getPrevents().size());
-
     }
 
     public File[] getLevels() {

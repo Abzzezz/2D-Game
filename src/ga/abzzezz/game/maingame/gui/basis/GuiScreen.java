@@ -19,26 +19,14 @@ public class GuiScreen extends Gui {
 
     @Override
     public void drawScreen() {
-        for (GuiButton guiButton : getGuiButtons()) {
+        for (GuiButton guiButton : guiButtons) {
             guiButton.drawButton();
         }
 
-        super.drawScreen();
-    }
-
-    public void keyPressed(int keyCode, char keyChar, boolean hold) {
-
-    }
-
-
-    public void mousePress(int mouseButton) {
-        if (mouseButton == 0) {
-            for (GuiButton guiButton : getGuiButtons()) {
-                if (guiButton.buttonHovered()) {
-                    buttonPressed(guiButton.getButtonID());
-                }
-            }
+        for (TextBox textBox : textBoxes) {
+           textBox.drawTextBox();
         }
+        super.drawScreen();
     }
 
 
