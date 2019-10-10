@@ -13,6 +13,7 @@ import ga.abzzezz.game.maingame.gui.screens.MainMenu;
 import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.object.ObjectManager;
 
+import java.io.File;
 import java.io.IOException;
 
 /*
@@ -29,6 +30,8 @@ public class Main {
     private LevelSystem levelSystem;
     private GuiScreen currentScreen;
     private byte version;
+    private File dir;
+
 
 
     public static void main(String[] args) {
@@ -40,7 +43,6 @@ public class Main {
     public void start() {
         Logger.log("Engine setting up...", Logger.LogType.INFO);
         main = this;
-        objectManager = new ObjectManager();
         register();
         engineCore = new EngineCore();
         engineCore.startCore();
@@ -50,12 +52,34 @@ public class Main {
     Handler registration for game
      */
     public void register() {
+        /*
+        Version used for Server communication
+         */
+        version = 1;
+        /*
+        Game Directory, when not existent: create a new one
+         */
+        dir = new File(System.getProperty("user.home"), "PONG!");
+        if(!dir.exists()) dir.mkdir();
+
+        /*
+        Manager initialisation
+         */
         levelSystem = new LevelSystem();
+        objectManager = new ObjectManager();
+
+        /*
+        Test level loading, removed in final build
+         */
         try {
             levelSystem.loadLevel("Level1");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        /*
+        Current Screen, so menus can be displayed
+         */
         setCurrentScreen(new MainMenu());
     }
 
@@ -64,6 +88,9 @@ public class Main {
         return currentScreen;
     }
 
+    /*
+    Sets the current Screen(Class) to render, old screen is cleaned before and new screen is initialised
+     */
     public void setCurrentScreen(GuiScreen currentScreen) {
         if (this.currentScreen != null) {
             this.currentScreen.onGuiClosed();
@@ -87,4 +114,12 @@ public class Main {
         return objectManager;
     }
 
+
+    public File getDir() {
+        return dir;
+    }
+
+    public LevelSystem getLevelSystem() {
+        return levelSystem;
+    }
 }

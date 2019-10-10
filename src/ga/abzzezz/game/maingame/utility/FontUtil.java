@@ -46,6 +46,10 @@ public class FontUtil {
         }
     }
 
+    public int centerText(String text) {
+        return getStringWidth(text) / 2;
+    }
+
     public int getFontSize() {
         return fontSize;
     }

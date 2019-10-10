@@ -26,6 +26,10 @@ public class GuiScreen extends Gui {
         super.drawScreen();
     }
 
+    public void keyPressed(int keyCode, char keyChar, boolean hold) {
+
+    }
+
 
     public void mousePress(int mouseButton) {
         if (mouseButton == 0) {
@@ -36,6 +40,7 @@ public class GuiScreen extends Gui {
             }
         }
     }
+
 
     public int[] display() {
         return new int[]{800, 600};

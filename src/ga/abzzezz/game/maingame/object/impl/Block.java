@@ -24,7 +24,7 @@ public class Block extends Prevent {
 
     @Override
     public void draw() {
-        RenderHelper.drawQuadInverted(getxPos(), getyPos(), getWidth(), getHeight(), getColor());
+        RenderHelper.drawQuad(getxPos(), getyPos(), getWidth(), getHeight(), getColor());
         super.draw();
     }
 }

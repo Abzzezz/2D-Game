@@ -27,10 +27,10 @@ public class ImageButton extends GuiButton {
     }
 
 
-    FontUtil buttonFont = new FontUtil(20, "OpenSans");
+    FontUtil buttonFont = new FontUtil(15, "OpenSans");
 
     public void drawButton() {
-        texture.drawImage(xPos - buttonFont.getStringWidth(text) / 8, yPos + texture.getTextureHeight() / 4);
+        texture.drawImage(xPos - buttonFont.getStringWidth(text) / 4, yPos + texture.getTextureHeight() / 4 + 15);
         buttonFont.drawText(text, xPos, yPos, Color.BLACK);
     }
 

@@ -59,11 +59,10 @@ public class GuiButton extends Gui {
             }
         }
 
-
         fontUtil.drawText(buttonText, xPos + width / 4 - slide, yPos - fontUtil.getFontSize() / 6, Color.BLACK);
 
         if (slide > 13)
-            fontUtil1.drawText(">>", xPos + width / 4 - slide + fontUtil.getStringWidth(buttonText) + 5, yPos, Color.BLACK);
+            fontUtil1.drawText(">", xPos + width / 4 - slide + fontUtil.getStringWidth(buttonText) + 5, yPos, Color.BLACK);
 
         RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.getBlackTransparent());
         super.drawScreen();

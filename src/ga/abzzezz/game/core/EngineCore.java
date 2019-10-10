@@ -87,6 +87,8 @@ public class EngineCore {
             System.exit(0);
         }
 
+        Display.setTitle("PONG!");
+
         glEnable(GL_TEXTURE_2D);
 
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -133,11 +135,14 @@ public class EngineCore {
             renderer.render();
         } else {
             while (Mouse.next()) {
-                if (mouseClick.isTimeOver(200)) {
-                    main.getCurrentScreen().mousePress(Mouse.getEventButton());
-                    mouseClick.reset();
-                }
+                if (Mouse.getEventButtonState()) main.getCurrentScreen().mousePress(Mouse.getEventButton());
             }
+
+            while (Keyboard.next()) {
+                if (Keyboard.getEventKeyState())
+                    main.getCurrentScreen().keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+            }
+
             main.getCurrentScreen().drawScreen();
         }
 

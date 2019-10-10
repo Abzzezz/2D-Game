@@ -13,7 +13,7 @@ Quadrat:
 
 Example
 
-[Obj]:1:Test:0:10:100:20
+[Obj]:1:Block:0:10:100:20
 
 Objekt:ID:Name:X:Y:W:H:Color(optional ansonsten Black)
 

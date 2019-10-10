@@ -20,7 +20,7 @@ public class MainMenu extends GuiScreen {
     @Override
     public void buttonPressed(int buttonID) {
         if (buttonID == 0) {
-            Main.getMain().setCurrentScreen(null);
+            Main.getMain().setCurrentScreen(new LevelSelector());
         } else if (buttonID == 1) {
             Main.getMain().setCurrentScreen(new LevelBuilder());
         }
