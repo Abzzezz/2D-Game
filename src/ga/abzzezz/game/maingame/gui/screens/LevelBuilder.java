@@ -8,6 +8,7 @@ package ga.abzzezz.game.maingame.gui.screens;
 import ga.abzzezz.game.core.collision.Collision;
 import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.core.rendering.TextureRenderer;
+import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.gui.basis.ImageButton;
 import ga.abzzezz.game.maingame.object.Prevent;
@@ -29,7 +30,7 @@ public class LevelBuilder extends GuiScreen {
 
     @Override
     public void initialiseGui() {
-        guiButtons.add(new ImageButton("Block", "block.png", display()[0] - 60, 20, 0));
+        guiButtons.add(new GuiButton("Block", display()[0] - 60, 20, 100, 100, 0));
         super.initialiseGui();
     }
 
@@ -62,9 +63,8 @@ public class LevelBuilder extends GuiScreen {
     @Override
     public void mousePress(int mouseButton) {
         for (Prevent prevent : prevents) {
-            if(Collision.mouseHovered(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight()) ) {
+            if(Collision.mouseHovered(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight()) && mouseButton == 0) {
                 drag = true;
-                System.out.println("drag");
                 dragID = prevent.getID();
             }
         }

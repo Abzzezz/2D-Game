@@ -34,6 +34,8 @@ public class GuiButton extends Gui {
         this.xPos = xPos;
         this.yPos = yPos;
         this.buttonID = buttonID;
+        this.width = 100;
+        this.height = 30;
     }
 
     private FontUtil fontUtil = new FontUtil(30, "BrutalType");

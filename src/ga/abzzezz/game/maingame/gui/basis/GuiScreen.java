@@ -12,7 +12,9 @@ import org.lwjgl.opengl.Display;
 public class GuiScreen extends Gui {
 
     public void initialiseGui() {
+    }
 
+    public void onGuiClosed() {        guiButtons.clear();
     }
 
 
@@ -34,6 +36,7 @@ public class GuiScreen extends Gui {
         for (GuiButton guiButton : getGuiButtons()) {
             if(guiButton.buttonHovered() && mouseButton == 0) {
                 buttonPressed(guiButton.getButtonID());
+                System.out.println("Pressed");
             }
         }
     }

@@ -70,7 +70,12 @@ public class Main {
     }
 
     public void setCurrentScreen(GuiScreen currentScreen) {
+
         this.currentScreen = currentScreen;
+
+        if(currentScreen != null) {
+            this.currentScreen.onGuiClosed();
+        }
 
         if(currentScreen != null)
         currentScreen.initialiseGui();

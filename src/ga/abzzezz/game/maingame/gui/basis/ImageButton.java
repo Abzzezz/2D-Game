@@ -14,7 +14,6 @@ public class ImageButton extends GuiButton {
 
     private String text, image;
     private float xPos, yPos, buttonWidth, buttonHeight;
-    private boolean enabled;
     private int buttonID;
     private TextureRenderer texture = new TextureRenderer();
     public ImageButton(String text, String image, float xPos, float yPos, int buttonID) {
@@ -22,7 +21,6 @@ public class ImageButton extends GuiButton {
         this.text = text;
         this.xPos = xPos;
         this.yPos = yPos;
-        this.enabled = enabled;
         this.buttonID = buttonID;
         this.image = image;
         texture.initTexture(image, "PNG");
@@ -36,10 +34,10 @@ public class ImageButton extends GuiButton {
         buttonFont.drawText(text, xPos, yPos, Color.BLACK);
     }
 
+    @Override
     public boolean buttonHovered() {
         return Collision.mouseHovered(xPos, yPos, texture.getTextureWidth(), texture.getTextureHeight());
     }
-
 
 
     public String getText() {
@@ -80,14 +78,6 @@ public class ImageButton extends GuiButton {
 
     public void setButtonHeight(float buttonHeight) {
         this.buttonHeight = buttonHeight;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public int getButtonID() {

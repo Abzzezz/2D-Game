@@ -21,9 +21,7 @@ public class MainMenu extends GuiScreen {
     public void buttonPressed(int buttonID) {
         if (buttonID == 0) {
             Main.getMain().setCurrentScreen(null);
-        }
-
-       else if (buttonID == 1) {
+        } else if (buttonID == 1) {
             Main.getMain().setCurrentScreen(new LevelBuilder());
         }
         super.buttonPressed(buttonID);
