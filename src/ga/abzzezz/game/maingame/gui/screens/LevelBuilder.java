@@ -16,15 +16,16 @@ import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 
 import java.awt.*;
-import java.security.Key;
 import java.util.ArrayList;
 
 public class LevelBuilder extends GuiScreen {
 
+
+    /*
+    For dev purposes only
+     */
     private ArrayList<Prevent> prevents = new ArrayList();
 
     @Override
@@ -35,7 +36,9 @@ public class LevelBuilder extends GuiScreen {
         guiButtons.add(new ImageButton("Player", "player.png", x, 100, 1));
         guiButtons.add(new GuiButton("Save", 0, display()[1] - 30, 3));
         guiButtons.add(new GuiButton("Clear", 100, display()[1] - 30, 4));
-        textBoxes.add(new TextBox(x - 100, display()[1] - 100, false));
+
+        guiButtons.add(new GuiButton("Set", x - 20, display()[1] - 30, 6));
+        textBoxes.add(new TextBox("Color", x - 120, display()[1] - 30, !edit));
         super.initialiseGui();
     }
 
@@ -49,6 +52,8 @@ public class LevelBuilder extends GuiScreen {
             Main.getMain().getLevelSystem().saveLevel(prevents);
         }else if (buttonID == 4) {
             prevents.clear();
+        } else if (buttonID == 6) {
+            if(selected != null) selected.setColor(Color.decode(textBoxes.get(0).getText()));
         }
         super.buttonPressed(buttonID);
     }
@@ -63,6 +68,7 @@ public class LevelBuilder extends GuiScreen {
                     prevent.setyPos(Collision.getMousePosition()[1]);
                 } else if (edit) {
                     selected = prevent;
+                    textBoxes.get(0).setHide(false);
                 }
             }
             prevent.draw();
@@ -78,25 +84,24 @@ public class LevelBuilder extends GuiScreen {
 
     @Override
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
-        for (Prevent prevent : prevents) {
-            if (edit && prevent.getID() == dragID) {
+            if (edit && selected.getID() == dragID) {
                 switch (keyCode) {
                     case Keyboard.KEY_RIGHT:
-                        prevent.setWidth(prevent.getWidth() + 1);
+                        selected.setWidth(selected.getWidth() + 1);
                         break;
                     case Keyboard.KEY_LEFT:
-                        prevent.setWidth(prevent.getWidth() - 1);
+                        selected.setWidth(selected.getWidth() - 1);
                         break;
                     case Keyboard.KEY_UP:
-                        prevent.setHeight(prevent.getHeight() + 1);
+                        selected.setHeight(selected.getHeight() + 1);
                         break;
                     case Keyboard.KEY_DOWN:
-                        prevent.setHeight(prevent.getHeight() - 1);
+                        selected.setHeight(selected.getHeight() - 1);
                         break;
                     default:
                     break;
                 }
-            }
+
         }
         super.keyPressed(keyCode, keyChar, hold);
     }

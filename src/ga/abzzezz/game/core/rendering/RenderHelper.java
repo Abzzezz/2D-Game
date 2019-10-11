@@ -68,6 +68,7 @@ public class RenderHelper {
         }
         glEnd();
         glColor4f(outlineColor.getRed() / 255.0F, outlineColor.getGreen() / 255.0F, outlineColor.getBlue() / 255.0F, outlineColor.getAlpha() / 255.0F);
+        glLineWidth(3);
         glEnable(GL_LINE_SMOOTH);
         glBegin(GL_LINES);
         {
@@ -79,9 +80,16 @@ public class RenderHelper {
 
     private static void drawRectBasis(float xPos, float yPos, float width, float height) {
         glVertex2d(xPos, yPos);
-        glVertex2d(xPos + width, yPos);
-        glVertex2d(xPos + width, yPos + height);
         glVertex2d(xPos, yPos + height);
+
+        glVertex2d(xPos, yPos + height);
+        glVertex2d(xPos + width, yPos + height);
+
+        glVertex2d(xPos + width, yPos + height);
+        glVertex2d(xPos + width, yPos);
+        glVertex2d(xPos + width, yPos);
+        glVertex2d(xPos, yPos );
+
     }
 
     public static void drawCircle(float xPos, float yPos, int radius, int segments, int part, Color color, Color outlineColor) {

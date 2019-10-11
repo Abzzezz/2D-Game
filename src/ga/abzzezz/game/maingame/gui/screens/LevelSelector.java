@@ -47,6 +47,7 @@ public class LevelSelector extends GuiScreen {
             }
 
             levelFont.drawText(name, display()[0] / 2 - levelFont.centerText(name), yBuffer, Color.BLACK);
+
             RenderHelper.drawQuad(display()[0] / 2 - levelFont.centerText(name)* 2, yBuffer, levelFont.centerText(name) * 4, levelFont.getFontSize() * 1.5F, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
             yBuffer += levelFont.getFontSize() + 20;
         }

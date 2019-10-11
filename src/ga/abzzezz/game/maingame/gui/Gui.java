@@ -32,6 +32,10 @@ public class Gui {
 
     public void mousePress(int mouseButton) {
         if (mouseButton == 0) {
+            for (TextBox textBox : textBoxes) {
+                textBox.mousePress(mouseButton);
+            }
+
             for (GuiButton guiButton : guiButtons) {
                 if (guiButton.buttonHovered()) {
                     buttonPressed(guiButton.getButtonID());
