@@ -8,6 +8,7 @@ package ga.abzzezz.game.core.rendering;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.Core;
 import ga.abzzezz.game.core.utils.Logger;
+import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
 

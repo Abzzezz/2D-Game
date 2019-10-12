@@ -49,7 +49,7 @@ public class LevelSystem {
                     float xPos = Float.parseFloat(splitLine[1]);
                     float yPos = Float.parseFloat(splitLine[2]);
                     PlayerUtil.mainPlayer.setXPos(xPos);
-                    PlayerUtil.mainPlayer.setYPos(yPos);
+                    PlayerUtil.mainPlayer.setStartY(yPos);
                 }
             }
         }

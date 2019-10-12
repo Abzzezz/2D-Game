@@ -44,7 +44,6 @@ public class GuiButton extends Gui {
     private float slide;
 
     public void drawButton() {
-
         if (buttonHovered()) {
             if (slide < 15) {
                 slide++;

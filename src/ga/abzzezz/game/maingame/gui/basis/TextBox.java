@@ -19,26 +19,28 @@ import java.security.Key;
 
 public class TextBox extends Gui {
 
-    private String text = new String(), input;
+    private String text = new String(), input, ID;
     private float xPos, yPos, width, height;
     private boolean hide, selected;
 
-    public TextBox(String input, float xPos, float yPos, float width, float height, boolean hide) {
+    public TextBox(String ID, String input, float xPos, float yPos, float width, float height, boolean hide) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = width;
         this.height = height;
         this.hide = hide;
         this.input = input;
+        this.ID = ID;
     }
 
-    public TextBox(String input,float xPos, float yPos, boolean hide) {
+    public TextBox(String ID,String input,float xPos, float yPos, boolean hide) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.width = 100;
         this.height = 30;
         this.hide = hide;
         this.input = input;
+        this.ID = ID;
     }
 
     @Override
@@ -86,6 +88,12 @@ public class TextBox extends Gui {
     public String getText() {
         return text;
     }
+
+
+    public String getID() {
+        return ID;
+    }
+
 
     public void setSelected(boolean selected) {
         this.selected = selected;

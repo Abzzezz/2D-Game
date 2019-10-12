@@ -16,11 +16,11 @@ public class PhysicsCore {
      */
     public int ground;
     private float gravity;
-    private float dY, acceleratedY;
+    private float dY = 1F, acceleratedY;
     public boolean done, doneAccelerating;
 
     public void setup() {
-        ground = Display.getHeight();
+        ground = 600;
         gravity = 1F;
     }
 
@@ -31,14 +31,13 @@ public class PhysicsCore {
     Basic Gravity method to accelerate the output position from an input position f.e. pos 100 ; 100 + dy; dy = 2 * PI = 6.283185307179586 and so on
      */
 
-    public float positionWithGravity() {
-        System.out.println(position);
-        if (position < 50) {
+    public float positionWithGravity(int max) {
+        if (position < max) {
             dY *= 1.5F;
             position += dY;
             done = false;
         } else {
-            position = 50;
+            position = max;
             done = true;
         }
 

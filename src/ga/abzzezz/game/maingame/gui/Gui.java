@@ -44,6 +44,23 @@ public class Gui {
         }
     }
 
+    public TextBox geTextBoxByID(String ID) {
+        for (TextBox textBox : textBoxes) {
+            if(textBox.getID().equalsIgnoreCase(ID)) {
+                return textBox;
+            }
+        }
+        return null;
+    }
+
+    public GuiButton getButtonByID(int buttonID) {
+        for (GuiButton guiButton : guiButtons) {
+            if(guiButton.getButtonID() == buttonID) {
+                return guiButton;
+            }
+        }
+        return null;
+    }
 
     public LinkedList<GuiButton> getGuiButtons() {
         return guiButtons;

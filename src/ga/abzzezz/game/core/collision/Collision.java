@@ -13,7 +13,21 @@ import org.lwjgl.opengl.Display;
 public class Collision {
 
 
-    public static boolean isCollided(float xPosObj, float yPosObj, float widthObj, float heightObj, float playerX, float playerY) {
+    public static boolean isCollided(float xPosObj, float yPosObj, float widthObj, float heightObj, float playerX, float playerY, float playerWidth, float playerHeight) {
+        if(playerY >= Display.getHeight() - playerHeight || playerY <= -50) {
+            return true;
+        }
+
+        if(playerX <= 0 + playerWidth || playerX >= Display.getWidth() - playerWidth)  {
+            return true;
+        }
+
+
+        boolean flagX = (playerX >= xPosObj + widthObj || playerX <= xPosObj);
+        if(playerY + playerHeight >= yPosObj && !flagX) {
+            return true;
+        }
+
         return false;
     }
 

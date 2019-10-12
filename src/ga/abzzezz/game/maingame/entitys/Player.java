@@ -21,7 +21,7 @@ import java.awt.*;
 
 public class Player {
 
-    private float xPos, yPos, oldJumpPosY;
+    private float xPos, yPos, startY;
     public PhysicsCore physicsCore = new PhysicsCore();
     private TimeUtil jumpAirTime, timeBeforeJump;
 
@@ -40,13 +40,21 @@ public class Player {
 
 
     public void update(Prevent prevent) {
-        if (!Collision.isCollided(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight(), getXPos(), getYPos())) {
-            setYPos(yPos + physicsCore.positionWithGravity());
+        if (!Collision.isCollided(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight(), getXPos(), getYPos(), 30, 30)) {
+            setYPos(startY + physicsCore.positionWithGravity(Display.getHeight()));
         }
     }
 
     public float getXPos() {
         return xPos;
+    }
+
+    public void setStartY(float startY) {
+        this.startY = startY;
+    }
+
+    public float getStartY() {
+        return startY;
     }
 
     public void setXPos(float xPos) {
@@ -62,7 +70,11 @@ public class Player {
     }
 
     public void move(int keyCode) {
-        physicsCore.setPosition((int)getYPos());
+        physicsCore.setPosition((int) startY);
+        if(keyCode == Keyboard.KEY_D) {
+            setXPos(xPos + 5);
+        }
+
 
     }
 

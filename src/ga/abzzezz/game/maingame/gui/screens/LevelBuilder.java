@@ -38,7 +38,7 @@ public class LevelBuilder extends GuiScreen {
         guiButtons.add(new GuiButton("Clear", 100, display()[1] - 30, 4));
 
         guiButtons.add(new GuiButton("Set", x - 20, display()[1] - 30, 6));
-        textBoxes.add(new TextBox("Color", x - 120, display()[1] - 30, !edit));
+        textBoxes.add(new TextBox("ColorBox", "Color", x - 120, display()[1] - 30, !edit));
         super.initialiseGui();
     }
 
@@ -48,81 +48,75 @@ public class LevelBuilder extends GuiScreen {
             prevents.add(new Block("B" + System.currentTimeMillis(), display()[0] / 2, display()[1] / 2, 100, 100));
         } else if (buttonID == 1) {
             prevents.add(new Block("Player", display()[0] / 2, display()[1] / 2, 30, 30, Color.GREEN));
-        }else if (buttonID == 3) {
+        } else if (buttonID == 3) {
             Main.getMain().getLevelSystem().saveLevel(prevents);
-        }else if (buttonID == 4) {
+        } else if (buttonID == 4) {
             prevents.clear();
         } else if (buttonID == 6) {
-            if(selected != null) selected.setColor(Color.decode(textBoxes.get(0).getText()));
+            if (selected != null) selected.setColor(Color.decode(textBoxes.get(0).getText()));
         }
         super.buttonPressed(buttonID);
     }
 
     Prevent selected;
+
     @Override
     public void drawScreen() {
         for (Prevent prevent : prevents) {
-            if(prevent.getID() == dragID) {
-                if (drag) {
-                    prevent.setxPos(Collision.getMousePosition()[0]);
-                    prevent.setyPos(Collision.getMousePosition()[1]);
-                } else if (edit) {
-                    selected = prevent;
-                    textBoxes.get(0).setHide(false);
-                }
-            }
             prevent.draw();
         }
+        if (drag) {
+            selected.setxPos(Collision.getMousePosition()[0] - selected.getWidth() / 2);
+            selected.setyPos(Collision.getMousePosition()[1] - selected.getHeight() / 2);
+        } else if (edit) {
+            selected = selected;
+        }
 
+
+        geTextBoxByID("ColorBox").setHide(!edit);
 
         RenderHelper.drawQuad(display()[0] - 80, 0, 80, display()[1], ColorHelper.colorFormHex(0xf1c40f));
         super.drawScreen();
     }
 
     private boolean drag, edit;
-    private String dragID;
 
     @Override
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
-            if (edit && selected.getID() == dragID) {
-                switch (keyCode) {
-                    case Keyboard.KEY_RIGHT:
-                        selected.setWidth(selected.getWidth() + 1);
-                        break;
-                    case Keyboard.KEY_LEFT:
-                        selected.setWidth(selected.getWidth() - 1);
-                        break;
-                    case Keyboard.KEY_UP:
-                        selected.setHeight(selected.getHeight() + 1);
-                        break;
-                    case Keyboard.KEY_DOWN:
-                        selected.setHeight(selected.getHeight() - 1);
-                        break;
-                    default:
+        if (edit) {
+            switch (keyCode) {
+                case Keyboard.KEY_RIGHT:
+                    selected.setWidth(selected.getWidth() + 1);
                     break;
-                }
-
+                case Keyboard.KEY_LEFT:
+                    selected.setWidth(selected.getWidth() - 1);
+                    break;
+                case Keyboard.KEY_DOWN:
+                    selected.setHeight(selected.getHeight() + 1);
+                    break;
+                case Keyboard.KEY_UP:
+                    selected.setHeight(selected.getHeight() - 1);
+                    break;
+                default:
+                    break;
+            }
         }
         super.keyPressed(keyCode, keyChar, hold);
     }
 
     @Override
     public void mousePress(int mouseButton) {
-        if (mouseButton == 0) {
-            for (Prevent prevent : prevents) {
-                if (Collision.mouseHovered(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight())) {
+        for (Prevent prevent : prevents) {
+            if (Collision.mouseHovered(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight())) {
+                if (mouseButton == 0) {
                     drag = !drag;
-                    dragID = prevent.getID();
-                }
-            }
-        } else if (mouseButton == 1) {
-            for (Prevent prevent : prevents) {
-                if (Collision.mouseHovered(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight())) {
+                } else if(mouseButton == 1) {
                     edit = !edit;
-                    dragID = prevent.getID();
                 }
+                selected = prevent;
             }
         }
+
         super.mousePress(mouseButton);
     }
 }

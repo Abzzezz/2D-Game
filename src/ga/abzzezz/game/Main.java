@@ -12,6 +12,7 @@ import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.gui.screens.MainMenu;
 import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.object.ObjectManager;
+import ga.abzzezz.game.maingame.utility.InternetConnection;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +62,8 @@ public class Main {
          */
         dir = new File(System.getProperty("user.home"), "PONG!");
         if(!dir.exists()) dir.mkdir();
+
+        InternetConnection.checkVersion();
 
         /*
         Manager initialisation
@@ -117,6 +120,11 @@ public class Main {
 
     public File getDir() {
         return dir;
+    }
+
+
+    public byte getVersion() {
+        return version;
     }
 
     public LevelSystem getLevelSystem() {
