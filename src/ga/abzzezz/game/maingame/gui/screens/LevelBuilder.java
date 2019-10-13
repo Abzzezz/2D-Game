@@ -15,7 +15,9 @@ import ga.abzzezz.game.maingame.gui.basis.TextBox;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
+import org.joml.Vector2i;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -45,9 +47,9 @@ public class LevelBuilder extends GuiScreen {
     @Override
     public void buttonPressed(int buttonID) {
         if (buttonID == 0) {
-            prevents.add(new Block("B" + System.currentTimeMillis(), display()[0] / 2, display()[1] / 2, 100, 100));
+            prevents.add(new Block("B" + System.currentTimeMillis(), new Vector2i(display()[0] / 2, display()[1] / 2), 100, 100));
         } else if (buttonID == 1) {
-            prevents.add(new Block("Player", display()[0] / 2, display()[1] / 2, 30, 30, Color.GREEN));
+            prevents.add(new Block("Player", new Vector2i(display()[0] / 2, display()[1] / 2), 30, 30, Color.GREEN));
         } else if (buttonID == 3) {
             Main.getMain().getLevelSystem().saveLevel(prevents);
         } else if (buttonID == 4) {
@@ -66,10 +68,8 @@ public class LevelBuilder extends GuiScreen {
             prevent.draw();
         }
         if (drag) {
-            selected.setxPos(Collision.getMousePosition()[0] - selected.getWidth() / 2);
-            selected.setyPos(Collision.getMousePosition()[1] - selected.getHeight() / 2);
-        } else if (edit) {
-            selected = selected;
+            selected.setxPos((int) (Collision.getMousePosition()[0] - selected.getWidth() / 2));
+            selected.setyPos((int) (Collision.getMousePosition()[1] - selected.getHeight() / 2));
         }
 
 
@@ -110,7 +110,7 @@ public class LevelBuilder extends GuiScreen {
             if (Collision.mouseHovered(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight())) {
                 if (mouseButton == 0) {
                     drag = !drag;
-                } else if(mouseButton == 1) {
+                } else if (mouseButton == 1) {
                     edit = !edit;
                 }
                 selected = prevent;

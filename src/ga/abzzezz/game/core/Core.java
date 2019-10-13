@@ -27,6 +27,7 @@ public class Core {
     /*
     Method that gets called when Mouse is pressed
      */
-    public void mouseClicked(int button) { }
+    public void mouseClicked(int button) {
+    }
 
 }

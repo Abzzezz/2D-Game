@@ -7,24 +7,30 @@ package ga.abzzezz.game.core.collision;
 
 import ga.abzzezz.game.core.Core;
 import ga.abzzezz.game.core.EngineCore;
+import org.joml.Vector2i;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 
 public class Collision {
 
 
-    public static boolean isCollided(float xPosObj, float yPosObj, float widthObj, float heightObj, float playerX, float playerY, float playerWidth, float playerHeight) {
-        if(playerY >= Display.getHeight() - playerHeight || playerY <= -50) {
+    public static boolean isCollided(Vector2i posObj, float widthObj, float heightObj, Vector2i posPlayer, float playerWidth, float playerHeight) {
+        AABB player = new AABB(posPlayer, playerWidth, playerHeight);
+        AABB object = new AABB(posObj, widthObj, heightObj);
+        return object.intersects(player);
+    }
+
+    public static boolean isOutOfBounds(Vector2i playerPosition, float playerHeight, float playerWidth) {
+        float playerY = playerPosition.y;
+        float playerX = playerPosition.x;
+
+        if (playerY >= Display.getHeight() - playerHeight || playerY <= 0) {
             return true;
         }
 
-        if(playerX <= 0 + playerWidth || playerX >= Display.getWidth() - playerWidth)  {
-            return true;
-        }
-
-
-        boolean flagX = (playerX >= xPosObj + widthObj || playerX <= xPosObj);
-        if(playerY + playerHeight >= yPosObj && !flagX) {
+        if (playerX <= 0 + playerWidth || playerX + playerWidth >= Display.getWidth()) {
+            System.out.println("Out of bounds");
             return true;
         }
 
@@ -42,7 +48,7 @@ public class Collision {
     public static float[] getMousePosition() {
         float xPos = Mouse.getX();
         float yPos = Display.getHeight() - Mouse.getY();
-        return new float[] {xPos, yPos};
+        return new float[]{xPos, yPos};
     }
 
 

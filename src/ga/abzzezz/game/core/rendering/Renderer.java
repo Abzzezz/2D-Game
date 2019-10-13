@@ -31,9 +31,6 @@ public class Renderer extends Core {
 
 
     public void render() {
-        for (Prevent prevent : Main.getMain().getObjectManager().getPrevents()) {
-            PlayerUtil.mainPlayer.update(prevent);
-        }
         PlayerUtil.mainPlayer.drawPlayer();
 
         //Draw All Objects

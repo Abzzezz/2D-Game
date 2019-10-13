@@ -5,6 +5,7 @@
 
 package ga.abzzezz.game.maingame.entitys;
 
+import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.collision.Collision;
 import ga.abzzezz.game.core.pysics.PhysicsCore;
 import ga.abzzezz.game.core.rendering.RenderHelper;
@@ -13,40 +14,50 @@ import ga.abzzezz.game.core.utils.Logger;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
 import ga.abzzezz.game.maingame.utility.TimeUtil;
+import org.joml.Vector2i;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
 public class Player {
 
-    private float xPos, yPos, startY;
-    public PhysicsCore physicsCore = new PhysicsCore();
-    private TimeUtil jumpAirTime, timeBeforeJump;
+    private float startY;
+    private Vector2i pos;
 
-    public Player(float xPos, float yPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    protected int playerSize = 30;
+
+    public PhysicsCore physicsCore = new PhysicsCore();
+
+
+    public Player(Vector2i position) {
+        this.pos = position;
         physicsCore.setup();
-        jumpAirTime = new TimeUtil();
-        timeBeforeJump = new TimeUtil();
         Logger.log("Player set up", Logger.LogType.INFO);
 
     }
 
-    public void jump() {
-    }
 
+    public void update() {
+        if (Collision.isOutOfBounds(pos, playerSize, playerSize)) return;
 
-    public void update(Prevent prevent) {
-        if (!Collision.isCollided(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight(), getXPos(), getYPos(), 30, 30)) {
-            setYPos(startY + physicsCore.positionWithGravity(Display.getHeight()));
+        for (Prevent prevent : Main.getMain().getObjectManager().getPrevents()) {
+            if (Collision.isCollided(prevent.getPos(), prevent.getWidth(), prevent.getHeight(), pos, playerSize, playerSize)) {
+                break;
+            } else {
+                setYPos((int) (startY += 1));
+            }
         }
     }
 
+    public Vector2i getPos() {
+        return pos;
+    }
+
     public float getXPos() {
-        return xPos;
+        return pos.x;
     }
 
     public void setStartY(float startY) {
@@ -57,28 +68,33 @@ public class Player {
         return startY;
     }
 
-    public void setXPos(float xPos) {
-        this.xPos = xPos;
+    public void setXPos(int xPos) {
+        this.pos.x = xPos;
     }
 
-    public float getYPos() {
-        return yPos;
+    public int getYPos() {
+        return pos.y;
     }
 
-    public void setYPos(float yPos) {
-        this.yPos = yPos;
+    public void setYPos(int yPos) {
+        this.pos.y = yPos;
     }
 
     public void move(int keyCode) {
+        //For test purposes
+        if(Collision.isOutOfBounds(pos, playerSize, playerSize)) return;
+
+
+
         physicsCore.setPosition((int) startY);
-        if(keyCode == Keyboard.KEY_D) {
-            setXPos(xPos + 5);
+        if (keyCode == Keyboard.KEY_D) {
+            setXPos(pos.x + 5);
         }
 
 
     }
 
     public void drawPlayer() {
-        RenderHelper.drawCircle(getXPos(), getYPos(), 20, 10, 360, Color.GREEN, Color.GREEN);
+        RenderHelper.drawQuad(getXPos(), getYPos(), playerSize, playerSize, Color.GREEN);
     }
 }

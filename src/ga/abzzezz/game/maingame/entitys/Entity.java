@@ -5,24 +5,27 @@
 
 package ga.abzzezz.game.maingame.entitys;
 
+import org.joml.Vector2i;
+import org.lwjgl.util.vector.Vector2f;
+
 public class Entity {
 
-    private float xPos, yPos;
+    private Vector2i position;
 
 
     public float getXPos() {
-        return xPos;
+        return position.x;
     }
 
-    public void setXPos(float xPos) {
-        this.xPos = xPos;
+    public void setXPos(int xPos) {
+        this.position.x = xPos;
     }
 
     public float getYPos() {
-        return yPos;
+        return position.y;
     }
 
-    public void setYPos(float yPos) {
-        this.yPos = yPos;
+    public void setYPos(int yPos) {
+        this.position.y = yPos;
     }
 }

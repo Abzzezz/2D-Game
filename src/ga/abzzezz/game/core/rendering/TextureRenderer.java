@@ -34,14 +34,14 @@ public class TextureRenderer {
         GL11.glEnable(GL11.GL_BLEND);
         texture.bind();
         GL11.glBegin(GL11.GL_QUADS);
-        GL11.glTexCoord2f(0,0);
+        GL11.glTexCoord2f(0, 0);
         GL11.glVertex2f(xPos, yPos);
-        GL11.glTexCoord2f(1,0);
+        GL11.glTexCoord2f(1, 0);
         GL11.glVertex2f(xPos + texture.getTextureWidth(), yPos);
-        GL11.glTexCoord2f(1,1);
-        GL11.glVertex2f(xPos + texture.getTextureWidth(),yPos + texture.getTextureHeight());
-        GL11.glTexCoord2f(0,1);
-        GL11.glVertex2f(xPos ,yPos + texture.getTextureHeight());
+        GL11.glTexCoord2f(1, 1);
+        GL11.glVertex2f(xPos + texture.getTextureWidth(), yPos + texture.getTextureHeight());
+        GL11.glTexCoord2f(0, 1);
+        GL11.glVertex2f(xPos, yPos + texture.getTextureHeight());
         GL11.glEnd();
         GL11.glDisable(GL11.GL_BLEND);
 
@@ -51,14 +51,14 @@ public class TextureRenderer {
         GL11.glEnable(GL11.GL_BLEND);
         texture.bind();
         GL11.glBegin(GL11.GL_QUADS);
-        GL11.glTexCoord2f(0,0);
+        GL11.glTexCoord2f(0, 0);
         GL11.glVertex2f(xPos, yPos);
-        GL11.glTexCoord2f(1,0);
+        GL11.glTexCoord2f(1, 0);
         GL11.glVertex2f(xPos + newWidth, yPos);
-        GL11.glTexCoord2f(1,1);
-        GL11.glVertex2f(xPos + newWidth,yPos + newHeight);
-        GL11.glTexCoord2f(0,1);
-        GL11.glVertex2f(xPos ,yPos + newHeight);
+        GL11.glTexCoord2f(1, 1);
+        GL11.glVertex2f(xPos + newWidth, yPos + newHeight);
+        GL11.glTexCoord2f(0, 1);
+        GL11.glVertex2f(xPos, yPos + newHeight);
         GL11.glEnd();
         GL11.glDisable(GL11.GL_BLEND);
     }
@@ -66,6 +66,7 @@ public class TextureRenderer {
     public int getTextureWidth() {
         return texture.getTextureWidth();
     }
+
     public int getTextureHeight() {
         return texture.getTextureHeight();
     }

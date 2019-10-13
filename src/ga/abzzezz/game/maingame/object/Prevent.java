@@ -5,48 +5,58 @@
 
 package ga.abzzezz.game.maingame.object;
 
+import org.joml.Vector2i;
+import org.lwjgl.util.vector.Vector2f;
+
 import java.awt.*;
 
 public class Prevent {
 
-    private float xPos, yPos, width, height;
+    private float width, height;
+    private Vector2i pos;
     private String ID;
     private Color color;
 
     public void draw() { }
 
-    public Prevent(String ID,float xPos, float yPos, float width, float height) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public Prevent(String ID, Vector2i pos, float width, float height) {
         this.width = width;
         this.height = height;
         this.ID = ID;
         this.color = Color.RED;
+        this.pos = pos;
     }
 
-    public Prevent(String ID, float xPos, float yPos, float width, float height,  Color color) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public Prevent(String ID, Vector2i pos, float width, float height,  Color color) {
         this.width = width;
         this.height = height;
         this.ID = ID;
         this.color = color;
+        this.pos = pos;
     }
 
-    public float getxPos() {
-        return xPos;
+    public Vector2i getPos() {
+        return pos;
     }
 
-    public void setxPos(float xPos) {
-        this.xPos = xPos;
+    public void setPos(Vector2i pos) {
+        this.pos = pos;
     }
 
-    public float getyPos() {
-        return yPos;
+    public int getxPos() {
+        return pos.x;
     }
 
-    public void setyPos(float yPos) {
-        this.yPos = yPos;
+    public void setxPos(int xPos) {
+        this.pos.x = xPos;
+    }
+
+    public int getyPos() {
+        return pos.y;
+    }
+
+    public void setyPos(int yPos) {
+        this.pos.y = yPos;
     }
 
     public float getWidth() {

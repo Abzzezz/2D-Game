@@ -11,6 +11,8 @@ import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
+import org.joml.Vector2i;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.io.*;
@@ -35,19 +37,18 @@ public class LevelSystem {
                 if (splitLine[0].equalsIgnoreCase("[Obj]")) {
                     String objectName = splitLine[1];
                     String objectID = splitLine[2];
-                    float xPos = Float.parseFloat(splitLine[3]);
-                    float yPos = Float.parseFloat(splitLine[4]);
+                    Vector2i positionVector = new Vector2i(Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]));
                     float width = Float.parseFloat(splitLine[5]);
                     float height = Float.parseFloat(splitLine[6]);
                     boolean colorFlag = splitLine.length > 7;
                     if (objectName.equalsIgnoreCase("Block")) {
-                        Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, xPos, yPos, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
+                        Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, positionVector, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
                     }
                 }
             } else {
                 if (splitLine[0].equalsIgnoreCase("[P]")) {
-                    float xPos = Float.parseFloat(splitLine[1]);
-                    float yPos = Float.parseFloat(splitLine[2]);
+                    int xPos = Integer.parseInt(splitLine[1]);
+                    int yPos = Integer.parseInt(splitLine[2]);
                     PlayerUtil.mainPlayer.setXPos(xPos);
                     PlayerUtil.mainPlayer.setStartY(yPos);
                 }

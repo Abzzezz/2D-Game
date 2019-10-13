@@ -88,7 +88,7 @@ public class RenderHelper {
         glVertex2d(xPos + width, yPos + height);
         glVertex2d(xPos + width, yPos);
         glVertex2d(xPos + width, yPos);
-        glVertex2d(xPos, yPos );
+        glVertex2d(xPos, yPos);
 
     }
 

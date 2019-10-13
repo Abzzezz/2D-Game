@@ -8,12 +8,10 @@ package ga.abzzezz.game.core.utils;
 public class Logger {
 
 
-
     public static void log(String message, LogType type) {
-         System.out.println("[" + type.getName() + "] " + message);
+        System.out.println("[" + type.getName() + "] " + message);
 
     }
-
 
 
     public enum LogType {

@@ -113,8 +113,6 @@ public class EngineCore {
 
     Main main = Main.getMain();
 
-    private TimeUtil mouseClick = new TimeUtil();
-
     public void cycle() {
         /*
         All hooks in main and separated from the main game.
@@ -129,7 +127,7 @@ public class EngineCore {
             while (Mouse.next()) {
                 core.mouseClicked(Mouse.getEventButton());
             }
-
+            PlayerUtil.mainPlayer.update();
             renderer.render();
         } else {
             while (Mouse.next()) {

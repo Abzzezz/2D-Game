@@ -10,17 +10,18 @@ import org.lwjgl.util.glu.GLU;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Camera  {
+public class Camera {
 
 
     float xPos;
+
     public void move(float xPos, float yPos) {
         float xPos1 = 0;
         xPos1 -= xPos;
         this.xPos = xPos1;
 
-        if(xPos > 0)
-        glTranslatef(xPos1, 0, 0);
+        if (xPos > 0)
+            glTranslatef(xPos1, 0, 0);
     }
 
     public float getXPos() {
