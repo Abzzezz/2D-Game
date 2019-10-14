@@ -24,7 +24,7 @@ public class GuiScreen extends Gui {
         }
 
         for (TextBox textBox : textBoxes) {
-           textBox.drawTextBox();
+            textBox.drawTextBox();
         }
         super.drawScreen();
     }

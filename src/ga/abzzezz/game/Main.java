@@ -15,7 +15,6 @@ import ga.abzzezz.game.maingame.object.ObjectManager;
 import ga.abzzezz.game.maingame.utility.InternetConnection;
 
 import java.io.File;
-import java.io.IOException;
 
 /*
 Main Game Class everything in here: Managers, Core Engine setup etc.
@@ -34,12 +33,18 @@ public class Main {
     private File dir;
 
 
-
     public static void main(String[] args) {
         Main main = new Main();
         main.start();
     }
 
+    public static Main getMain() {
+        return main;
+    }
+
+    public static EngineCore getEngineCore() {
+        return engineCore;
+    }
 
     public void start() {
         Logger.log("Engine setting up...", Logger.LogType.INFO);
@@ -61,7 +66,7 @@ public class Main {
         Game Directory, when not existent: create a new one
          */
         dir = new File(System.getProperty("user.home"), "PONG!");
-        if(!dir.exists()) dir.mkdir();
+        if (!dir.exists()) dir.mkdir();
 
         InternetConnection.checkVersion();
 
@@ -72,20 +77,10 @@ public class Main {
         objectManager = new ObjectManager();
 
         /*
-        Test level loading, removed in final build
-         */
-        try {
-            levelSystem.loadLevel("Level1");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        /*
         Current Screen, so menus can be displayed
          */
         setCurrentScreen(new MainMenu());
     }
-
 
     public GuiScreen getCurrentScreen() {
         return currentScreen;
@@ -101,27 +96,17 @@ public class Main {
 
         this.currentScreen = currentScreen;
 
-        if(currentScreen != null)
-        currentScreen.initialiseGui();
-    }
-
-    public static Main getMain() {
-        return main;
-    }
-
-    public static EngineCore getEngineCore() {
-        return engineCore;
+        if (currentScreen != null)
+            currentScreen.initialiseGui();
     }
 
     public ObjectManager getObjectManager() {
         return objectManager;
     }
 
-
     public File getDir() {
         return dir;
     }
-
 
     public byte getVersion() {
         return version;

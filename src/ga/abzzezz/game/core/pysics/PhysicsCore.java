@@ -5,31 +5,26 @@
 
 package ga.abzzezz.game.core.pysics;
 
-import org.lwjgl.opengl.Display;
-
-import java.util.Date;
-
 public class PhysicsCore {
 
     /*
     Can be called everywhere. Physics for game, actually just a animation class
      */
     public int ground;
+    public boolean done, doneAccelerating;
     private float gravity;
     private float dY = 1F, acceleratedY;
-    public boolean done, doneAccelerating;
+    private float position;
+    private float positionAccelerated;
+
+    /*
+    Basic Gravity method to accelerate the output position from an input position f.e. pos 100 ; 100 + dy; dy = 2 * PI = 6.283185307179586 and so on
+     */
 
     public void setup() {
         ground = 600;
         gravity = 1F;
     }
-
-
-    private float position;
-
-    /*
-    Basic Gravity method to accelerate the output position from an input position f.e. pos 100 ; 100 + dy; dy = 2 * PI = 6.283185307179586 and so on
-     */
 
     public float positionWithGravity(int max) {
         if (position < max) {
@@ -43,8 +38,6 @@ public class PhysicsCore {
 
         return position;
     }
-
-    private float positionAccelerated;
 
     public float acceleration(float finalPos) {
         if (positionAccelerated < finalPos) {

@@ -9,92 +9,106 @@ import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.collision.Collision;
 import ga.abzzezz.game.core.pysics.PhysicsCore;
 import ga.abzzezz.game.core.rendering.RenderHelper;
-import ga.abzzezz.game.core.rendering.TextureRenderer;
 import ga.abzzezz.game.core.utils.Logger;
-import ga.abzzezz.game.maingame.object.Prevent;
-import ga.abzzezz.game.maingame.utility.PlayerUtil;
-import ga.abzzezz.game.maingame.utility.TimeUtil;
+import ga.abzzezz.game.maingame.utility.VectorUtil;
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 import org.joml.Vector2i;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
 public class Player {
 
-    private float startY;
-    private Vector2i pos;
-
-    protected int playerSize = 30;
-
     public PhysicsCore physicsCore = new PhysicsCore();
-
+    protected int playerSize = 30;
+    private float startY;
+    private BodyDef bodyDef = new BodyDef();
 
     public Player(Vector2i position) {
-        this.pos = position;
         physicsCore.setup();
         Logger.log("Player set up", Logger.LogType.INFO);
-
+        /*
+        Physics shape for player.
+         */
+        bodyDef.position.set(position.x, position.y);
+        bodyDef.type = BodyType.DYNAMIC;
+        PolygonShape boxShape = new PolygonShape();
+        boxShape.setAsBox(1, 1);
+        Body box = Main.getMain().getObjectManager().getWorld().createBody(bodyDef);
+        FixtureDef boxFixture = new FixtureDef();
+        boxFixture.density = 1f;
+        boxFixture.shape = boxShape;
+        //
+        box.createFixture(boxFixture);
+        //Add body to all the list
+        Main.getMain().getObjectManager().getBodies().add(box);
     }
 
 
     public void update() {
-        if (Collision.isOutOfBounds(pos, playerSize, playerSize)) return;
-
-        for (Prevent prevent : Main.getMain().getObjectManager().getPrevents()) {
-            if (Collision.isCollided(prevent.getPos(), prevent.getWidth(), prevent.getHeight(), pos, playerSize, playerSize)) {
-                break;
-            } else {
-                setYPos((int) (startY += 1));
-            }
-        }
+        if (Collision.isOutOfBounds(VectorUtil.getVector2iFromVec2(bodyDef.position), playerSize, playerSize))
+            return;
+        bodyDef.position.set(bodyDef.position.x, bodyDef.position.y);
     }
 
     public Vector2i getPos() {
-        return pos;
+        return VectorUtil.getVector2iFromVec2(bodyDef.position);
     }
 
     public float getXPos() {
-        return pos.x;
+        return bodyDef.position.x;
     }
 
-    public void setStartY(float startY) {
-        this.startY = startY;
+    public void setXPos(int xPos) {
+        this.bodyDef.position.x = xPos;
     }
 
     public float getStartY() {
         return startY;
     }
 
-    public void setXPos(int xPos) {
-        this.pos.x = xPos;
+    public void setStartY(float startY) {
+        this.startY = startY;
     }
 
-    public int getYPos() {
-        return pos.y;
+    public float getYPos() {
+        return bodyDef.position.y;
     }
 
     public void setYPos(int yPos) {
-        this.pos.y = yPos;
+        this.bodyDef.position.y = yPos;
     }
 
     public void move(int keyCode) {
         //For test purposes
-        if(Collision.isOutOfBounds(pos, playerSize, playerSize)) return;
+        if (Collision.isOutOfBounds(VectorUtil.getVector2iFromVec2(bodyDef.position), playerSize, playerSize))
+            return;
 
-
-
-        physicsCore.setPosition((int) startY);
         if (keyCode == Keyboard.KEY_D) {
-            setXPos(pos.x + 5);
+            setXPos((int) bodyDef.position.x + 5);
         }
-
-
     }
 
     public void drawPlayer() {
-        RenderHelper.drawQuad(getXPos(), getYPos(), playerSize, playerSize, Color.GREEN);
+        for (Body body : Main.getMain().getObjectManager().getBodies()) {
+            if (body.m_type == BodyType.DYNAMIC) {
+                Vec2 pos = body.getPosition();
+                RenderHelper.drawQuad((int) pos.x, (int) pos.y, 40, 40, Color.BLUE);
+                float timeStep = 1.0f / 60.0f;
+                int velocityIterations = 6;
+                int positionIterations = 2;
+
+                /*
+                Testing Velocity
+                 */
+                body.setLinearVelocity(new Vec2(0, 100));
+                Main.getMain().getObjectManager().getWorld().step(timeStep, velocityIterations, positionIterations);
+            }
+        }
     }
 }

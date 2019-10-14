@@ -12,10 +12,13 @@ import java.awt.*;
 
 public class ImageButton extends GuiButton {
 
+    FontUtil buttonFont = new FontUtil(15, "OpenSans");
     private String text, image;
     private float xPos, yPos, buttonWidth, buttonHeight;
     private int buttonID;
     private TextureRenderer texture = new TextureRenderer();
+
+
     public ImageButton(String text, String image, float xPos, float yPos, int buttonID) {
         super(text, xPos, yPos, buttonID);
         this.text = text;
@@ -25,9 +28,6 @@ public class ImageButton extends GuiButton {
         this.image = image;
         texture.initTexture(image, "PNG");
     }
-
-
-    FontUtil buttonFont = new FontUtil(15, "OpenSans");
 
     public void drawButton() {
         texture.drawImage(xPos - buttonFont.getStringWidth(text) / 4, yPos + texture.getTextureHeight() / 4 + 15);

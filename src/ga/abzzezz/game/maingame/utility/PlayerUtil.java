@@ -6,13 +6,19 @@
 package ga.abzzezz.game.maingame.utility;
 
 import ga.abzzezz.game.maingame.entitys.Player;
-import org.joml.Vector2i;
-import org.lwjgl.util.vector.Vector2f;
 
 public class PlayerUtil {
 
-    public static Player mainPlayer = new Player(new Vector2i(0,0));
-    public static int jumpHeight = 45;
+    /*
+    Main Player got moved here to prevent continuous re initialisations. if no position is set, the player pos gets set to (0|0)
+    */
+    public static Player mainPlayer;
+
+
+    /*
+    Definition of tries the player has. Used globally
+     */
+    public static int tries = 5;
 
 
 }

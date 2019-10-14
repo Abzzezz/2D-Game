@@ -17,18 +17,17 @@ import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
 import org.joml.Vector2i;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class LevelBuilder extends GuiScreen {
-
-
+    Prevent selected;
     /*
     For dev purposes only
      */
     private ArrayList<Prevent> prevents = new ArrayList();
+    private boolean drag, edit;
 
     @Override
     public void initialiseGui() {
@@ -47,7 +46,10 @@ public class LevelBuilder extends GuiScreen {
     @Override
     public void buttonPressed(int buttonID) {
         if (buttonID == 0) {
-            prevents.add(new Block("B" + System.currentTimeMillis(), new Vector2i(display()[0] / 2, display()[1] / 2), 100, 100));
+            /*
+            Add object to prevents list, so it can be stored etc.
+             */
+            prevents.add(new Block("B" + System.currentTimeMillis(), new Vector2i(display()[0] / 2, display()[1] / 2), 50, 50, Color.RED));
         } else if (buttonID == 1) {
             prevents.add(new Block("Player", new Vector2i(display()[0] / 2, display()[1] / 2), 30, 30, Color.GREEN));
         } else if (buttonID == 3) {
@@ -60,26 +62,22 @@ public class LevelBuilder extends GuiScreen {
         super.buttonPressed(buttonID);
     }
 
-    Prevent selected;
-
     @Override
     public void drawScreen() {
         for (Prevent prevent : prevents) {
-            prevent.draw();
+            RenderHelper.drawQuad(prevent.getxPos(), prevent.getyPos(), prevent.getWidth(), prevent.getHeight(), prevent.getColor());
         }
+
         if (drag) {
             selected.setxPos((int) (Collision.getMousePosition()[0] - selected.getWidth() / 2));
             selected.setyPos((int) (Collision.getMousePosition()[1] - selected.getHeight() / 2));
         }
-
 
         geTextBoxByID("ColorBox").setHide(!edit);
 
         RenderHelper.drawQuad(display()[0] - 80, 0, 80, display()[1], ColorHelper.colorFormHex(0xf1c40f));
         super.drawScreen();
     }
-
-    private boolean drag, edit;
 
     @Override
     public void keyPressed(int keyCode, char keyChar, boolean hold) {

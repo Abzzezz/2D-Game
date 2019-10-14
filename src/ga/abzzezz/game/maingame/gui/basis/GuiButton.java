@@ -19,6 +19,9 @@ public class GuiButton extends Gui {
     private String buttonText;
     private float xPos, yPos, width, height;
     private int buttonID;
+    private FontUtil fontUtil = new FontUtil(30, "BrutalType");
+    private FontUtil fontUtil1 = new FontUtil(25, "BrutalType");
+    private float slide;
 
     public GuiButton(String buttonText, float xPos, float yPos, float width, float height, int buttonID) {
         this.buttonText = buttonText;
@@ -37,11 +40,6 @@ public class GuiButton extends Gui {
         this.width = 100;
         this.height = 30;
     }
-
-    private FontUtil fontUtil = new FontUtil(30, "BrutalType");
-    private FontUtil fontUtil1 = new FontUtil(25, "BrutalType");
-
-    private float slide;
 
     public void drawButton() {
         if (buttonHovered()) {
@@ -63,7 +61,7 @@ public class GuiButton extends Gui {
         if (slide > 13)
             fontUtil1.drawText(">", xPos + width / 4 - slide + fontUtil.getStringWidth(buttonText) + 5, yPos, Color.BLACK);
 
-        RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.getBlackTransparent());
+        RenderHelper.drawQuad((int)xPos, (int) yPos, (int) width, (int)height, ColorHelper.getBlackTransparent());
         super.drawScreen();
     }
 

@@ -9,11 +9,9 @@ Includes Code form the LWJGL Wik cause im Lazy .-.
 package ga.abzzezz.game.core;
 
 import ga.abzzezz.game.Main;
-import ga.abzzezz.game.core.rendering.Camera;
 import ga.abzzezz.game.core.rendering.Renderer;
 import ga.abzzezz.game.core.utils.Logger;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
-import ga.abzzezz.game.maingame.utility.TimeUtil;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -24,18 +22,17 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class EngineCore {
 
-
     private static EngineCore engineCore;
-    private Core core;
+    private Main main = Main.getMain();
     private Renderer renderer;
-    private Camera camera;
+
+    public static EngineCore getEngineCore() {
+        return new EngineCore();
+    }
 
     private void registerHandlers() {
         Logger.log("Registering handlers ", Logger.LogType.INFO);
         engineCore = new EngineCore();
-
-        core = new Core();
-        camera = new Camera();
         renderer = new Renderer();
     }
 
@@ -49,6 +46,9 @@ public class EngineCore {
 
     }
 
+    /*
+    Game cycle: Rendering, input detection etc.
+     */
 
     /*
     Init OpenGL with Display Size and Syncs it. Then Render
@@ -88,30 +88,18 @@ public class EngineCore {
         }
 
         Display.setTitle("PONG!");
-
         glEnable(GL_TEXTURE_2D);
-
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
         // enable alpha blending
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
         glViewport(0, 0, width, height);
         glMatrixMode(GL_MODELVIEW);
-
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glOrtho(0, width, height, 0, 1, -1);
         glMatrixMode(GL_MODELVIEW);
     }
-
-
-    /*
-    Game cycle: Rendering, input detection etc.
-     */
-
-    Main main = Main.getMain();
 
     public void cycle() {
         /*
@@ -119,44 +107,31 @@ public class EngineCore {
          */
 
         if (main.getCurrentScreen() == null) {
-            while (Keyboard.next()) {
-                if (Keyboard.getEventKeyState())
-                    renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
-            }
-
-            while (Mouse.next()) {
-                core.mouseClicked(Mouse.getEventButton());
-            }
             PlayerUtil.mainPlayer.update();
             renderer.render();
         } else {
-            while (Mouse.next()) {
-                if (Mouse.getEventButtonState()) main.getCurrentScreen().mousePress(Mouse.getEventButton());
-            }
-
-            while (Keyboard.next()) {
-                if (Keyboard.getEventKeyState())
-                    main.getCurrentScreen().keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
-            }
-
             main.getCurrentScreen().drawScreen();
         }
 
-    }
+        while (Mouse.next()) {
+            if (Mouse.getEventButtonState()) {
+                if (main.getCurrentScreen() != null) {
+                    main.getCurrentScreen().mousePress(Mouse.getEventButton());
+                }
+            }
+        }
 
-    public static EngineCore getEngineCore() {
-        return new EngineCore();
-    }
-
-    public Core getCore() {
-        return core;
+        while (Keyboard.next()) {
+            if (Keyboard.getEventKeyState())
+                if (main.getCurrentScreen() == null) {
+                    renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+                } else {
+                    main.getCurrentScreen().keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+                }
+        }
     }
 
     public Renderer getRenderer() {
         return renderer;
-    }
-
-    public Camera getCamera() {
-        return camera;
     }
 }

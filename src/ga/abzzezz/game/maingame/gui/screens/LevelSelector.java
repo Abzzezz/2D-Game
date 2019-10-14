@@ -28,7 +28,7 @@ public class LevelSelector extends GuiScreen {
 
     @Override
     public void drawScreen() {
-        bigText.drawText("Levels", display()[0] /2 - bigText.getStringWidth("Levels") /2 , 20, Color.BLACK);
+        bigText.drawText("Levels", display()[0] / 2 - bigText.getStringWidth("Levels") / 2, 20, Color.BLACK);
 
         int yBuffer = 100;
         for (File level : Main.getMain().getLevelSystem().getLevels()) {
@@ -37,7 +37,7 @@ public class LevelSelector extends GuiScreen {
             /*
             Really basic solution... TODO: Move into @mousePress method
              */
-            if(Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name)* 2, yBuffer, display()[0] / 2 - levelFont.centerText(name)* 4, levelFont.getFontSize() * 1.5F) && Mouse.isButtonDown(0)) {
+            if (Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, display()[0] / 2 - levelFont.centerText(name) * 4, levelFont.getFontSize() * 1.5F) && Mouse.isButtonDown(0)) {
                 try {
                     Main.getMain().getLevelSystem().loadLevel(level.getName());
                 } catch (IOException e) {
@@ -48,7 +48,7 @@ public class LevelSelector extends GuiScreen {
 
             levelFont.drawText(name, display()[0] / 2 - levelFont.centerText(name), yBuffer, Color.BLACK);
 
-            RenderHelper.drawQuad(display()[0] / 2 - levelFont.centerText(name)* 2, yBuffer, levelFont.centerText(name) * 4, levelFont.getFontSize() * 1.5F, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
+            RenderHelper.drawQuad(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, levelFont.centerText(name) * 4, levelFont.getFontSize() * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
             yBuffer += levelFont.getFontSize() + 20;
         }
         super.drawScreen();

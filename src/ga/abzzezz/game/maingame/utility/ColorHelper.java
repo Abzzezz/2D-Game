@@ -14,7 +14,7 @@ public class ColorHelper {
     }
 
     public static Color getBlackTransparent() {
-        return new Color(0,0,0, 50);
+        return new Color(0, 0, 0, 50);
     }
 
     public static Color colorFormHex(int hex) {

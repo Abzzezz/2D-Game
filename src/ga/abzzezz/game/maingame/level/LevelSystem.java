@@ -11,16 +11,20 @@ import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
+import ga.abzzezz.game.maingame.utility.VectorUtil;
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 import org.joml.Vector2i;
-import org.lwjgl.util.vector.Vector2f;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.awt.*;
 import java.io.*;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class LevelSystem {
 
@@ -38,10 +42,23 @@ public class LevelSystem {
                     String objectName = splitLine[1];
                     String objectID = splitLine[2];
                     Vector2i positionVector = new Vector2i(Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]));
-                    float width = Float.parseFloat(splitLine[5]);
-                    float height = Float.parseFloat(splitLine[6]);
+                    int width = Integer.parseInt(splitLine[5]);
+                    int height = Integer.parseInt(splitLine[6]);
                     boolean colorFlag = splitLine.length > 7;
                     if (objectName.equalsIgnoreCase("Block")) {
+
+                        BodyDef bodyDef = new BodyDef();
+                        bodyDef.position.set(VectorUtil.getVec2FormVector(positionVector));
+                        bodyDef.type = BodyType.STATIC;
+                        PolygonShape boxShape = new PolygonShape();
+                        boxShape.setAsBox(width / 2, height / 2);
+                        Body box = Main.getMain().getObjectManager().getWorld().createBody(bodyDef);
+                        FixtureDef boxFixture = new FixtureDef();
+                        boxFixture.density = 1f;
+                        boxFixture.shape = boxShape;
+                        boxFixture.restitution = 1f;
+                        box.createFixture(boxFixture);
+                        Main.getMain().getObjectManager().getBodies().add(box);
                         Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, positionVector, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
                     }
                 }
@@ -49,8 +66,8 @@ public class LevelSystem {
                 if (splitLine[0].equalsIgnoreCase("[P]")) {
                     int xPos = Integer.parseInt(splitLine[1]);
                     int yPos = Integer.parseInt(splitLine[2]);
-                    PlayerUtil.mainPlayer.setXPos(xPos);
-                    PlayerUtil.mainPlayer.setStartY(yPos);
+                    PlayerUtil.mainPlayer = new Player(new Vector2i(xPos, yPos));
+                    PlayerUtil.mainPlayer.physicsCore.setPosition(yPos);
                 }
             }
         }

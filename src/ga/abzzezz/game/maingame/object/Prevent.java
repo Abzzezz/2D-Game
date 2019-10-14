@@ -6,20 +6,17 @@
 package ga.abzzezz.game.maingame.object;
 
 import org.joml.Vector2i;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
 public class Prevent {
 
-    private float width, height;
+    private int width, height;
     private Vector2i pos;
     private String ID;
     private Color color;
 
-    public void draw() { }
-
-    public Prevent(String ID, Vector2i pos, float width, float height) {
+    public Prevent(String ID, Vector2i pos, int width, int height) {
         this.width = width;
         this.height = height;
         this.ID = ID;
@@ -27,7 +24,7 @@ public class Prevent {
         this.pos = pos;
     }
 
-    public Prevent(String ID, Vector2i pos, float width, float height,  Color color) {
+    public Prevent(String ID, Vector2i pos, int width, int height, Color color) {
         this.width = width;
         this.height = height;
         this.ID = ID;
@@ -59,19 +56,19 @@ public class Prevent {
         this.pos.y = yPos;
     }
 
-    public float getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 

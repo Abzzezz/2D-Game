@@ -6,8 +6,6 @@
 package ga.abzzezz.game.maingame.gui.screens;
 
 import ga.abzzezz.game.Main;
-import ga.abzzezz.game.core.collision.Collision;
-import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.utility.FontUtil;
@@ -16,6 +14,8 @@ import java.awt.*;
 
 public class MainMenu extends GuiScreen {
 
+
+    FontUtil fontUtil = new FontUtil(40, "OpenSans");
 
     @Override
     public void buttonPressed(int buttonID) {
@@ -35,8 +35,6 @@ public class MainMenu extends GuiScreen {
 
         super.initialiseGui();
     }
-
-    FontUtil fontUtil = new FontUtil(40, "OpenSans");
 
     @Override
     public void drawScreen() {

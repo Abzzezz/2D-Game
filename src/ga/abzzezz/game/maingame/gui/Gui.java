@@ -46,7 +46,7 @@ public class Gui {
 
     public TextBox geTextBoxByID(String ID) {
         for (TextBox textBox : textBoxes) {
-            if(textBox.getID().equalsIgnoreCase(ID)) {
+            if (textBox.getID().equalsIgnoreCase(ID)) {
                 return textBox;
             }
         }
@@ -55,7 +55,7 @@ public class Gui {
 
     public GuiButton getButtonByID(int buttonID) {
         for (GuiButton guiButton : guiButtons) {
-            if(guiButton.getButtonID() == buttonID) {
+            if (guiButton.getButtonID() == buttonID) {
                 return guiButton;
             }
         }

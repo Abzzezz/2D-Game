@@ -11,7 +11,7 @@ public class TimeUtil {
 
 
     public boolean isTimeOver(long timeOver) {
-        return getSystemTime() - time  > timeOver;
+        return getSystemTime() - time > timeOver;
     }
 
     public void reset() {
