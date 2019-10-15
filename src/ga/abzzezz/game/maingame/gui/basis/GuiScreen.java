@@ -14,6 +14,7 @@ public class GuiScreen extends Gui {
 
     public void onGuiClosed() {
         guiButtons.clear();
+        textBoxes.clear();
     }
 
 

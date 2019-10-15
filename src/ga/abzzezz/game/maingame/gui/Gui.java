@@ -5,26 +5,32 @@
 
 package ga.abzzezz.game.maingame.gui;
 
+import ga.abzzezz.game.Main;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.TextBox;
+import org.lwjgl.input.Keyboard;
 
+import java.security.Key;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Gui {
 
 
-    protected LinkedList<GuiButton> guiButtons = new LinkedList<>();
-    protected LinkedList<TextBox> textBoxes = new LinkedList<>();
+    protected List<GuiButton> guiButtons = new CopyOnWriteArrayList<>();
+    protected List<TextBox> textBoxes = new CopyOnWriteArrayList<>();
 
 
-    public void drawScreen() {
+    public void drawScreen() {}
 
-    }
-
-    public void buttonPressed(int buttonID) {
-    }
+    public void buttonPressed(int buttonID) { }
 
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
+        if(keyCode == Keyboard.KEY_F1) {
+            Main.getMain().setCurrentScreen(Main.getMain().getOldScreen());
+        }
+
         for (TextBox textBox : textBoxes) {
             textBox.keyPressed(keyCode, keyChar, hold);
         }
@@ -62,7 +68,7 @@ public class Gui {
         return null;
     }
 
-    public LinkedList<GuiButton> getGuiButtons() {
+    public List<GuiButton> getGuiButtons() {
         return guiButtons;
     }
 }

@@ -10,6 +10,7 @@ import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.Gui;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
 import ga.abzzezz.game.maingame.utility.FontUtil;
+import ga.abzzezz.game.maingame.utility.KeyboardShortcuts;
 import ga.abzzezz.game.maingame.utility.ScissorUtil;
 import org.lwjgl.input.Keyboard;
 
@@ -45,10 +46,15 @@ public class TextBox extends Gui {
     @Override
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
         if (!hide && selected) {
-            if (keyCode == Keyboard.KEY_BACK && text.length() > 0) {
-                text = text.substring(0, text.length() - 1);
+            if (KeyboardShortcuts.isKeyboardCombo()) {
+                if (KeyboardShortcuts.isControlV()) text = text + KeyboardShortcuts.getClipboard();
+                if (KeyboardShortcuts.isDeleteAll()) text = "";
             } else {
-                text = text + keyChar;
+                if (keyCode == Keyboard.KEY_BACK && text.length() > 0) {
+                    text = text.substring(0, text.length() - 1);
+                } else {
+                    text = text + keyChar;
+                }
             }
         }
         super.keyPressed(keyCode, keyChar, hold);
@@ -56,9 +62,9 @@ public class TextBox extends Gui {
 
     @Override
     public void mousePress(int mouseButton) {
-        if (Collision.mouseHovered(xPos, yPos, width, height)) {
+        if (Collision.mouseHovered(xPos, yPos, width, height))
             selected = !selected;
-        }
+
         super.mousePress(mouseButton);
     }
 
@@ -67,11 +73,11 @@ public class TextBox extends Gui {
             ScissorUtil.enableScissor();
             ScissorUtil.scissor(xPos, yPos, width, height);
 
-            if (selected) {
+            if (selected)
                 RenderHelper.drawOutlinedQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 20), Color.BLACK);
-            } else {
+             else
                 RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
-            }
+
             font.drawText(text, xPos + font.getFontSize() / 2, yPos, Color.BLACK);
             ScissorUtil.disableScissor();
             font.drawText(input, xPos, yPos - height, Color.BLACK);

@@ -28,7 +28,7 @@ public class Main {
     private static Main main;
     private ObjectManager objectManager;
     private LevelSystem levelSystem;
-    private GuiScreen currentScreen;
+    private GuiScreen currentScreen, oldScreen;
     private byte version;
     private File dir;
 
@@ -93,7 +93,7 @@ public class Main {
         if (this.currentScreen != null) {
             this.currentScreen.onGuiClosed();
         }
-
+        this.oldScreen = this.currentScreen;
         this.currentScreen = currentScreen;
 
         if (currentScreen != null)
@@ -102,6 +102,10 @@ public class Main {
 
     public ObjectManager getObjectManager() {
         return objectManager;
+    }
+
+    public GuiScreen getOldScreen() {
+        return oldScreen;
     }
 
     public File getDir() {
