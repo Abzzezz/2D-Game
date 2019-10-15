@@ -38,11 +38,7 @@ public class LevelSelector extends GuiScreen {
             Really basic solution... TODO: Move into @mousePress method
              */
             if (Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, display()[0] / 2 - levelFont.centerText(name) * 4, levelFont.getFontSize() * 1.5F) && Mouse.isButtonDown(0)) {
-                try {
                     Main.getMain().getLevelSystem().loadLevel(level.getName());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 Main.getMain().setCurrentScreen(null);
             }
 

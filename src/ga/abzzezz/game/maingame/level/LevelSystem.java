@@ -18,8 +18,6 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.joml.Vector2i;
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.awt.*;
 import java.io.*;
 import java.time.LocalDate;
@@ -28,48 +26,56 @@ import java.util.ArrayList;
 
 public class LevelSystem {
 
-    public void loadLevel(String level) throws IOException {
+    public void loadLevel(String level) {
         //    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(LevelSystem.class.getResourceAsStream("levels/" + level)));
         File levelFile = new File(Main.getMain().getDir(), level);
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(levelFile));
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(levelFile));
 
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] splitLine = line.split(":");
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] splitLine = line.split(":");
 
-            if (splitLine.length > 6) {
-                if (splitLine[0].equalsIgnoreCase("[Obj]")) {
-                    String objectName = splitLine[1];
-                    String objectID = splitLine[2];
-                    Vector2i positionVector = new Vector2i(Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]));
-                    int width = Integer.parseInt(splitLine[5]);
-                    int height = Integer.parseInt(splitLine[6]);
-                    boolean colorFlag = splitLine.length > 7;
-                    if (objectName.equalsIgnoreCase("Block")) {
+                if (splitLine.length > 6) {
+                    if (splitLine[0].equalsIgnoreCase("[Obj]")) {
+                        String objectName = splitLine[1];
+                        String objectID = splitLine[2];
+                        Vector2i positionVector = new Vector2i(Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]));
+                        int width = Integer.parseInt(splitLine[5]);
+                        int height = Integer.parseInt(splitLine[6]);
+                        boolean colorFlag = splitLine.length > 7;
+                        if (objectName.equalsIgnoreCase("Block")) {
+                            //Define boxes
+                            BodyDef bodyDef = new BodyDef();
+                            bodyDef.position.set(VectorUtil.getVec2FormVector(positionVector));
+                            bodyDef.type = BodyType.STATIC;
+                            PolygonShape boxShape = new PolygonShape();
+                            boxShape.setAsBox(width, 30);
+                            Body box = Main.getMain().getObjectManager().getWorld().createBody(bodyDef);
+                            FixtureDef boxFixture = new FixtureDef();
+                            boxFixture.density = 1f;
+                            boxFixture.shape = boxShape;
+                            boxFixture.restitution = 1f;
+                            box.createFixture(boxFixture);
+                            Main.getMain().getObjectManager().getBodies().add(box);
 
-                        BodyDef bodyDef = new BodyDef();
-                        bodyDef.position.set(VectorUtil.getVec2FormVector(positionVector));
-                        bodyDef.type = BodyType.STATIC;
-                        PolygonShape boxShape = new PolygonShape();
-                        boxShape.setAsBox(width / 2, height / 2);
-                        Body box = Main.getMain().getObjectManager().getWorld().createBody(bodyDef);
-                        FixtureDef boxFixture = new FixtureDef();
-                        boxFixture.density = 1f;
-                        boxFixture.shape = boxShape;
-                        boxFixture.restitution = 1f;
-                        box.createFixture(boxFixture);
-                        Main.getMain().getObjectManager().getBodies().add(box);
-                        Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, positionVector, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
+                            //Add Prevents to draw
+                            Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, positionVector, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
+                        }
+                    }
+                } else {
+                    if (splitLine[0].equalsIgnoreCase("[P]")) {
+                        int xPos = Integer.parseInt(splitLine[1]);
+                        int yPos = Integer.parseInt(splitLine[2]);
+                        PlayerUtil.mainPlayer = new Player(new Vector2i(xPos, yPos));
+                        PlayerUtil.mainPlayer.physicsCore.setPosition(yPos);
                     }
                 }
-            } else {
-                if (splitLine[0].equalsIgnoreCase("[P]")) {
-                    int xPos = Integer.parseInt(splitLine[1]);
-                    int yPos = Integer.parseInt(splitLine[2]);
-                    PlayerUtil.mainPlayer = new Player(new Vector2i(xPos, yPos));
-                    PlayerUtil.mainPlayer.physicsCore.setPosition(yPos);
-                }
             }
+            bufferedReader.close();
+        }catch (IOException e ) {
+            e.printStackTrace();
+            Logger.log("Error when reading level file: " + level, Logger.LogType.ERROR);
         }
     }
 
