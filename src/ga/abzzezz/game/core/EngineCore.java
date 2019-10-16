@@ -43,16 +43,8 @@ public class EngineCore {
         Logger.log("Setting up...", Logger.LogType.INFO);
         renderer.setupRenderer();
         Keyboard.enableRepeatEvents(true);
-
     }
 
-    /*
-    Game cycle: Rendering, input detection etc.
-     */
-
-    /*
-    Init OpenGL with Display Size and Syncs it. Then Render
-     */
     public void startCore() {
         registerHandlers();
         initGL(800, 600);
@@ -74,6 +66,9 @@ public class EngineCore {
         }
     }
 
+    /*
+       Init OpenGL with Display Size and Syncs it. Then Render
+         */
     private void initGL(int width, int height) {
         Logger.log("Init OpenGL", Logger.LogType.INFO);
         try {
@@ -100,6 +95,10 @@ public class EngineCore {
         glOrtho(0, width, height, 0, 1, -1);
         glMatrixMode(GL_MODELVIEW);
     }
+
+      /*
+    Game cycle: Rendering, input detection etc.
+     */
 
     public void cycle() {
         /*

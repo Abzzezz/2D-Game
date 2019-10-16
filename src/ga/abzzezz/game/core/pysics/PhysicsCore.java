@@ -61,7 +61,7 @@ public class PhysicsCore {
         positionAccelerated = 0;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(float position) {
         this.position = position;
     }
 

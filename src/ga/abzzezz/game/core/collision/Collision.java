@@ -5,21 +5,21 @@
 
 package ga.abzzezz.game.core.collision;
 
-import org.joml.Vector2i;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 
 public class Collision {
 
 
-    public static boolean isCollided(Vector2i posObj, float widthObj, float heightObj, Vector2i posPlayer, float playerWidth, float playerHeight) {
+    public static boolean isCollided(Vector2f posObj, float widthObj, float heightObj, Vector2f posPlayer, float playerWidth, float playerHeight) {
         //AABB player = new AABB(posPlayer, playerWidth, playerHeight);
         //AABB object = new AABB(posObj, widthObj, heightObj);
         //return object.intersects(player);
         return false;
     }
 
-    public static boolean isOutOfBounds(Vector2i playerPosition, float playerHeight, float playerWidth) {
+    public static boolean isOutOfBounds(Vector2f playerPosition, float playerHeight, float playerWidth) {
         float playerY = playerPosition.y;
         float playerX = playerPosition.x;
         return playerX <= 0 + playerWidth || playerX + playerWidth >= Display.getWidth() || playerY >= Display.getHeight() - playerHeight || playerY <= -50;

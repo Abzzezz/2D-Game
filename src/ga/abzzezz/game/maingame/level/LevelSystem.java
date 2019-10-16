@@ -12,12 +12,12 @@ import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.PlayerUtil;
 import ga.abzzezz.game.maingame.utility.VectorUtil;
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
-import org.joml.Vector2i;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.geometry.Geometry;
+import org.dyn4j.geometry.MassType;
+import org.dyn4j.geometry.Vector2;
+import org.lwjgl.util.vector.Vector2f;
+
 import java.awt.*;
 import java.io.*;
 import java.time.LocalDate;
@@ -40,24 +40,17 @@ public class LevelSystem {
                     if (splitLine[0].equalsIgnoreCase("[Obj]")) {
                         String objectName = splitLine[1];
                         String objectID = splitLine[2];
-                        Vector2i positionVector = new Vector2i(Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]));
-                        int width = Integer.parseInt(splitLine[5]);
-                        int height = Integer.parseInt(splitLine[6]);
+                        Vector2f positionVector = new Vector2f(Float.parseFloat(splitLine[3]), Float.parseFloat(splitLine[4]));
+                        float width = Float.parseFloat(splitLine[5]);
+                        float height = Float.parseFloat(splitLine[6]);
                         boolean colorFlag = splitLine.length > 7;
                         if (objectName.equalsIgnoreCase("Block")) {
                             //Define boxes
-                            BodyDef bodyDef = new BodyDef();
-                            bodyDef.position.set(VectorUtil.getVec2FormVector(positionVector));
-                            bodyDef.type = BodyType.STATIC;
-                            PolygonShape boxShape = new PolygonShape();
-                            boxShape.setAsBox(width, 30);
-                            Body box = Main.getMain().getObjectManager().getWorld().createBody(bodyDef);
-                            FixtureDef boxFixture = new FixtureDef();
-                            boxFixture.density = 1f;
-                            boxFixture.shape = boxShape;
-                            boxFixture.restitution = 1f;
-                            box.createFixture(boxFixture);
-                            Main.getMain().getObjectManager().getBodies().add(box);
+                            Body body = new Body();
+                            body.addFixture(Geometry.createRectangle(width, height));
+                            body.translate(VectorUtil.getVec2FormVector(positionVector));
+                            body.setMass(MassType.INFINITE);
+                            Main.getMain().getObjectManager().getWorld().addBody(body);
 
                             //Add Prevents to draw
                             Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, positionVector, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
@@ -65,15 +58,14 @@ public class LevelSystem {
                     }
                 } else {
                     if (splitLine[0].equalsIgnoreCase("[P]")) {
-                        int xPos = Integer.parseInt(splitLine[1]);
-                        int yPos = Integer.parseInt(splitLine[2]);
-                        PlayerUtil.mainPlayer = new Player(new Vector2i(xPos, yPos));
-                        PlayerUtil.mainPlayer.physicsCore.setPosition(yPos);
+                        float xPos = Float.parseFloat(splitLine[1]);
+                        float yPos = Float.parseFloat(splitLine[2]);
+                        PlayerUtil.mainPlayer = new Player(new Vector2f(xPos, yPos));
                     }
                 }
             }
             bufferedReader.close();
-        }catch (IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
             Logger.log("Error when reading level file: " + level, Logger.LogType.ERROR);
         }

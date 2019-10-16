@@ -6,9 +6,8 @@
 package ga.abzzezz.game.maingame.object;
 
 import ga.abzzezz.game.core.rendering.RenderHelper;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.World;
+import org.dyn4j.dynamics.Body;
+import org.dyn4j.dynamics.World;
 
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class ObjectManager {
     /*
     JBox2d world for object Player
      */
-    private World world = new World(new Vec2(0, -9.8f), false);
+    private World world = new World();
 
     private ArrayList<Body> bodies = new ArrayList<>();
 

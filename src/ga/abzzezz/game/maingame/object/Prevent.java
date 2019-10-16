@@ -4,19 +4,18 @@
  */
 
 package ga.abzzezz.game.maingame.object;
-
-import org.joml.Vector2i;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
 public class Prevent {
 
-    private int width, height;
-    private Vector2i pos;
+    private float width, height;
+    private Vector2f pos;
     private String ID;
     private Color color;
 
-    public Prevent(String ID, Vector2i pos, int width, int height) {
+    public Prevent(String ID, Vector2f pos, float width, float height) {
         this.width = width;
         this.height = height;
         this.ID = ID;
@@ -24,7 +23,7 @@ public class Prevent {
         this.pos = pos;
     }
 
-    public Prevent(String ID, Vector2i pos, int width, int height, Color color) {
+    public Prevent(String ID, Vector2f pos, float width, float height, Color color) {
         this.width = width;
         this.height = height;
         this.ID = ID;
@@ -32,43 +31,43 @@ public class Prevent {
         this.pos = pos;
     }
 
-    public Vector2i getPos() {
+    public Vector2f getPos() {
         return pos;
     }
 
-    public void setPos(Vector2i pos) {
+    public void setPos(Vector2f pos) {
         this.pos = pos;
     }
 
-    public int getxPos() {
+    public float getxPos() {
         return pos.x;
     }
 
-    public void setxPos(int xPos) {
+    public void setxPos(float xPos) {
         this.pos.x = xPos;
     }
 
-    public int getyPos() {
+    public float getyPos() {
         return pos.y;
     }
 
-    public void setyPos(int yPos) {
+    public void setyPos(float yPos) {
         this.pos.y = yPos;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 

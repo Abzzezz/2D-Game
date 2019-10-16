@@ -10,8 +10,6 @@ import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.TextBox;
 import org.lwjgl.input.Keyboard;
 
-import java.security.Key;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -22,12 +20,14 @@ public class Gui {
     protected List<TextBox> textBoxes = new CopyOnWriteArrayList<>();
 
 
-    public void drawScreen() {}
+    public void drawScreen() {
+    }
 
-    public void buttonPressed(int buttonID) { }
+    public void buttonPressed(int buttonID) {
+    }
 
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
-        if(keyCode == Keyboard.KEY_F1) {
+        if (keyCode == Keyboard.KEY_F1) {
             Main.getMain().setCurrentScreen(Main.getMain().getOldScreen());
         }
 

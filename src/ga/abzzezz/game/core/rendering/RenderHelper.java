@@ -31,21 +31,21 @@ public class RenderHelper {
     }
 
 
-    public static void drawQuadInverted(int xPos, int yPos, int width, int height, Color quadColor) {
+    public static void drawQuadInverted(float xPos, float yPos, float width, float height, Color quadColor) {
         setupGL();
         glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);
         glBegin(GL_QUADS);
         {
-            glVertex2i(xPos, yPos);
-            glVertex2i(xPos + width, yPos);
-            glVertex2i(xPos + width, yPos - height);
-            glVertex2i(xPos, yPos - height);
+            glVertex2f(xPos, yPos);
+            glVertex2f(xPos + width, yPos);
+            glVertex2f(xPos + width, yPos - height);
+            glVertex2f(xPos, yPos - height);
         }
         glEnd();
         endGL();
     }
 
-    public static void drawQuad(int xPos, int yPos, int width, int height, Color quadColor) {
+    public static void drawQuad(float xPos, float yPos, float width, float height, Color quadColor) {
         setupGL();
         glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);
         glBegin(GL_QUADS);
@@ -56,7 +56,7 @@ public class RenderHelper {
         endGL();
     }
 
-    public static void drawOutlinedQuad(int xPos, int yPos, int width, int height, Color quadColor, Color outlineColor) {
+    public static void drawOutlinedQuad(float xPos, float yPos, float width, float height, Color quadColor, Color outlineColor) {
         setupGL();
         glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);
         glBegin(GL_QUADS);
@@ -75,7 +75,7 @@ public class RenderHelper {
         endGL();
     }
 
-    private static void drawRectBasis(int xPos, int yPos, int width, int height) {
+    private static void drawRectBasis(float xPos, float yPos, float width, float height) {
         glVertex2d(xPos, yPos);
         glVertex2d(xPos, yPos + height);
 
@@ -89,7 +89,7 @@ public class RenderHelper {
 
     }
 
-    public static void drawCircle(float xPos, float yPos, int radius, int segments, int part, Color color, Color outlineColor) {
+    public static void drawCircle(float xPos, float yPos, float radius, float segments, float part, Color color, Color outlineColor) {
 
         setupGL();
         glColor4f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
@@ -111,7 +111,7 @@ public class RenderHelper {
     }
 
 
-    private static void drawCircle(float xPos, float yPos, int segments, int part, int radius) {
+    private static void drawCircle(float xPos, float yPos, float segments, float part, float radius) {
         for (float i = 0; i <= 360; i++) {
             double PI = Math.PI;
             double x = xPos + (Math.sin(i * PI / 180) * radius);

@@ -6,17 +6,17 @@
 package ga.abzzezz.game.maingame.object.impl;
 
 import ga.abzzezz.game.maingame.object.Prevent;
-import org.joml.Vector2i;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
 public class Block extends Prevent {
 
-    public Block(String ID, Vector2i pos, int width, int height) {
+    public Block(String ID, Vector2f pos, float width, float height) {
         super(ID, pos, width, height);
     }
 
-    public Block(String ID, Vector2i pos, int width, int height, Color color) {
+    public Block(String ID, Vector2f pos, float width, float height, Color color) {
         super(ID, pos, width, height, color);
     }
 

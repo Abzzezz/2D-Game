@@ -5,11 +5,11 @@
 
 package ga.abzzezz.game.maingame.entitys;
 
-import org.joml.Vector2i;
+import org.lwjgl.util.vector.Vector2f;
 
 public class Entity {
 
-    private Vector2i position;
+    private Vector2f position;
 
 
     public float getXPos() {
