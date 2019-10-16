@@ -34,11 +34,11 @@ public class Player {
         body.setMass(MassType.NORMAL);
         //Add body to all the list
         Main.getMain().getObjectManager().getWorld().addBody(body);
+        startTime = System.nanoTime();
     }
 
 
     public void update() {
-        body.translate(body.getInitialTransform().getTranslation());
     }
 
     public Vector2f getPos() {
@@ -73,24 +73,19 @@ public class Player {
     }
 
     public static final double NANO_TO_BASE = 1.0e9;
-    private long last;
+    private long startTime;
 
     public void drawPlayer() {
         Vector2f pos = VectorUtil.getPositionsFromBody(body);
         long time = System.nanoTime();
-        // get the elapsed time from the last iteration
-        long diff = time - this.last;
-        // set the last time
-        this.last = time;
-        // convert from nanoseconds to seconds
+        long diff = time - startTime;
         double elapsedTime = (double) diff / NANO_TO_BASE;
         /*
                 Testing Velocity
                  */
         body.setLinearVelocity(new Vector2(0, 100));
-        System.out.println(pos.y);
         RenderHelper.drawQuad(pos.x, pos.y, playerSize, playerSize, Color.BLUE);
-        Main.getMain().getObjectManager().getWorld().updatev(elapsedTime);
+        Main.getMain().getObjectManager().getWorld().update(elapsedTime);
 
     }
 }

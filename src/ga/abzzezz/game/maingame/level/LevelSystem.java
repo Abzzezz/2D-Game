@@ -15,7 +15,6 @@ import ga.abzzezz.game.maingame.utility.VectorUtil;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
-import org.dyn4j.geometry.Vector2;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -47,7 +46,7 @@ public class LevelSystem {
                         if (objectName.equalsIgnoreCase("Block")) {
                             //Define boxes
                             Body body = new Body();
-                            body.addFixture(Geometry.createRectangle(width, height));
+                            body.addFixture(Geometry.createRectangle(width, 30));
                             body.translate(VectorUtil.getVec2FormVector(positionVector));
                             body.setMass(MassType.INFINITE);
                             Main.getMain().getObjectManager().getWorld().addBody(body);
