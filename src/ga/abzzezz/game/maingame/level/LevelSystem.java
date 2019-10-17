@@ -70,8 +70,15 @@ public class LevelSystem {
         }
     }
 
-    public File[] getLevels() {
-        return Main.getMain().getDir().listFiles();
+    public ArrayList<File> getLevels() {
+        ArrayList<File> filesOut = new ArrayList<>();
+        File[] file = Main.getMain().getDir().listFiles();
+        for (int i = 0; i < file.length; i++) {
+            if(!file[i].isDirectory()) {
+                filesOut.add(file[i]);
+            }
+        }
+        return filesOut;
     }
 
     private String getDate() {

@@ -6,7 +6,6 @@
 package ga.abzzezz.game.maingame.object;
 
 import ga.abzzezz.game.core.rendering.RenderHelper;
-import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.World;
 
 import java.util.ArrayList;
@@ -14,12 +13,7 @@ import java.util.ArrayList;
 public class ObjectManager {
 
     private ArrayList<Prevent> prevents = new ArrayList();
-    /*
-    JBox2d world for object Player
-     */
     private World world = new World();
-
-    private ArrayList<Body> bodies = new ArrayList<>();
 
     public ArrayList<Prevent> getPrevents() {
         return prevents;
@@ -42,10 +36,6 @@ public class ObjectManager {
 
     public World getWorld() {
         return world;
-    }
-
-    public ArrayList<Body> getBodies() {
-        return bodies;
     }
 }
 

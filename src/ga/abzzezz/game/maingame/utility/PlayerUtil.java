@@ -20,5 +20,10 @@ public class PlayerUtil {
      */
     public static int tries = 5;
 
+    /*
+    Global player size
+     */
+    public static int playerSize = 30;
+
 
 }

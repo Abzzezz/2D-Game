@@ -15,7 +15,6 @@ import org.lwjgl.input.Mouse;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 
 public class LevelSelector extends GuiScreen {
 
@@ -38,7 +37,7 @@ public class LevelSelector extends GuiScreen {
             Really basic solution... TODO: Move into @mousePress method
              */
             if (Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, display()[0] / 2 - levelFont.centerText(name) * 4, levelFont.getFontSize() * 1.5F) && Mouse.isButtonDown(0)) {
-                    Main.getMain().getLevelSystem().loadLevel(level.getName());
+                Main.getMain().getLevelSystem().loadLevel(level.getName());
                 Main.getMain().setCurrentScreen(null);
             }
 

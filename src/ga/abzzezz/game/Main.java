@@ -31,6 +31,7 @@ public class Main {
     private GuiScreen currentScreen, oldScreen;
     private byte version;
     private File dir;
+    private InternetConnection internetConnection;
 
 
     public static void main(String[] args) {
@@ -63,18 +64,22 @@ public class Main {
          */
         version = 1;
         /*
-        Game Directory, when not existent: create a new one
+        Game Directory, if it does not exist: create a new one
          */
         dir = new File(System.getProperty("user.home"), "PONG!");
         if (!dir.exists()) dir.mkdir();
-
-        InternetConnection.checkVersion();
 
         /*
         Manager initialisation
          */
         levelSystem = new LevelSystem();
         objectManager = new ObjectManager();
+        internetConnection = new InternetConnection();
+
+        /*
+          internet connection start, check version etc.
+         */
+        internetConnection.initConnections();
 
         /*
         Current Screen, so menus can be displayed
@@ -118,5 +123,9 @@ public class Main {
 
     public LevelSystem getLevelSystem() {
         return levelSystem;
+    }
+
+    public InternetConnection getInternetConnection() {
+        return internetConnection;
     }
 }

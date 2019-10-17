@@ -14,12 +14,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InternetConnection {
 
-    private static boolean update;
+    private boolean update;
+    private HashMap<String, String> download;
+    private String baseURL;
+    private File downloadOut;
 
-    public static void downloadFile(String URL, File output) {
+    public void initConnections() {
+        download = new HashMap<>();
+        baseURL = "http://abzzezz.bplaced.net/PONG!/";
+        downloadOut = new File(Main.getMain().getDir(), "Downloads");
+        if(!downloadOut.exists()) downloadOut.mkdir();
+        checkVersion();
+        downloadAll();
+    }
+
+    public void addDownload(String fileName) {
+        download.put(baseURL + fileName, fileName);
+    }
+
+    private void downloadAll() {
+        for (Map.Entry<String, String> entry : download.entrySet()) {
+            File out = new File(downloadOut, entry.getValue());
+            downloadFile(entry.getKey(), out);
+        }
+    }
+
+    private void downloadFile(String URL, File output) {
         try {
             FileUtils.copyURLToFile(new URL(URL), output);
         } catch (IOException e) {
@@ -27,35 +52,30 @@ public class InternetConnection {
         }
     }
 
-    public static void checkVersion() {
+    private void checkVersion() {
         byte version = Main.getMain().getVersion();
-
         try {
-            URL versionOnline = new URL("abzzezz.bplaced.net/PONG!/Version.txt");
+            URL versionOnline = new URL(baseURL + "Version.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(versionOnline.openStream()));
-
             String line;
-
             while ((line = bufferedReader.readLine()) != null) {
                 byte newVersion = Byte.parseByte(line);
                 setUpdate(newVersion > version);
 
             }
             bufferedReader.close();
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static boolean isUpdate() {
+    public boolean isUpdate() {
         return update;
     }
 
-    public static void setUpdate(boolean update) {
-        InternetConnection.update = update;
+    public void setUpdate(boolean update) {
+        this.update = update;
     }
 }

@@ -56,6 +56,10 @@ public class RenderHelper {
         endGL();
     }
 
+    public static void drawTrajectory() {
+
+    }
+
     public static void drawOutlinedQuad(float xPos, float yPos, float width, float height, Color quadColor, Color outlineColor) {
         setupGL();
         glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);

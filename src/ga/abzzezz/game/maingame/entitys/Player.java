@@ -8,18 +8,25 @@ package ga.abzzezz.game.maingame.entitys;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.core.utils.Logger;
+import ga.abzzezz.game.maingame.utility.KeyboardShortcuts;
+import ga.abzzezz.game.maingame.utility.PlayerUtil;
 import ga.abzzezz.game.maingame.utility.VectorUtil;
+import org.dyn4j.collision.AxisAlignedBounds;
 import org.dyn4j.dynamics.Body;
+import org.dyn4j.dynamics.World;
+import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
 public class Player {
 
-    public int playerSize = 30;
+    private int playerSize = PlayerUtil.playerSize;
     private float startY;
     private Body body;
 
@@ -32,13 +39,16 @@ public class Player {
         body.addFixture(Geometry.createRectangle(playerSize, playerSize));
         body.translate(VectorUtil.getVec2FormVector(position));
         body.setMass(MassType.NORMAL);
-        //Add body to all the list
+        body.applyForce(new Vector2(-100.0, 0.0));
         Main.getMain().getObjectManager().getWorld().addBody(body);
         startTime = System.nanoTime();
+        Main.getMain().getObjectManager().getWorld().setGravity(World.EARTH_GRAVITY);
     }
 
 
     public void update() {
+       // body.setLinearVelocity(new Vector2(0, 100));
+        System.out.println(getYPos());
     }
 
     public Vector2f getPos() {
@@ -69,22 +79,26 @@ public class Player {
         VectorUtil.getPositionsFromBody(body).y = yPos;
     }
 
+    private float pullBack;
+
     public void move(float keyCode) {
+        if(keyCode == Keyboard.KEY_A) {
+            if(pullBack <= 20) {
+                pullBack += 1;
+            }
+        }
     }
 
-    public static final double NANO_TO_BASE = 1.0e9;
+    final double NANO_TO_BASE = 1.0e9;
     private long startTime;
 
     public void drawPlayer() {
-        Vector2f pos = VectorUtil.getPositionsFromBody(body);
         long time = System.nanoTime();
         long diff = time - startTime;
         double elapsedTime = (double) diff / NANO_TO_BASE;
-        /*
-                Testing Velocity
-                 */
-        body.setLinearVelocity(new Vector2(0, 100));
-        RenderHelper.drawQuad(pos.x, pos.y, playerSize, playerSize, Color.BLUE);
+       // AxisAlignedBounds axisAlignedBounds = new AxisAlignedBounds(Display.getWidth(), Display.getHeight());
+
+        RenderHelper.drawQuad(getXPos(), getYPos(), playerSize, playerSize, Color.BLUE);
         Main.getMain().getObjectManager().getWorld().update(elapsedTime);
 
     }
