@@ -38,17 +38,14 @@ public class Player {
         body = new Body();
         body.addFixture(Geometry.createRectangle(playerSize, playerSize));
         body.translate(VectorUtil.getVec2FormVector(position));
-        body.setMass(MassType.NORMAL);
-        body.applyForce(new Vector2(-100.0, 0.0));
+        body.setMass(MassType.FIXED_LINEAR_VELOCITY);
         Main.getMain().getObjectManager().getWorld().addBody(body);
         startTime = System.nanoTime();
-        Main.getMain().getObjectManager().getWorld().setGravity(World.EARTH_GRAVITY);
     }
 
 
     public void update() {
-       // body.setLinearVelocity(new Vector2(0, 100));
-        System.out.println(getYPos());
+        body.setLinearVelocity(new Vector2(0, 100));
     }
 
     public Vector2f getPos() {
@@ -96,8 +93,6 @@ public class Player {
         long time = System.nanoTime();
         long diff = time - startTime;
         double elapsedTime = (double) diff / NANO_TO_BASE;
-       // AxisAlignedBounds axisAlignedBounds = new AxisAlignedBounds(Display.getWidth(), Display.getHeight());
-
         RenderHelper.drawQuad(getXPos(), getYPos(), playerSize, playerSize, Color.BLUE);
         Main.getMain().getObjectManager().getWorld().update(elapsedTime);
 

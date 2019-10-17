@@ -1,21 +1,16 @@
 Level Syntax
 
 
-[Obj] für Objekte mit Objekt ID und obj name
-[P] für Player
-: für syntax
-
-Objekt ID
-
-Quadrat:
-1
+[Obj] for Objects
+[P] for the Player
+[Goal] for the Goal
+: = syntax
 
 
-Example
+Example:
 
-[Obj]:1:Block:0:10:100:20
+[Obj]:Test:Block:100.0:100.0:40.0:40.0:Color(optional)
 
-Objekt:ID:Name:X:Y:W:H:Color(optional ansonsten Black)
+[P]:100:100
 
-[P]:X:Y
-
+[Goal]:100:100

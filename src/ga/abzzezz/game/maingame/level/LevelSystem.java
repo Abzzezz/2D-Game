@@ -7,6 +7,7 @@ package ga.abzzezz.game.maingame.level;
 
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.utils.Logger;
+import ga.abzzezz.game.maingame.entitys.Goal;
 import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
@@ -50,16 +51,16 @@ public class LevelSystem {
                             body.translate(VectorUtil.getVec2FormVector(positionVector));
                             body.setMass(MassType.INFINITE);
                             Main.getMain().getObjectManager().getWorld().addBody(body);
-
                             //Add Prevents to draw
                             Main.getMain().getObjectManager().getPrevents().add(new Block(objectID, positionVector, width, height, colorFlag ? Color.decode(splitLine[7]) : Color.RED));
                         }
                     }
                 } else {
-                    if (splitLine[0].equalsIgnoreCase("[P]")) {
-                        float xPos = Float.parseFloat(splitLine[1]);
-                        float yPos = Float.parseFloat(splitLine[2]);
-                        PlayerUtil.mainPlayer = new Player(new Vector2f(xPos, yPos));
+                    Vector2f pos = new Vector2f( Float.parseFloat(splitLine[1]),  Float.parseFloat(splitLine[2]));
+                    if (splitLine[0].equalsIgnoreCase("[Player]")) {
+                        PlayerUtil.mainPlayer = new Player(pos);
+                    } else if (splitLine[0].equalsIgnoreCase("[Goal]")) {
+                        PlayerUtil.goal = new Goal(pos);
                     }
                 }
             }
@@ -74,7 +75,7 @@ public class LevelSystem {
         ArrayList<File> filesOut = new ArrayList<>();
         File[] file = Main.getMain().getDir().listFiles();
         for (int i = 0; i < file.length; i++) {
-            if(!file[i].isDirectory()) {
+            if (!file[i].isDirectory()) {
                 filesOut.add(file[i]);
             }
         }
@@ -97,8 +98,8 @@ public class LevelSystem {
             String syntax = ":";
 
             for (Prevent prevent : in) {
-                if (prevent.getID().equalsIgnoreCase("Player")) {
-                    bufferedWriter.write("[P]" + syntax + prevent.getxPos() + syntax + prevent.getyPos());
+                if (prevent.getID().equalsIgnoreCase("Player") || prevent.getID().equalsIgnoreCase("Goal")) {
+                    bufferedWriter.write("[" + prevent.getID() + "]" + syntax + prevent.getxPos() + syntax + prevent.getyPos());
                 } else {
                     bufferedWriter.write("[Obj]" + syntax + prevent.getClass().getSimpleName() + syntax + prevent.getID() + syntax + prevent.getxPos() + syntax + prevent.getyPos() + syntax +
                             prevent.getWidth() + syntax + prevent.getHeight() + syntax + prevent.getColor().getRGB());

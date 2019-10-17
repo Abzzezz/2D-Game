@@ -5,6 +5,7 @@
 
 package ga.abzzezz.game.maingame.utility;
 
+import ga.abzzezz.game.maingame.entitys.Goal;
 import ga.abzzezz.game.maingame.entitys.Player;
 
 public class PlayerUtil {
@@ -24,6 +25,12 @@ public class PlayerUtil {
     Global player size
      */
     public static int playerSize = 30;
+
+    /*
+    Goal
+     */
+
+    public static Goal goal;
 
 
 }

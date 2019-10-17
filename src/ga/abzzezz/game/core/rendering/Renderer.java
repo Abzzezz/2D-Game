@@ -37,6 +37,7 @@ public class Renderer {
     public void render() {
         fontUtil.drawText("Tries: " + PlayerUtil.tries, 0, 0, Color.BLACK);
         PlayerUtil.mainPlayer.drawPlayer();
+        PlayerUtil.goal.drawGoal();
         /*
         Draw All Objects
          */

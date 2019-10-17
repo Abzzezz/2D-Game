@@ -53,12 +53,9 @@ public class EngineCore {
 
         while (true) {
             glClear(GL_COLOR_BUFFER_BIT);
-
             cycle();
-
             Display.update();
             Display.sync(100);
-
             if (Display.isCloseRequested()) {
                 Display.destroy();
                 System.exit(0);
@@ -104,7 +101,6 @@ public class EngineCore {
         /*
         All hooks in main and separated from the main game.
          */
-
         if (main.getCurrentScreen() == null) {
             PlayerUtil.mainPlayer.update();
             renderer.render();
