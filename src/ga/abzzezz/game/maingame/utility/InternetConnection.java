@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:30
  */
 
 package ga.abzzezz.game.maingame.utility;
@@ -28,7 +29,7 @@ public class InternetConnection {
         download = new HashMap<>();
         baseURL = "http://abzzezz.bplaced.net/PONG!/";
         downloadOut = new File(Main.getMain().getDir(), "Downloads");
-        if(!downloadOut.exists()) downloadOut.mkdir();
+        if (!downloadOut.exists()) downloadOut.mkdir();
         checkVersion();
         downloadAll();
     }

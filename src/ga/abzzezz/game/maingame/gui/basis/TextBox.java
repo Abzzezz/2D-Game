@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:33
  */
 
 package ga.abzzezz.game.maingame.gui.basis;
@@ -18,7 +19,7 @@ import java.awt.*;
 
 public class TextBox extends Gui {
 
-    private String text = new String(), input, ID;
+    private String text = "", input, ID;
     private int xPos, yPos, width, height;
     private boolean hide, selected;
     private FontUtil font = new FontUtil(15, "OpenSans");
@@ -75,7 +76,7 @@ public class TextBox extends Gui {
 
             if (selected)
                 RenderHelper.drawOutlinedQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 20), Color.BLACK);
-             else
+            else
                 RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
 
             font.drawText(text, xPos + font.getFontSize() / 2, yPos, Color.BLACK);

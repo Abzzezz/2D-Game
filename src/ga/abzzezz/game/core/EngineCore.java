@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 20:39
  */
 
 /*
@@ -11,12 +12,13 @@ package ga.abzzezz.game.core;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.rendering.Renderer;
 import ga.abzzezz.game.core.utils.Logger;
-import ga.abzzezz.game.maingame.utility.PlayerUtil;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+
+import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -25,6 +27,7 @@ public class EngineCore {
     private static EngineCore engineCore;
     private Main main = Main.getMain();
     private Renderer renderer;
+    private GameCycle gameCycle;
 
     public static EngineCore getEngineCore() {
         return new EngineCore();
@@ -34,6 +37,7 @@ public class EngineCore {
         Logger.log("Registering handlers ", Logger.LogType.INFO);
         engineCore = new EngineCore();
         renderer = new Renderer();
+        gameCycle = new GameCycle();
     }
 
     /*
@@ -50,7 +54,6 @@ public class EngineCore {
         initGL(800, 600);
         setupCores();
         Logger.log("Engine Set up...", Logger.LogType.INFO);
-
         while (true) {
             glClear(GL_COLOR_BUFFER_BIT);
             cycle();
@@ -74,14 +77,17 @@ public class EngineCore {
             Display.setVSyncEnabled(true);
         } catch (LWJGLException e) {
             e.printStackTrace();
-            Logger.log("Exception thrown when creating Display", Logger.LogType.ERROR);
-
+            Logger.log("Exception thrown while creating Display", Logger.LogType.ERROR);
             System.exit(0);
         }
 
         Display.setTitle("PONG!");
         glEnable(GL_TEXTURE_2D);
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        Color uiColor = new Color(0x9e9e9e);
+        float red = uiColor.getRed() / 255.0F;
+        float green = uiColor.getGreen() / 255.0F;
+        float blue = uiColor.getBlue() / 255.0F;
+        glClearColor(red, green, blue, 1.0f);
         // enable alpha blending
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -102,7 +108,7 @@ public class EngineCore {
         All hooks in main and separated from the main game.
          */
         if (main.getCurrentScreen() == null) {
-            PlayerUtil.mainPlayer.update();
+            gameCycle.cycle();
             renderer.render();
         } else {
             main.getCurrentScreen().drawScreen();

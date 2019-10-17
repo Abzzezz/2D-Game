@@ -1,9 +1,11 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:30
  */
 
 package ga.abzzezz.game.maingame.object;
+
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;

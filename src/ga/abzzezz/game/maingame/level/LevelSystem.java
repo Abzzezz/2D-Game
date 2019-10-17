@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:30
  */
 
 package ga.abzzezz.game.maingame.level;
@@ -11,7 +12,7 @@ import ga.abzzezz.game.maingame.entitys.Goal;
 import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
-import ga.abzzezz.game.maingame.utility.PlayerUtil;
+import ga.abzzezz.game.maingame.utility.Util;
 import ga.abzzezz.game.maingame.utility.VectorUtil;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Geometry;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 public class LevelSystem {
 
     public void loadLevel(String level) {
-        //    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(LevelSystem.class.getResourceAsStream("levels/" + level)));
         File levelFile = new File(Main.getMain().getDir(), level);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(levelFile));
@@ -56,18 +56,18 @@ public class LevelSystem {
                         }
                     }
                 } else {
-                    Vector2f pos = new Vector2f( Float.parseFloat(splitLine[1]),  Float.parseFloat(splitLine[2]));
+                    Vector2f pos = new Vector2f(Float.parseFloat(splitLine[1]), Float.parseFloat(splitLine[2]));
                     if (splitLine[0].equalsIgnoreCase("[Player]")) {
-                        PlayerUtil.mainPlayer = new Player(pos);
+                        Util.mainPlayer = new Player(pos);
                     } else if (splitLine[0].equalsIgnoreCase("[Goal]")) {
-                        PlayerUtil.goal = new Goal(pos);
+                        Util.goal = new Goal(pos);
                     }
                 }
             }
             bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
-            Logger.log("Error when reading level file: " + level, Logger.LogType.ERROR);
+            Logger.log("Error while reading level file: " + level, Logger.LogType.ERROR);
         }
     }
 
@@ -90,7 +90,7 @@ public class LevelSystem {
         Method to save a level, All Objects that are input are saved with their syntax
          */
     public void saveLevel(ArrayList<Prevent> in) {
-        File file = new File(Main.getMain().getDir(), "Level " + Main.getMain().getDir().listFiles().length + ".txt");
+        File file = new File(Main.getMain().getDir(), "Level " + (Main.getMain().getDir().listFiles().length + 1) + ".txt");
         Logger.log("Saving level: " + file.getName(), Logger.LogType.INFO);
         try {
             if (!file.exists()) file.createNewFile();
@@ -110,7 +110,7 @@ public class LevelSystem {
             Logger.log("Closing writer", Logger.LogType.INFO);
         } catch (IOException e) {
             e.printStackTrace();
-            Logger.log("Error when writing or creating file", Logger.LogType.ERROR);
+            Logger.log("Error while writing or creating file", Logger.LogType.ERROR);
         }
     }
 }

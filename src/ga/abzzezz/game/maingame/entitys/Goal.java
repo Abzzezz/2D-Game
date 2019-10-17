@@ -1,16 +1,16 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 20:39
  */
 
 package ga.abzzezz.game.maingame.entitys;
 
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.rendering.RenderHelper;
-import ga.abzzezz.game.maingame.utility.PlayerUtil;
+import ga.abzzezz.game.maingame.utility.Util;
 import ga.abzzezz.game.maingame.utility.VectorUtil;
 import org.dyn4j.dynamics.Body;
-import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.lwjgl.util.vector.Vector2f;
@@ -26,7 +26,7 @@ public class Goal {
         width = 100;
         height = 20;
         body = new Body();
-        body.addFixture(Geometry.createRectangle(width, PlayerUtil.playerSize));
+        body.addFixture(Geometry.createRectangle(width, Util.playerSize));
         body.translate(VectorUtil.getVec2FormVector(pos));
         body.setMass(MassType.INFINITE);
         Main.getMain().getObjectManager().getWorld().addBody(body);
@@ -48,5 +48,11 @@ public class Goal {
         return getPos().y;
     }
 
+    public float getWidth() {
+        return width;
+    }
 
+    public float getHeight() {
+        return height;
+    }
 }

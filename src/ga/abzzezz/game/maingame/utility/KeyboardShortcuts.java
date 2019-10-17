@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:30
  */
 
 package ga.abzzezz.game.maingame.utility;
@@ -15,7 +16,8 @@ import java.io.IOException;
 public class KeyboardShortcuts {
 
     public static boolean isControlV() {
-        return (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) && Keyboard.isKeyDown(Keyboard.KEY_V); }
+        return (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) && Keyboard.isKeyDown(Keyboard.KEY_V);
+    }
 
     public static String getClipboard() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();

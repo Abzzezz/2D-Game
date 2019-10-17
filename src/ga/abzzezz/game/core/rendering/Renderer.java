@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:30
  */
 
 package ga.abzzezz.game.core.rendering;
@@ -8,7 +9,7 @@ package ga.abzzezz.game.core.rendering;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.utils.Logger;
 import ga.abzzezz.game.maingame.utility.FontUtil;
-import ga.abzzezz.game.maingame.utility.PlayerUtil;
+import ga.abzzezz.game.maingame.utility.Util;
 
 import java.awt.*;
 
@@ -31,13 +32,13 @@ public class Renderer {
     }
 
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
-        PlayerUtil.mainPlayer.move(keyCode);
+        Util.mainPlayer.move(keyCode);
     }
 
     public void render() {
-        fontUtil.drawText("Tries: " + PlayerUtil.tries, 0, 0, Color.BLACK);
-        PlayerUtil.mainPlayer.drawPlayer();
-        PlayerUtil.goal.drawGoal();
+        fontUtil.drawText("Tries: " + Util.tries, 0, 0, Color.BLACK);
+        Util.mainPlayer.drawPlayer();
+        Util.goal.drawGoal();
         /*
         Draw All Objects
          */

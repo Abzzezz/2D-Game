@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:04
  */
 
 package ga.abzzezz.game.core.rendering;
@@ -56,10 +57,6 @@ public class RenderHelper {
         endGL();
     }
 
-    public static void drawTrajectory() {
-
-    }
-
     public static void drawOutlinedQuad(float xPos, float yPos, float width, float height, Color quadColor, Color outlineColor) {
         setupGL();
         glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);
@@ -93,13 +90,12 @@ public class RenderHelper {
 
     }
 
-    public static void drawCircle(float xPos, float yPos, float radius, float segments, float part, Color color, Color outlineColor) {
-
+    public static void drawCircle(float xPos, float yPos, float radius, Color color, Color outlineColor) {
         setupGL();
         glColor4f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
-        glEnable(GL_POLYGON);
+        glBegin(GL_POLYGON);
         {
-            drawCircle(xPos, yPos, segments, part, radius);
+            drawCircle(xPos, yPos, radius);
         }
         glEnd();
 
@@ -108,14 +104,14 @@ public class RenderHelper {
         glLineWidth(3);
         glBegin(GL_LINES);
         {
-            drawCircle(xPos, yPos, segments, part, radius);
+            drawCircle(xPos, yPos, radius);
         }
         glEnd();
         endGL();
     }
 
 
-    private static void drawCircle(float xPos, float yPos, float segments, float part, float radius) {
+    private static void drawCircle(float xPos, float yPos, float radius) {
         for (float i = 0; i <= 360; i++) {
             double PI = Math.PI;
             double x = xPos + (Math.sin(i * PI / 180) * radius);

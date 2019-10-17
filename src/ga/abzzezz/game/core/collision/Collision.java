@@ -1,10 +1,14 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 20:09
  */
 
 package ga.abzzezz.game.core.collision;
 
+import ga.abzzezz.game.maingame.utility.VectorUtil;
+import org.dyn4j.geometry.AABB;
+import org.dyn4j.geometry.Vector2;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -12,11 +16,10 @@ import org.lwjgl.util.vector.Vector2f;
 public class Collision {
 
 
-    public static boolean isCollided(Vector2f posObj, float widthObj, float heightObj, Vector2f posPlayer, float playerWidth, float playerHeight) {
-        //AABB player = new AABB(posPlayer, playerWidth, playerHeight);
-        //AABB object = new AABB(posObj, widthObj, heightObj);
-        //return object.intersects(player);
-        return false;
+    public static boolean AABBOverlaps(Vector2f pos, Vector2f pos1, float widthPos, float heightPos, float width1, float height1) {
+        AABB position = new AABB(VectorUtil.getVec2FormVector(pos), new Vector2(pos.x + widthPos, pos.y + heightPos));
+        AABB position2 = new AABB(VectorUtil.getVec2FormVector(pos1), new Vector2(pos1.x + width1, pos1.y + height1));
+        return position.overlaps(position2);
     }
 
     public static boolean isOutOfBounds(Vector2f playerPosition, float playerHeight, float playerWidth) {

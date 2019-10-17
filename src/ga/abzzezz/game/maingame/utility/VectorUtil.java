@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. Abzzezz
- * All code belongs to Abzzezz. Used Code/APIs are mentioned
+ * All code  from the project 2D-Game	 belongs to Abzzezz. Used Code/APIs are mentioned
+ * FIle last modified: 17.10.19, 22:30
  */
 
 package ga.abzzezz.game.maingame.utility;
@@ -20,7 +21,7 @@ public class VectorUtil {
     Translates Vector2 coordinates into a Vector2f(LWJGL) (coverts double coordinates into float coordinates)
      */
     public static Vector2f getVector2fFromVec2(Vector2 vector2) {
-        return new Vector2f((float)vector2.x, (float)vector2.y);
+        return new Vector2f((float) vector2.x, (float) vector2.y);
     }
 
     public static Vector2f getPositionsFromBody(Body body) {
