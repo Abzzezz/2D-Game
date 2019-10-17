@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.CodeSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,12 +63,17 @@ public class InternetConnection {
             while ((line = bufferedReader.readLine()) != null) {
                 byte newVersion = Byte.parseByte(line);
                 setUpdate(newVersion > version);
-
             }
             bufferedReader.close();
+
+            if(update) {
+                CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
+                File jarFile = new File(codeSource.getLocation().toURI().getPath());
+            //    downloadFile(baseURL + "PONG!.jar", jarFile);
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

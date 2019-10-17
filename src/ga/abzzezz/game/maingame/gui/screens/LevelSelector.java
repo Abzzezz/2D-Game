@@ -37,15 +37,15 @@ public class LevelSelector extends GuiScreen {
             /*
             Really basic solution... TODO: Move into @mousePress method
              */
-            if (Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, display()[0] / 2 - levelFont.centerText(name) * 4, levelFont.getFontSize() * 1.5F) && Mouse.isButtonDown(0)) {
+            if (Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, display()[0] / 2 - levelFont.centerText(name) * 4, levelFont.getFontSize() * 2) && Mouse.isButtonDown(0)) {
                 Main.getMain().getLevelSystem().loadLevel(level.getName());
                 Main.getMain().setCurrentScreen(null);
             }
 
-            levelFont.drawText(name, display()[0] / 2 - levelFont.centerText(name), yBuffer, Color.BLACK);
+            levelFont.drawText(name, display()[0] / 2 - levelFont.centerText(name), yBuffer +  levelFont.getFontSize() / 4, Color.BLACK);
 
             RenderHelper.drawQuad(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, levelFont.centerText(name) * 4, levelFont.getFontSize() * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
-            yBuffer += levelFont.getFontSize() + 20;
+            yBuffer += levelFont.getFontSize() + 30;
         }
         super.drawScreen();
     }

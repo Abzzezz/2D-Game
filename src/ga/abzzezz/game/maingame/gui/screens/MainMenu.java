@@ -15,7 +15,6 @@ import java.awt.*;
 
 public class MainMenu extends GuiScreen {
 
-
     FontUtil fontUtil = new FontUtil(40, "OpenSans");
 
     @Override

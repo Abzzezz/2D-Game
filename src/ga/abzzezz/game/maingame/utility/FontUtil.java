@@ -18,12 +18,10 @@ import java.io.IOException;
 public class FontUtil {
 
     private int fontSize;
-    private String fontName;
     private UnicodeFont unicodeFont;
 
     public FontUtil(int fontSize, String fontName) {
         this.fontSize = fontSize;
-        this.fontName = fontName;
         try {
             Font load = Font.createFont(Font.PLAIN, Main.class.getResourceAsStream("maingame/font/" + fontName + ".ttf"));
             unicodeFont = new UnicodeFont(load, fontSize, false, false);

@@ -21,4 +21,8 @@ public class ColorHelper {
     public static Color colorFormHex(int hex) {
         return new Color(hex);
     }
+
+    public static float[] getRGBAFormColor(Color color)  {
+        return new float[] {color.getBlue() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F};
+    }
 }

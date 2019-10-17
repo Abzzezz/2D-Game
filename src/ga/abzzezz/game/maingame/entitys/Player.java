@@ -38,8 +38,7 @@ public class Player {
         startTime = System.nanoTime();
     }
 
-    public void update() {
-    }
+    public void update() {}
 
     public Vector2f getPos() {
         return VectorUtil.getPositionsFromBody(body);
