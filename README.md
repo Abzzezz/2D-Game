@@ -14,7 +14,6 @@ All code belongs to Abzzezz(c) 2019/2020 and is free to use.
 
 # Contact:
 
-# Libraries
 
 # Libraries used: 
 
