@@ -15,9 +15,15 @@ All code belongs to Abzzezz(c) 2019/2020 and is free to use.
 # Contact:
 
 # Libraries
-Libraries used: 
-Apache IO (https://commons.apache.org/proper/commons-io/)
-Lightweight Java Game Library (https://www.lwjgl.org/)
-Slick2D (http://slick.ninjacave.com/)
-Dyn4j Physics Library (http://www.dyn4j.org/)
+
+# Libraries used: 
+
+
+Apache IO (https://commons.apache.org/proper/commons-io/).
+
+Lightweight Java Game Library (https://www.lwjgl.org/).
+
+Slick2D (http://slick.ninjacave.com/).
+
+Dyn4j Physics Library (http://www.dyn4j.org/).
 
