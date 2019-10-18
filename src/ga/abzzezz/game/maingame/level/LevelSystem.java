@@ -35,7 +35,6 @@ public class LevelSystem {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");
-
                 if (splitLine.length > 6) {
                     if (splitLine[0].equalsIgnoreCase("[Obj]")) {
                         String objectName = splitLine[1];

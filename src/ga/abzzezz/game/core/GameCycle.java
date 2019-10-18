@@ -21,7 +21,7 @@ public class GameCycle {
         if (Collision.AABBOverlaps(p.getPos(), g.getPos(), p.getPlayerSize(), p.getPlayerSize(), g.getWidth(), g.getHeight())) {
             Util.levelComplete = true;
         } else if (Collision.isOutOfBounds(p.getPos(), p.getPlayerSize(), p.getPlayerSize())) {
-            Util.levelFailed = true;
+            Util.tries -= 1;
         }
     }
 }
