@@ -14,7 +14,7 @@ All code belongs to Abzzezz(c) 2019/2020 and is free to use.
 
 # Contact:
 
-#Libraries
+# Libraries
 Libraries used: 
-Apache IO #https://commons.apache.org/proper/commons-io/
-Lightweight Java Game Library  #https://www.lwjgl.org/
+Apache IO # https://commons.apache.org/proper/commons-io/
+Lightweight Java Game Library  # https://www.lwjgl.org/
