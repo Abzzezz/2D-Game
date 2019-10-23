@@ -69,7 +69,7 @@ public class InternetConnection {
             if(update) {
                 CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
                 File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            //    downloadFile(baseURL + "PONG!.jar", jarFile);
+                downloadFile(baseURL + "PONG!.jar", jarFile);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

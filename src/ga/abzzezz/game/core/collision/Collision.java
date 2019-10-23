@@ -16,11 +16,19 @@ import org.lwjgl.util.vector.Vector2f;
 public class Collision {
 
 
+    /*
+    Checks if The position form one object with pos, heightPos, widthPos and object2 overlaps
+    refers to @overlap in @ABBB.class (simple min, max detection previously implemented in the project)
+     */
+
     public static boolean AABBOverlaps(Vector2f pos, Vector2f pos1, float widthPos, float heightPos, float width1, float height1) {
         AABB position = new AABB(VectorUtil.getVec2FormVector(pos), new Vector2(pos.x + widthPos, pos.y + heightPos));
         AABB position2 = new AABB(VectorUtil.getVec2FormVector(pos1), new Vector2(pos1.x + width1, pos1.y + height1));
         return position.overlaps(position2);
     }
+
+    /*Checks if the positions of the player + width, height are out of the bounds defined for the Display (Display.getWidth, height)
+     */
 
     public static boolean isOutOfBounds(Vector2f playerPosition, float playerHeight, float playerWidth) {
         float playerY = playerPosition.y;
@@ -28,6 +36,9 @@ public class Collision {
         return playerX <= 0 + playerWidth || playerX + playerWidth >= Display.getWidth() || playerY >= Display.getHeight() - playerHeight || playerY <= -50;
     }
 
+    /*
+    Checks if the mouse is over the positions x, y and the rectangles width and height
+     */
     public static boolean mouseHovered(float xPos, float yPos, float width, float height) {
         float[] mouse = getMousePosition();
         return mouse[0] >= xPos && mouse[0] <= xPos + width && mouse[1] >= yPos && mouse[1] <= yPos + height;

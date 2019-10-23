@@ -7,12 +7,21 @@
 package ga.abzzezz.game.core;
 
 import ga.abzzezz.game.core.collision.Collision;
+import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.entitys.Goal;
 import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.utility.Util;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
+
+import java.awt.*;
 
 public class GameCycle {
 
+    /*
+    Updates the player and checks for collision with the goal
+     */
     public void cycle() {
         Player p = Util.mainPlayer;
         Goal g = Util.goal;
@@ -22,6 +31,19 @@ public class GameCycle {
             Util.levelComplete = true;
         } else if (Collision.isOutOfBounds(p.getPos(), p.getPlayerSize(), p.getPlayerSize())) {
             Util.tries -= 1;
+            /*
+            For testing purposes only
+             */
+            System.exit(0);
+        }
+
+        RenderHelper.drawLine(oldMousePos, new Vector2f(Collision.getMousePosition()[0], Collision.getMousePosition()[1]), Color.BLUE);
+    }
+
+    Vector2f oldMousePos;
+    public void mousePressed(int mousePressed) {
+        if(mousePressed == 0) {
+            oldMousePos = new Vector2f(Collision.getMousePosition()[0], Collision.getMousePosition()[1]);
         }
     }
 }

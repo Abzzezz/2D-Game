@@ -118,6 +118,8 @@ public class EngineCore {
             if (Mouse.getEventButtonState()) {
                 if (main.getCurrentScreen() != null) {
                     main.getCurrentScreen().mousePress(Mouse.getEventButton());
+                } else {
+                    gameCycle.mousePressed(Mouse.getEventButton());
                 }
             }
         }

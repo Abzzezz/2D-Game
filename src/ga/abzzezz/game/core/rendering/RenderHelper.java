@@ -6,6 +6,8 @@
 
 package ga.abzzezz.game.core.rendering;
 
+import org.lwjgl.util.vector.Vector2f;
+
 import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -71,6 +73,21 @@ public class RenderHelper {
         glBegin(GL_LINES);
         {
             drawRectBasis(xPos, yPos, width, height);
+        }
+        glEnd();
+        endGL();
+    }
+
+    public static void drawLine(Vector2f pos, Vector2f to, Color quadColor) {
+        setupGL();
+        glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);
+        glLineWidth(3);
+        glEnable(GL_LINE_SMOOTH);
+        glBegin(GL_LINES);
+        {
+            glVertex2f(pos.x, pos.y);
+
+            glVertex2f(to.x, to.y);
         }
         glEnd();
         endGL();
