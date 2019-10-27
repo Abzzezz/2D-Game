@@ -35,11 +35,12 @@ public class GuiButton extends Gui {
 
     public GuiButton(String buttonText, float xPos, float yPos, int buttonID) {
         this.buttonText = buttonText;
-        this.xPos = xPos;
-        this.yPos = yPos;
         this.buttonID = buttonID;
         this.width = 100;
         this.height = 30;
+
+        this.xPos = xPos - width / 2;
+        this.yPos = yPos;
     }
 
     public void drawButton() {

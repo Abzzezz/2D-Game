@@ -31,7 +31,7 @@ public class LevelSystem {
         File levelFile = new File(Main.getMain().getDir(), level);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(levelFile));
-
+            Util.currentLevel = level;
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");
@@ -64,6 +64,7 @@ public class LevelSystem {
                 }
             }
             bufferedReader.close();
+            Main.getMain().setCurrentScreen(null);
         } catch (IOException e) {
             e.printStackTrace();
             Logger.log("Error while reading level file: " + level, Logger.LogType.ERROR);

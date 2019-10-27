@@ -7,6 +7,7 @@
 package ga.abzzezz.game.maingame.utility;
 
 import ga.abzzezz.game.Main;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
@@ -47,6 +48,10 @@ public class FontUtil {
 
     public int centerText(String text) {
         return getStringWidth(text) / 2;
+    }
+
+    public int centerTextMiddle(String text) {
+        return Display.getWidth() / 2 - getStringWidth(text) / 2;
     }
 
     public int getFontSize() {

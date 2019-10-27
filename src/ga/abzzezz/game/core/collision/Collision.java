@@ -40,17 +40,17 @@ public class Collision {
     Checks if the mouse is over the positions x, y and the rectangles width and height
      */
     public static boolean mouseHovered(float xPos, float yPos, float width, float height) {
-        float[] mouse = getMousePosition();
+        int[] mouse = getMousePosition();
         return mouse[0] >= xPos && mouse[0] <= xPos + width && mouse[1] >= yPos && mouse[1] <= yPos + height;
     }
 
     /*
-    Returns the mouse positions as a float array: point P(x,y);
+    Returns the mouse positions as a int array: point P(x,y); Idk why I returned a float LWJGL display only uses ints so...
      */
-    public static float[] getMousePosition() {
-        float xPos = Mouse.getX();
-        float yPos = Display.getHeight() - Mouse.getY();
-        return new float[]{xPos, yPos};
+    public static int[] getMousePosition() {
+        int xPos = Mouse.getX();
+        int yPos = Display.getHeight() - Mouse.getY();
+        return new int[]{xPos, yPos};
     }
 
 

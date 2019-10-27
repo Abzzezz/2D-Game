@@ -83,7 +83,7 @@ public class RenderHelper {
         glColor4f(quadColor.getRed() / 255.0F, quadColor.getGreen() / 255.0F, quadColor.getBlue() / 255.0F, quadColor.getAlpha() / 255.0F);
         glLineWidth(3);
         glEnable(GL_LINE_SMOOTH);
-        glBegin(GL_LINES);
+        glBegin(GL_LINE_LOOP);
         {
             glVertex2f(pos.x, pos.y);
 

@@ -49,4 +49,10 @@ public class Util {
      */
 
     public static boolean levelFailed;
+
+    /*
+    String to reset Level
+     */
+
+    public static String currentLevel;
 }
