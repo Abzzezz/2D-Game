@@ -12,6 +12,7 @@ package ga.abzzezz.game.core;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.rendering.Renderer;
 import ga.abzzezz.game.core.utils.Logger;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -51,7 +52,7 @@ public class EngineCore {
 
     public void startCore() {
         registerHandlers();
-        initGL(800, 600);
+        initGL(DisplayHelper.getWidth(), DisplayHelper.getHeight());
         setupCores();
         Logger.log("Engine Set up...", Logger.LogType.INFO);
         while (true) {
@@ -88,7 +89,6 @@ public class EngineCore {
         float green = uiColor.getGreen() / 255.0F;
         float blue = uiColor.getBlue() / 255.0F;
         glClearColor(red, green, blue, 1.0f);
-        // enable alpha blending
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glViewport(0, 0, width, height);
@@ -128,6 +128,7 @@ public class EngineCore {
             if (Keyboard.getEventKeyState())
                 if (main.getCurrentScreen() == null) {
                     renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+                    gameCycle.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter());
                 } else {
                     main.getCurrentScreen().keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
                 }

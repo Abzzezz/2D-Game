@@ -16,6 +16,7 @@ import ga.abzzezz.game.maingame.gui.basis.TextBox;
 import ga.abzzezz.game.maingame.object.Prevent;
 import ga.abzzezz.game.maingame.object.impl.Block;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -32,16 +33,16 @@ public class LevelBuilder extends GuiScreen {
 
     @Override
     public void initialiseGui() {
-        int x = display()[0] - 64;
+        int x = DisplayHelper.getWidth() - 64;
 
         guiButtons.add(new ImageButton("Block", "block.png", x, 0, 0));
         guiButtons.add(new ImageButton("Player", "player.png", x, 100, 1));
         guiButtons.add(new ImageButton("Goal", "goal.png", x, 200, 2));
-        guiButtons.add(new GuiButton("Save", 0, display()[1] - 30, 3));
-        guiButtons.add(new GuiButton("Clear", 100, display()[1] - 30, 4));
+        guiButtons.add(new GuiButton("Save", 0,  DisplayHelper.getWidth() - 30, 3));
+        guiButtons.add(new GuiButton("Clear", 100,  DisplayHelper.getWidth()  - 30, 4));
 
-        guiButtons.add(new GuiButton("Set", x - 20, display()[1] - 30, 6));
-        textBoxes.add(new TextBox("ColorBox", "Color", x - 120, display()[1] - 30, !edit));
+        guiButtons.add(new GuiButton("Set", x - 20,  DisplayHelper.getWidth() - 30, 6));
+        textBoxes.add(new TextBox("ColorBox", "Color", x - 120,  DisplayHelper.getHeight() - 30, !edit));
         super.initialiseGui();
     }
 
@@ -51,11 +52,11 @@ public class LevelBuilder extends GuiScreen {
             /*
             Add object to prevents list, so it can be stored etc.
              */
-            prevents.add(new Block("B" + System.currentTimeMillis(), new Vector2f(display()[0] / 2, display()[1] / 2), 50, 50, Color.RED));
+            prevents.add(new Block("B" + System.currentTimeMillis(), new Vector2f(DisplayHelper.getHalfWidth(), DisplayHelper.getHalfHeight()), 50, 50, Color.RED));
         } else if (buttonID == 1) {
-            prevents.add(new Block("Player", new Vector2f(display()[0] / 2, display()[1] / 2), 30, 30, Color.GREEN));
+            prevents.add(new Block("Player", new Vector2f(DisplayHelper.getHalfWidth(), DisplayHelper.getHalfHeight()), 30, 30, Color.GREEN));
         } else if (buttonID == 2) {
-            prevents.add(new Block("Goal", new Vector2f(display()[0] / 2, display()[1] / 2), 100, 10, Color.YELLOW));
+            prevents.add(new Block("Goal", new Vector2f(DisplayHelper.getHalfWidth(), DisplayHelper.getHalfHeight()), 100, 10, Color.YELLOW));
         } else if (buttonID == 3) {
             Main.getMain().getLevelSystem().saveLevel(prevents);
         } else if (buttonID == 4) {
@@ -79,7 +80,7 @@ public class LevelBuilder extends GuiScreen {
 
         geTextBoxByID("ColorBox").setHide(!edit);
 
-        RenderHelper.drawQuad(display()[0] - 80, 0, 80, display()[1], ColorHelper.colorFormHex(0xf1c40f));
+        RenderHelper.drawQuad(DisplayHelper.getWidth() - 80, 0, 80, DisplayHelper.getHeight(), ColorHelper.colorFormHex(0xf1c40f));
         super.drawScreen();
     }
 

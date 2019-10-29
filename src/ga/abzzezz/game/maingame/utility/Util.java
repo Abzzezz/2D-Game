@@ -43,13 +43,6 @@ public class Util {
 
     public static boolean levelComplete;
 
-
-    /*
-    Boolean is true when the player is out of tries or out of bounds
-     */
-
-    public static boolean levelFailed;
-
     /*
     String to reset Level
      */

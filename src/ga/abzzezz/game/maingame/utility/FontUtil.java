@@ -46,6 +46,20 @@ public class FontUtil {
         }
     }
 
+    public void drawCenteredText(String text, float xPos, float yPos, Color color) {
+        try {
+            GL11.glEnable(GL11.GL_BLEND);
+            unicodeFont.addAsciiGlyphs();
+            unicodeFont.getEffects().add(new ColorEffect(color));
+            unicodeFont.loadGlyphs();
+            unicodeFont.drawString(xPos - centerText(text), yPos, text);
+            GL11.glDisable(GL11.GL_BLEND);
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public int centerText(String text) {
         return getStringWidth(text) / 2;
     }

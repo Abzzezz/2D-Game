@@ -30,9 +30,4 @@ public class GuiScreen extends Gui {
         }
         super.drawScreen();
     }
-
-
-    public int[] display() {
-        return new int[]{800, 600};
-    }
 }

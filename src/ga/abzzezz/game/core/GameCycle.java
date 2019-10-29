@@ -11,9 +11,11 @@ import ga.abzzezz.game.core.collision.Collision;
 import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.entitys.Goal;
 import ga.abzzezz.game.maingame.entitys.Player;
+import ga.abzzezz.game.maingame.gui.screens.EscapeMenu;
 import ga.abzzezz.game.maingame.gui.screens.LevelFailedScreen;
 import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.utility.Util;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -24,18 +26,34 @@ import java.util.HashMap;
 
 public class GameCycle {
 
+    final double NANO_TO_BASE = 1.0e9;
+    private long startTime;
+
+    public GameCycle() {
+        startTime = System.nanoTime();
+    }
     /*
     Updates the player and checks for collision with the goal
      */
     public void cycle() {
+        long time = System.nanoTime();
+        long diff = time - startTime;
+        double elapsedTime = (double) diff / NANO_TO_BASE;
         Player p = Util.mainPlayer;
         Goal g = Util.goal;
         p.update();
 
         if (Collision.AABBOverlaps(p.getPos(), g.getPos(), p.getPlayerSize(), p.getPlayerSize(), g.getWidth(), g.getHeight())) {
             Util.levelComplete = true;
-        } else if (Collision.isOutOfBounds(p.getPos(), p.getPlayerSize(), p.getPlayerSize())) {
+        } else if (Collision.isOutOfBounds(p.getPos(), p.getPlayerSize(), p.getPlayerSize()) || Util.tries == 0) {
             Main.getMain().setCurrentScreen(new LevelFailedScreen());
+        }
+        Main.getMain().getObjectManager().getWorld().update(elapsedTime);
+    }
+
+    public void keyPressed(int keyCode, char keyTyped) {
+        if(keyCode == Keyboard.KEY_ESCAPE) {
+            Main.getMain().setCurrentScreen(new EscapeMenu());
         }
     }
 

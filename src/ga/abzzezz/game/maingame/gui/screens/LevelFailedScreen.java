@@ -8,6 +8,7 @@ package ga.abzzezz.game.maingame.gui.screens;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.FontUtil;
 import ga.abzzezz.game.maingame.utility.Util;
 
@@ -18,8 +19,8 @@ public class LevelFailedScreen extends GuiScreen {
 
     @Override
     public void initialiseGui() {
-        guiButtons.add(new GuiButton("Retry", display()[0] / 2, display()[1] / 2, 0));
-        guiButtons.add(new GuiButton("Quit", display()[0] / 2, display()[1] / 4, 1));
+        guiButtons.add(new GuiButton("Retry", DisplayHelper.getWidth() / 2, DisplayHelper.getHeight() / 2 - 40, 0, true));
+        guiButtons.add(new GuiButton("Quit", DisplayHelper.getWidth() / 2, DisplayHelper.getHeight() / 2, 1,true));
         super.initialiseGui();
     }
 

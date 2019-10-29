@@ -21,9 +21,7 @@ import java.awt.*;
 
 public class Player {
 
-    final double NANO_TO_BASE = 1.0e9;
     private Body body;
-    private long startTime;
 
     public Player(Vector2f position) {
         Logger.log("Player set up", Logger.LogType.INFO);
@@ -34,8 +32,6 @@ public class Player {
         body.setMass(MassType.NORMAL);
         body.setAngularVelocity(-20);
         Main.getMain().getObjectManager().getWorld().addBody(body);
-
-        startTime = System.nanoTime();
     }
 
     public void update() {}
@@ -68,14 +64,9 @@ public class Player {
     }
 
     public void drawPlayer() {
-        long time = System.nanoTime();
-        long diff = time - startTime;
-        double elapsedTime = (double) diff / NANO_TO_BASE;
-
         GL11.glPushMatrix();
         GL11.glRotated(body.getTransform().getRotation(), 0, 0, 0);
         RenderHelper.drawQuad(getXPos(), getYPos(), Util.playerSize, Util.playerSize, Color.BLUE);
-        Main.getMain().getObjectManager().getWorld().update(elapsedTime);
         GL11.glPopMatrix();
     }
 }
