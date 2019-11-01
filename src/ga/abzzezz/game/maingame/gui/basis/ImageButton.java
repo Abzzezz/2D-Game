@@ -16,12 +16,12 @@ public class ImageButton extends GuiButton {
 
     FontUtil buttonFont = new FontUtil(15, "OpenSans");
     private String text, image;
-    private float xPos, yPos, buttonWidth, buttonHeight;
+    private int xPos, yPos, buttonWidth, buttonHeight;
     private int buttonID;
     private TextureRenderer texture = new TextureRenderer();
 
 
-    public ImageButton(String text, String image, float xPos, float yPos, int buttonID) {
+    public ImageButton(String text, String image, int xPos, int yPos, int buttonID) {
         super(text, xPos, yPos, buttonID);
         this.text = text;
         this.xPos = xPos;
@@ -48,38 +48,6 @@ public class ImageButton extends GuiButton {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public float getxPos() {
-        return xPos;
-    }
-
-    public void setxPos(float xPos) {
-        this.xPos = xPos;
-    }
-
-    public float getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(float yPos) {
-        this.yPos = yPos;
-    }
-
-    public float getButtonWidth() {
-        return buttonWidth;
-    }
-
-    public void setButtonWidth(float buttonWidth) {
-        this.buttonWidth = buttonWidth;
-    }
-
-    public float getButtonHeight() {
-        return buttonHeight;
-    }
-
-    public void setButtonHeight(float buttonHeight) {
-        this.buttonHeight = buttonHeight;
     }
 
     public int getButtonID() {

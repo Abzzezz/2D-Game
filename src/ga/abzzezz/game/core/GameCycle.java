@@ -41,14 +41,14 @@ public class GameCycle {
         double elapsedTime = (double) diff / NANO_TO_BASE;
         Player p = Util.mainPlayer;
         Goal g = Util.goal;
-        p.update();
+        Main.getMain().getObjectManager().getWorld().update(elapsedTime);
+
 
         if (Collision.AABBOverlaps(p.getPos(), g.getPos(), p.getPlayerSize(), p.getPlayerSize(), g.getWidth(), g.getHeight())) {
             Util.levelComplete = true;
         } else if (Collision.isOutOfBounds(p.getPos(), p.getPlayerSize(), p.getPlayerSize()) || Util.tries == 0) {
             Main.getMain().setCurrentScreen(new LevelFailedScreen());
         }
-        Main.getMain().getObjectManager().getWorld().update(elapsedTime);
     }
 
     public void keyPressed(int keyCode, char keyTyped) {

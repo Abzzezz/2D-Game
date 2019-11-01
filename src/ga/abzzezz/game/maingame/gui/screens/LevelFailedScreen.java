@@ -19,8 +19,8 @@ public class LevelFailedScreen extends GuiScreen {
 
     @Override
     public void initialiseGui() {
-        guiButtons.add(new GuiButton("Retry", DisplayHelper.getWidth() / 2, DisplayHelper.getHeight() / 2 - 40, 0, true));
-        guiButtons.add(new GuiButton("Quit", DisplayHelper.getWidth() / 2, DisplayHelper.getHeight() / 2, 1,true));
+        guiButtons.add(new GuiButton("Retry", getHalfWidth(), getHalfHeight() - 40, 0, true));
+        guiButtons.add(new GuiButton("Quit", getHalfWidth(), getHalfHeight(), 1,true));
         super.initialiseGui();
     }
 
@@ -29,7 +29,7 @@ public class LevelFailedScreen extends GuiScreen {
         if(buttonID == 0) {
             Main.getMain().getLevelSystem().loadLevel(Util.currentLevel);
         } else if(buttonID == 1) {
-            System.exit(0);
+            Main.getMain().setCurrentScreen(new MainMenu());
         }
         super.buttonPressed(buttonID);
     }

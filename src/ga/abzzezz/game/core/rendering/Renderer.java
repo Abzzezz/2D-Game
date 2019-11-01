@@ -9,6 +9,7 @@ package ga.abzzezz.game.core.rendering;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.utils.Logger;
 import ga.abzzezz.game.maingame.utility.FontUtil;
+import ga.abzzezz.game.maingame.utility.FontUtilHelper;
 import ga.abzzezz.game.maingame.utility.Util;
 
 import java.awt.*;
@@ -18,8 +19,6 @@ Class mainly used for rendering but also for updating
  */
 
 public class Renderer {
-
-    private FontUtil fontUtil = new FontUtil(20, "OpenSans");
 
     /*
     Main Game renderer all rendering happens here
@@ -31,12 +30,8 @@ public class Renderer {
         Logger.log("Renderer Set up", Logger.LogType.INFO);
     }
 
-    public void keyPressed(int keyCode, char keyChar, boolean hold) {
-        Util.mainPlayer.move(keyCode);
-    }
-
     public void render() {
-        fontUtil.drawText("Tries: " + Util.tries, 0, 0, Color.BLACK);
+        FontUtilHelper.MENU_UTIL.drawText("Tries: " + Util.tries, 0, 0, Color.BLACK);
         Util.mainPlayer.drawPlayer();
         Util.goal.drawGoal();
         /*

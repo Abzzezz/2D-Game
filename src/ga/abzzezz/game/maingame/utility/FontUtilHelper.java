@@ -15,9 +15,11 @@ public class FontUtilHelper {
     public static final int FONT_SMALL = 15;
 
     public static final String FONT_MENU_STRING = "BrutalType";
+    public static final String FONT_BUTTON = "BrutalType";
 
 
     public static final FontUtil MENU_UTIL = new FontUtil(FONT_MENU, FONT_MENU_STRING);
+    public static final FontUtil BUTTON_UTIL = new FontUtil(FONT_MENU, FONT_BUTTON);
 
 
     public static final void drawMiddleMenu(String text) {

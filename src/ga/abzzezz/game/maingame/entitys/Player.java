@@ -9,6 +9,7 @@ package ga.abzzezz.game.maingame.entitys;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.core.utils.Logger;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.Util;
 import ga.abzzezz.game.maingame.utility.VectorUtil;
 import org.dyn4j.dynamics.Body;
@@ -25,7 +26,6 @@ public class Player {
 
     public Player(Vector2f position) {
         Logger.log("Player set up", Logger.LogType.INFO);
-
         body = new Body();
         body.addFixture(Geometry.createRectangle(Util.playerSize, Util.playerSize));
         body.translate(VectorUtil.getVec2FormVector(position));
@@ -34,18 +34,12 @@ public class Player {
         Main.getMain().getObjectManager().getWorld().addBody(body);
     }
 
-    public void update() {}
-
     public Vector2f getPos() {
         return VectorUtil.getPositionsFromBody(body);
     }
 
     public float getXPos() {
         return getPos().x;
-    }
-
-    public void setXPos(float xPos) {
-        getPos().x = xPos;
     }
 
     public int getPlayerSize() {
@@ -56,17 +50,11 @@ public class Player {
         return getPos().y;
     }
 
-    public void setYPos(float yPos) {
-        getPos().y = yPos;
-    }
-
-    public void move(float keyCode) {
-    }
-
     public void drawPlayer() {
         GL11.glPushMatrix();
-        GL11.glRotated(body.getTransform().getRotation(), 0, 0, 0);
-        RenderHelper.drawQuad(getXPos(), getYPos(), Util.playerSize, Util.playerSize, Color.BLUE);
+        GL11.glRotated(body.getTransform().getRotation(), 0,0, 1);
+        GL11.glTranslatef(getXPos(), getYPos(), 0);
+        RenderHelper.drawQuad(getXPos(), getYPos(), Util.playerSize,Util.playerSize,  Color.BLUE);
         GL11.glPopMatrix();
     }
 }

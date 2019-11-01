@@ -38,11 +38,11 @@ public class LevelBuilder extends GuiScreen {
         guiButtons.add(new ImageButton("Block", "block.png", x, 0, 0));
         guiButtons.add(new ImageButton("Player", "player.png", x, 100, 1));
         guiButtons.add(new ImageButton("Goal", "goal.png", x, 200, 2));
-        guiButtons.add(new GuiButton("Save", 0,  DisplayHelper.getWidth() - 30, 3));
-        guiButtons.add(new GuiButton("Clear", 100,  DisplayHelper.getWidth()  - 30, 4));
+        guiButtons.add(new GuiButton("Save", 0,  getHeight() - 30, 3));
+        guiButtons.add(new GuiButton("Clear", 100,  getHeight()  - 30, 4));
 
-        guiButtons.add(new GuiButton("Set", x - 20,  DisplayHelper.getWidth() - 30, 6));
-        textBoxes.add(new TextBox("ColorBox", "Color", x - 120,  DisplayHelper.getHeight() - 30, !edit));
+        guiButtons.add(new GuiButton("Set", x - 20,  getHeight() - 30, 6));
+        textBoxes.add(new TextBox("ColorBox", "Color", x - 120,  getHeight() - 30, !edit));
         super.initialiseGui();
     }
 

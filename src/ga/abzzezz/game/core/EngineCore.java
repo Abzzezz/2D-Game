@@ -127,7 +127,6 @@ public class EngineCore {
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState())
                 if (main.getCurrentScreen() == null) {
-                    renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
                     gameCycle.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter());
                 } else {
                     main.getCurrentScreen().keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());

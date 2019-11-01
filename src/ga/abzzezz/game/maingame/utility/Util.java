@@ -35,7 +35,7 @@ public class Util {
     /*
     Scale is needed to translate the coordinates (30 pixels are one meter in the physics engine)
      */
-    public static int scale = 45;
+    public static int scale = 30;
 
     /*
     Boolean is true when level is complete. Calls the done screen

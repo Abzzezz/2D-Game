@@ -129,7 +129,7 @@ public class RenderHelper {
 
 
     private static void drawCircle(float xPos, float yPos, float radius) {
-        for (float i = 0; i <= 360; i++) {
+        for (float i = 0; i <= 200; i++) {
             double PI = Math.PI;
             double x = xPos + (Math.sin(i * PI / 180) * radius);
             double y = yPos + (Math.cos(i * PI / 180) * radius);

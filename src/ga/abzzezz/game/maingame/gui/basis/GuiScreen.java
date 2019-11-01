@@ -7,6 +7,7 @@
 package ga.abzzezz.game.maingame.gui.basis;
 
 import ga.abzzezz.game.maingame.gui.Gui;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 
 public class GuiScreen extends Gui {
 
@@ -30,4 +31,21 @@ public class GuiScreen extends Gui {
         }
         super.drawScreen();
     }
+
+    public int getWidth() {
+        return DisplayHelper.getWidth();
+    }
+
+    public int getHeight() {
+        return DisplayHelper.getHeight();
+    }
+
+    public int getHalfWidth() {
+        return DisplayHelper.getHalfWidth();
+    }
+
+    public int getHalfHeight() {
+        return DisplayHelper.getHalfHeight();
+    }
+
 }

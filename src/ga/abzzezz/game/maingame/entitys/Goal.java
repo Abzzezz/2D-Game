@@ -26,7 +26,7 @@ public class Goal {
         width = 100;
         height = 20;
         body = new Body();
-        body.addFixture(Geometry.createRectangle(width, Util.playerSize));
+        body.addFixture(Geometry.createRectangle(width / 2, Util.playerSize));
         body.translate(VectorUtil.getVec2FormVector(pos));
         body.setMass(MassType.INFINITE);
         Main.getMain().getObjectManager().getWorld().addBody(body);

@@ -12,19 +12,17 @@ import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.Gui;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
 import ga.abzzezz.game.maingame.utility.FontUtil;
+import ga.abzzezz.game.maingame.utility.FontUtilHelper;
 
 import java.awt.*;
 
 public class GuiButton extends Gui {
 
     private String buttonText;
-    private float xPos, yPos, width, height;
+    private int xPos, yPos, width, height;
     private int buttonID;
-    private FontUtil fontUtil = new FontUtil(30, "BrutalType");
-    private FontUtil fontUtil1 = new FontUtil(25, "BrutalType");
-    private float slide;
 
-    public GuiButton(String buttonText, float xPos, float yPos, float width, float height, int buttonID) {
+    public GuiButton(String buttonText, int xPos, int yPos, int width, int height, int buttonID) {
         this.buttonText = buttonText;
         this.xPos = xPos;
         this.yPos = yPos;
@@ -33,7 +31,7 @@ public class GuiButton extends Gui {
         this.buttonID = buttonID;
     }
 
-    public GuiButton(String buttonText, float xPos, float yPos, int buttonID, boolean center) {
+    public GuiButton(String buttonText, int xPos, int yPos, int buttonID, boolean center) {
         this.buttonText = buttonText;
         this.buttonID = buttonID;
         this.width = 100;
@@ -42,7 +40,7 @@ public class GuiButton extends Gui {
         this.yPos = yPos;
     }
 
-    public GuiButton(String buttonText, float xPos, float yPos, int buttonID) {
+    public GuiButton(String buttonText, int xPos, int yPos, int buttonID) {
         this.buttonText = buttonText;
         this.buttonID = buttonID;
         this.width = 100;
@@ -53,26 +51,9 @@ public class GuiButton extends Gui {
 
 
     public void drawButton() {
-        if (buttonHovered()) {
-            if (slide < 15) {
-                slide++;
-            } else {
-                slide = 15;
-            }
-        } else {
-            if (slide > 0) {
-                slide--;
-            } else {
-                slide = 0;
-            }
-        }
 
-        fontUtil.drawText(buttonText, xPos + width / 4 - slide, yPos - fontUtil.getFontSize() / 6, Color.BLACK);
-
-        if (slide > 13)
-            fontUtil1.drawText(">", xPos + width / 4 - slide + fontUtil.getStringWidth(buttonText) + 5, yPos, Color.BLACK);
-
-        RenderHelper.drawQuad((int) xPos, (int) yPos, (int) width, (int) height, ColorHelper.getBlackTransparent());
+        FontUtilHelper.BUTTON_UTIL.drawText(buttonText, xPos + width / 4, yPos - FontUtilHelper.BUTTON_UTIL.getFontSize() / 6, Color.BLACK);
+        RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.getBlackTransparent());
         super.drawScreen();
     }
 
@@ -88,38 +69,6 @@ public class GuiButton extends Gui {
 
     public void setButtonText(String buttonText) {
         this.buttonText = buttonText;
-    }
-
-    public float getxPos() {
-        return xPos;
-    }
-
-    public void setxPos(float xPos) {
-        this.xPos = xPos;
-    }
-
-    public float getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(float yPos) {
-        this.yPos = yPos;
-    }
-
-    public float getWidth() {
-        return width;
-    }
-
-    public void setWidth(float width) {
-        this.width = width;
-    }
-
-    public float getHeight() {
-        return height;
-    }
-
-    public void setHeight(float height) {
-        this.height = height;
     }
 
     public int getButtonID() {

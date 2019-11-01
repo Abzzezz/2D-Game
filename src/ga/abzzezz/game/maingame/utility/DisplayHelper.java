@@ -25,11 +25,11 @@ public class DisplayHelper {
     }
 
     public static final int getHalfWidth() {
-        return getWidth() / 2;
+        return display()[0] / 2;
     }
 
     public static final int getHalfHeight() {
-        return getHeight() / 2;
+        return display()[1]/ 2;
     }
 
 }
