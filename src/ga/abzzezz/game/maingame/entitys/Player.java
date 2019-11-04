@@ -52,9 +52,10 @@ public class Player {
 
     public void drawPlayer() {
         GL11.glPushMatrix();
+        GL11.glTranslatef(getXPos(),getYPos(), 1);
         GL11.glRotated(body.getTransform().getRotation(), 0,0, 1);
-        GL11.glTranslatef(getXPos(), getYPos(), 0);
-        RenderHelper.drawQuad(getXPos(), getYPos(), Util.playerSize,Util.playerSize,  Color.BLUE);
+        GL11.glTranslatef(-getXPos(), -getYPos(), -1);
+        RenderHelper.drawQuad(getXPos(), getYPos(), Util.playerSize, Util.playerSize,  Color.BLUE);
         GL11.glPopMatrix();
     }
 }

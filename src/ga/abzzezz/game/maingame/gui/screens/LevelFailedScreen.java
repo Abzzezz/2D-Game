@@ -19,8 +19,8 @@ public class LevelFailedScreen extends GuiScreen {
 
     @Override
     public void initialiseGui() {
-        guiButtons.add(new GuiButton("Retry", getHalfWidth(), getHalfHeight() - 40, 0, true));
-        guiButtons.add(new GuiButton("Quit", getHalfWidth(), getHalfHeight(), 1,true));
+        guiButtons.add(new GuiButton("Retry", getHalfWidth(), getHalfHeight(), 0, true));
+        guiButtons.add(new GuiButton("Quit", getHalfWidth(), getHalfHeight() + 50, 1,true));
         super.initialiseGui();
     }
 

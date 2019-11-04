@@ -32,8 +32,8 @@ public class MainMenu extends GuiScreen {
     @Override
     public void initialiseGui() {
         int buttonWidth = 100;
-        guiButtons.add(new GuiButton("Play", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHeight()/ 2, buttonWidth, 30, 0));
-        guiButtons.add(new GuiButton("Build", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHeight()/ 2 + 50, buttonWidth, 30, 1));
+        guiButtons.add(new GuiButton("Play", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight(), buttonWidth, 30, 0));
+        guiButtons.add(new GuiButton("Build", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight() + 50, buttonWidth, 30, 1));
 
         super.initialiseGui();
     }
