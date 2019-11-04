@@ -33,6 +33,11 @@ public class LevelSystem {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(levelFile));
             Util.currentLevel = level;
             String line;
+            /*
+            Remove all objects to prevent interference with other levels
+             */
+            Main.getMain().getObjectManager().getWorld().removeAllBodies();
+
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");
                 if (splitLine.length > 6) {

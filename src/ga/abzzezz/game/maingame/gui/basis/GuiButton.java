@@ -51,9 +51,8 @@ public class GuiButton extends Gui {
 
 
     public void drawButton() {
-
-        FontUtilHelper.BUTTON_UTIL.drawText(buttonText, xPos + width / 4, yPos - FontUtilHelper.BUTTON_UTIL.getFontSize() / 6, Color.BLACK);
         RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.getBlackTransparent());
+        FontUtilHelper.BUTTON_UTIL.drawText(buttonText, xPos + width / 4, yPos - FontUtilHelper.BUTTON_UTIL.getFontSize() / 6, Color.BLACK);
         super.drawScreen();
     }
 

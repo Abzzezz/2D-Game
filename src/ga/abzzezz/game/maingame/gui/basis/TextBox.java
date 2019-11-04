@@ -75,7 +75,7 @@ public class TextBox extends Gui {
             ScissorUtil.scissor(xPos, yPos, width, height);
 
             if (selected)
-                RenderHelper.drawOutlinedQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 20), Color.BLACK);
+                RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 40));
             else
                 RenderHelper.drawQuad(xPos, yPos, width, height, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
 
