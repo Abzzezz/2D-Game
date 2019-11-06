@@ -6,8 +6,10 @@
 
 package ga.abzzezz.game.maingame.utility;
 
+import ga.abzzezz.game.core.utils.Logger;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Vector2;
+import org.joml.Vector2i;
 import org.lwjgl.util.vector.Vector2f;
 
 public class VectorUtil {
@@ -26,5 +28,14 @@ public class VectorUtil {
 
     public static Vector2f getPositionsFromBody(Body body) {
         return getVector2fFromVec2(body.getTransform().getTranslation());
+    }
+
+    public static Vector2f getVectorFromArray(int[] array) {
+        if(array.length > 1) {
+            return new Vector2f(array[0],  array[1]);
+        } else {
+            Logger.log("@VectorUtil.class; @getVectorFromArray " + array + "values are less / 1; returning pos 0",  Logger.LogType.WARNING);
+            return new Vector2f(0, 0);
+        }
     }
 }

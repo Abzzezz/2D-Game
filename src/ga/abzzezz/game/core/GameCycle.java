@@ -14,7 +14,9 @@ import ga.abzzezz.game.maingame.entitys.Player;
 import ga.abzzezz.game.maingame.gui.screens.EscapeMenu;
 import ga.abzzezz.game.maingame.gui.screens.LevelFailedScreen;
 import ga.abzzezz.game.maingame.level.LevelSystem;
+import ga.abzzezz.game.maingame.utility.ColorHelper;
 import ga.abzzezz.game.maingame.utility.Util;
+import ga.abzzezz.game.maingame.utility.VectorUtil;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -43,7 +45,6 @@ public class GameCycle {
         Goal g = Util.goal;
         Main.getMain().getObjectManager().getWorld().update(elapsedTime);
 
-
         if (Collision.AABBOverlaps(p.getPos(), g.getPos(), p.getPlayerSize(), p.getPlayerSize(), g.getWidth(), g.getHeight())) {
             Util.levelComplete = true;
         } else if (Collision.isOutOfBounds(p.getPos(), p.getPlayerSize(), p.getPlayerSize()) || Util.tries == 0) {
@@ -59,8 +60,6 @@ public class GameCycle {
 
     Vector2f oldMousePos;
     public void mousePressed(int mousePressed) {
-        if(mousePressed == 0) {
-            oldMousePos = new Vector2f(Collision.getMousePosition()[0], Collision.getMousePosition()[1]);
-        }
+        oldMousePos = new Vector2f(Collision.getMousePosition()[0], Collision.getMousePosition()[1]);
     }
 }

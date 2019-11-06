@@ -6,6 +6,7 @@
 
 package ga.abzzezz.game.core.rendering;
 
+import org.joml.Vector2i;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -75,6 +76,21 @@ public class RenderHelper {
         glEnd();
         endGL();
     }
+
+    public static void drawLine(Vector2f start, Vector2f end, Color color) {
+        setupGL();
+        glColor4f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(3);
+        glBegin(GL_LINES);
+        {
+            glVertex2f(start.x, start.y);
+            glVertex2f(end.x, end.y);
+        }
+        glEnd();
+        endGL();
+    }
+
 
 
     private static void drawCircle(float xPos, float yPos, float radius) {
