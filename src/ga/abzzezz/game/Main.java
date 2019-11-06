@@ -13,7 +13,10 @@ import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.gui.screens.MainMenu;
 import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.object.ObjectManager;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.InternetConnection;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
 import java.io.File;
 
@@ -33,7 +36,8 @@ public class Main {
     private byte version;
     private File dir;
     private InternetConnection internetConnection;
-
+    private float slide;
+    private boolean isSlide;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -96,14 +100,26 @@ public class Main {
     Sets the current Screen(Class) to render, old screen is cleaned before and new screen is initialised
      */
     public void setCurrentScreen(GuiScreen currentScreen) {
-        if (this.currentScreen != null) {
-            this.currentScreen.onGuiClosed();
-        }
         this.oldScreen = this.currentScreen;
-        this.currentScreen = currentScreen;
+        if (this.currentScreen != null) this.currentScreen.onGuiClosed();
 
-        if (currentScreen != null)
+        if (Display.isCreated()) {
+            isSlide = true;
+            this.currentScreen = currentScreen;
+
+        } else {
+            this.currentScreen = currentScreen;
             currentScreen.initialiseGui();
+        }
+    }
+
+    public void stopSliding() {
+        if(slide > 0 )  {
+            slide -= 10;
+        } else {
+            isSlide = false;
+            if (currentScreen != null) currentScreen.initialiseGui();
+        }
     }
 
     public ObjectManager getObjectManager() {
@@ -128,5 +144,21 @@ public class Main {
 
     public InternetConnection getInternetConnection() {
         return internetConnection;
+    }
+
+    public boolean isSliding() {
+        return isSlide;
+    }
+
+    public float getSlide() {
+        return slide;
+    }
+
+    public void setSlideing(boolean slide) {
+        isSlide = slide;
+    }
+
+    public void setSlide(float amount) {
+        slide += amount;
     }
 }

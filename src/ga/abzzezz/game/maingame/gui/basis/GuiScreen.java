@@ -6,7 +6,9 @@
 
 package ga.abzzezz.game.maingame.gui.basis;
 
+import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.Gui;
+import ga.abzzezz.game.maingame.utility.ColorHelper;
 import ga.abzzezz.game.maingame.utility.DisplayHelper;
 
 public class GuiScreen extends Gui {
@@ -29,6 +31,13 @@ public class GuiScreen extends Gui {
         for (TextBox textBox : textBoxes) {
             textBox.drawTextBox();
         }
+
+        /*
+        Draw Bars at the top and bottom
+         */
+        RenderHelper.drawQuad(0, 0, getWidth(), 100, ColorHelper.getBlackTransparent());
+        RenderHelper.drawQuad(0, getHeight() - 50, getWidth(), 50, ColorHelper.getBlackTransparent());
+
         super.drawScreen();
     }
 

@@ -111,7 +111,18 @@ public class EngineCore {
             gameCycle.cycle();
             renderer.render();
         } else {
+            if (main.isSliding()) {
+                main.setSlide(10);
+            }
+
+            if (main.getSlide() >= Display.getWidth()) {
+                main.stopSliding();
+            }
+
+            glPushMatrix();
+            glTranslatef(Main.getMain().getSlide(), 0, 0);
             main.getCurrentScreen().drawScreen();
+            glPopMatrix();
         }
 
         while (Mouse.next()) {

@@ -6,4 +6,6 @@
 package ga.abzzezz.game.maingame.utility;
 
 public class CrashHandler {
+
+
 }
