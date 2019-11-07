@@ -25,6 +25,8 @@ public class MainMenu extends GuiScreen {
             Main.getMain().setCurrentScreen(new LevelSelector());
         } else if (buttonID == 1) {
             Main.getMain().setCurrentScreen(new LevelBuilder());
+        }else if (buttonID == 2) {
+            System.exit(375039277);
         }
         super.buttonPressed(buttonID);
     }
@@ -34,6 +36,7 @@ public class MainMenu extends GuiScreen {
         int buttonWidth = 100;
         guiButtons.add(new GuiButton("Play", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight(), buttonWidth, 30, 0));
         guiButtons.add(new GuiButton("Build", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight() + 50, buttonWidth, 30, 1));
+        guiButtons.add(new GuiButton("Quit", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight() + 100, buttonWidth, 30, 2));
 
         super.initialiseGui();
     }
