@@ -84,7 +84,7 @@ public class EngineCore {
 
         Display.setTitle("PONG!");
         glEnable(GL_TEXTURE_2D);
-        Color uiColor = new Color(0x9e9e9e);
+        Color uiColor = new Color(0xc3e50);
         float red = uiColor.getRed() / 255.0F;
         float green = uiColor.getGreen() / 255.0F;
         float blue = uiColor.getBlue() / 255.0F;
@@ -112,14 +112,19 @@ public class EngineCore {
             renderer.render();
         } else {
             if (main.isSliding()) {
-                main.setSlide(10);
+                /*
+                Very nice to show acceleration when sliding.
+                x = 10 * e.g (200 / 100) * 1.2
+                x = 36
+                slide = x
+                 */
+                main.setSlide(10 * (main.getSlide() / 100) * 1.2F);
+                if (main.getSlide()  <= 0) main.stopSliding();
             }
-
-            if (main.getSlide() >= Display.getWidth()) {
-                main.stopSliding();
-            }
-
             glPushMatrix();
+            //Pretty bad way to do it, please don`t judge
+            main.getCurrentScreen().drawBars();
+            //
             glTranslatef(Main.getMain().getSlide(), 0, 0);
             main.getCurrentScreen().drawScreen();
             glPopMatrix();

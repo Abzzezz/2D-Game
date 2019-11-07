@@ -36,7 +36,7 @@ public class LevelSelector extends GuiScreen {
             RenderHelper.drawQuad(xPos - 10, yBuffer, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
             FontUtilHelper.MENU_UTIL.drawText(name, xPos, yPos, Color.BLACK);
 
-            if(Collision.mouseHovered(xPos, yPos, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2)) {
+            if(Collision.mouseHovered(xPos, yPos, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2) && Mouse.isButtonDown(0)) {
                 Main.getMain().getLevelSystem().loadLevel(level.getName());
             }
 

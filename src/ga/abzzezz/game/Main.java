@@ -100,26 +100,29 @@ public class Main {
     Sets the current Screen(Class) to render, old screen is cleaned before and new screen is initialised
      */
     public void setCurrentScreen(GuiScreen currentScreen) {
+        /*
+        Set current Screen to old Screen to later overwrite it
+         */
         this.oldScreen = this.currentScreen;
         if (this.currentScreen != null) this.currentScreen.onGuiClosed();
 
+        /*
+        Check if display is created if not proceed without slide
+         */
         if (Display.isCreated()) {
+            slide = DisplayHelper.getWidth();
             isSlide = true;
-            this.currentScreen = currentScreen;
-
-        } else {
-            this.currentScreen = currentScreen;
-            currentScreen.initialiseGui();
         }
+        this.currentScreen = currentScreen;
+        if (currentScreen != null) currentScreen.initialiseGui();
     }
 
+    /*
+    Set the slide to x = 0 then set isslide to false to stop sliding
+     */
     public void stopSliding() {
-        if(slide > 0 )  {
-            slide -= 10;
-        } else {
-            isSlide = false;
-            if (currentScreen != null) currentScreen.initialiseGui();
-        }
+        slide = 0;
+        isSlide = false;
     }
 
     public ObjectManager getObjectManager() {
@@ -154,11 +157,7 @@ public class Main {
         return slide;
     }
 
-    public void setSlideing(boolean slide) {
-        isSlide = slide;
-    }
-
     public void setSlide(float amount) {
-        slide += amount;
+        slide -= amount;
     }
 }

@@ -10,6 +10,7 @@ import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.Gui;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
 import ga.abzzezz.game.maingame.utility.DisplayHelper;
+import org.lwjgl.opengl.GL11;
 
 public class GuiScreen extends Gui {
 
@@ -31,14 +32,12 @@ public class GuiScreen extends Gui {
         for (TextBox textBox : textBoxes) {
             textBox.drawTextBox();
         }
+        super.drawScreen();
+    }
 
-        /*
-        Draw Bars at the top and bottom
-         */
+    public void drawBars() {
         RenderHelper.drawQuad(0, 0, getWidth(), 100, ColorHelper.getBlackTransparent());
         RenderHelper.drawQuad(0, getHeight() - 50, getWidth(), 50, ColorHelper.getBlackTransparent());
-
-        super.drawScreen();
     }
 
     public int getWidth() {
