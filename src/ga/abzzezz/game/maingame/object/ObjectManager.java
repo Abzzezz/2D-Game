@@ -10,6 +10,7 @@ import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.utility.Util;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Vector2;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class ObjectManager {
 
     private ArrayList<Prevent> prevents = new ArrayList();
     private World world = new World();
+    private ArrayList<Vector2f> lines = new ArrayList();
 
     public ObjectManager() {
         getWorld().setGravity(new Vector2(0, 9.8 * Util.scale));
@@ -43,6 +45,10 @@ public class ObjectManager {
 
     public World getWorld() {
         return world;
+    }
+
+    public ArrayList<Vector2f> getLines() {
+        return lines;
     }
 }
 

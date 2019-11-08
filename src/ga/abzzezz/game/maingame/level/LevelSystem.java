@@ -37,6 +37,7 @@ public class LevelSystem {
             Remove all objects to prevent interference with other levels
              */
             Main.getMain().getObjectManager().getWorld().removeAllBodies();
+            Main.getMain().getObjectManager().getLines().clear();
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");

@@ -36,10 +36,6 @@ public class LevelSelector extends GuiScreen {
             RenderHelper.drawQuad(xPos - 10, yBuffer, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
             FontUtilHelper.MENU_UTIL.drawText(name, xPos, yPos, Color.BLACK);
 
-            if(Collision.mouseHovered(xPos, yPos, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2) && Mouse.isButtonDown(0)) {
-                Main.getMain().getLevelSystem().loadLevel(level.getName());
-            }
-
             yBuffer += FontUtilHelper.FONT_MENU * 2;
         }
         super.drawScreen();
@@ -47,6 +43,16 @@ public class LevelSelector extends GuiScreen {
 
     @Override
     public void mousePress(int mouseButton) {
+        int yBuffer = 100;
+        for (File level : Main.getMain().getLevelSystem().getLevels()) {
+            String name = level.getName().substring(0, level.getName().length() - 4);
+            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText(name);
+            int yPos = yBuffer + FontUtilHelper.FONT_MENU / 4;
+            if(Collision.mouseHovered(xPos, yPos, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2) && Mouse.isButtonDown(0)) {
+                Main.getMain().getLevelSystem().loadLevel(level.getName());
+            }
+            yBuffer += FontUtilHelper.FONT_MENU * 2;
+        }
         super.mousePress(mouseButton);
     }
 }

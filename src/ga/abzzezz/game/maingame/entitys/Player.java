@@ -30,7 +30,6 @@ public class Player {
         body.addFixture(Geometry.createRectangle(Util.playerSize, Util.playerSize));
         body.translate(VectorUtil.getVec2FormVector(position));
         body.setMass(MassType.NORMAL);
-        body.setAngularVelocity(-20);
         Main.getMain().getObjectManager().getWorld().addBody(body);
     }
 

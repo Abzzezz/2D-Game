@@ -9,6 +9,7 @@ package ga.abzzezz.game.maingame.gui.screens;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
+import ga.abzzezz.game.maingame.utility.CrashHandler;
 import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.FontUtil;
 import ga.abzzezz.game.maingame.utility.FontUtilHelper;
@@ -26,7 +27,13 @@ public class MainMenu extends GuiScreen {
         } else if (buttonID == 1) {
             Main.getMain().setCurrentScreen(new LevelBuilder());
         }else if (buttonID == 2) {
-            System.exit(375039277);
+            CrashHandler.customLine();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.exit(8);
         }
         super.buttonPressed(buttonID);
     }
