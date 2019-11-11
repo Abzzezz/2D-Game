@@ -13,6 +13,7 @@ import ga.abzzezz.game.maingame.utility.VectorUtil;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
+import org.dyn4j.geometry.Vector2;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -24,16 +25,16 @@ public class Goal {
 
     public Goal(Vector2f pos) {
         width = 100;
-        height = 20;
+        height = Util.playerSize;
         body = new Body();
-        body.addFixture(Geometry.createRectangle(width / 2, Util.playerSize));
+        body.addFixture(Geometry.createRectangle(width * 2, height));
         body.translate(VectorUtil.getVec2FormVector(pos));
         body.setMass(MassType.INFINITE);
         Main.getMain().getObjectManager().getWorld().addBody(body);
     }
 
     public void drawGoal() {
-        RenderHelper.drawQuad(getxPos(), getyPos(), width, height, Color.YELLOW);
+        RenderHelper.drawQuad(getxPos(), getyPos(), getWidth(), getHeight(), Color.YELLOW);
     }
 
     public Vector2f getPos() {
@@ -54,5 +55,9 @@ public class Goal {
 
     public float getHeight() {
         return height;
+    }
+
+    public Body getBody() {
+        return body;
     }
 }

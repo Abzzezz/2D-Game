@@ -9,6 +9,7 @@ package ga.abzzezz.game.maingame.utility;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.utils.Logger;
 import org.dyn4j.dynamics.Body;
+import org.dyn4j.geometry.Transform;
 import org.dyn4j.geometry.Vector2;
 import org.joml.Vector2i;
 import org.lwjgl.util.vector.Vector2f;
@@ -16,6 +17,7 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class VectorUtil {
 
@@ -44,6 +46,10 @@ public class VectorUtil {
         }
     }
 
+    public static Vector2 getFromTransForm(Transform transform) {
+        return new Vector2((float) transform.getTranslationX(), (float) transform.getTranslationY());
+    }
+
     public static ArrayList<Vector2> convertListFormVector2f(ArrayList<Vector2f> list) {
         ArrayList<Vector2> out = new ArrayList<>();
         for (Vector2f vector2f : list) {
@@ -57,7 +63,13 @@ public class VectorUtil {
      */
 
     public static Vector2 getVector2ForLines(int index) {
-        Vector2f vector2f = new Vector2f(Main.getMain().getObjectManager().getLines().get(index).x + 1,Main.getMain().getObjectManager().getLines().get(index).y);
-        return getVec2FormVector(index != 0 ? Main.getMain().getObjectManager().getLines().get(index - 1) : vector2f);
+        if(index == 0) {
+            Transform transform = Main.getMain().getObjectManager().getLineBodies().get(index).getTransform();
+            Vector2f alternatePos = new Vector2f((float) transform.getTranslationX(), (float) transform.getTranslationY());
+            return getVec2FormVector(alternatePos);
+        } else {
+            Vector2 pos = getFromTransForm( Main.getMain().getObjectManager().getLineBodies().get(index - 1).getTransform());
+            return pos;
+        }
     }
 }

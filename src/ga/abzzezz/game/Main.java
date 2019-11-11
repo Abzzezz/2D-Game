@@ -86,6 +86,8 @@ public class Main {
          */
         internetConnection.initConnections();
 
+        levelSystem.init();
+
         /*
         Current Screen, so menus can be displayed
          */

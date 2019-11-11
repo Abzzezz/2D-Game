@@ -22,15 +22,22 @@ import java.io.File;
 
 public class LevelSelector extends GuiScreen {
 
+    File[] level;
+    @Override
+    public void initialiseGui() {
+        level = Main.getMain().getLevelSystem().getLevels();
+        super.initialiseGui();
+    }
+
     @Override
     public void drawScreen() {
         FontUtilHelper.drawMiddleMenu("LEVELS");
 
         int yBuffer = 100;
-        for (File level : Main.getMain().getLevelSystem().getLevels()) {
+        for (File level : level) {
 
             String name = level.getName().substring(0, level.getName().length() - 4);
-            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText(name);
+            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText("Level 0");
             int yPos = yBuffer + FontUtilHelper.FONT_MENU / 4;
 
             RenderHelper.drawQuad(xPos - 10, yBuffer, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
@@ -44,9 +51,9 @@ public class LevelSelector extends GuiScreen {
     @Override
     public void mousePress(int mouseButton) {
         int yBuffer = 100;
-        for (File level : Main.getMain().getLevelSystem().getLevels()) {
+        for (File level : level) {
             String name = level.getName().substring(0, level.getName().length() - 4);
-            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText(name);
+            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText("Level 0");
             int yPos = yBuffer + FontUtilHelper.FONT_MENU / 4;
             if(Collision.mouseHovered(xPos, yPos, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2) && Mouse.isButtonDown(0)) {
                 Main.getMain().getLevelSystem().loadLevel(level.getName());

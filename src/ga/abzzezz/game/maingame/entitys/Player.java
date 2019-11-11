@@ -49,6 +49,10 @@ public class Player {
         return getPos().y;
     }
 
+    public Body getBody() {
+        return body;
+    }
+
     public void drawPlayer() {
         GL11.glPushMatrix();
         GL11.glTranslatef(getXPos(),getYPos(), 1);
