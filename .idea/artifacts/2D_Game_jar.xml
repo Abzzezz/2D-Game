@@ -3,13 +3,13 @@
     <output-path>$PROJECT_DIR$/out/artifacts/2D_Game_jar</output-path>
     <root id="archive" name="2D Game.jar">
       <element id="module-output" name="2D Game" />
-      <element id="library" level="project" name="windows" />
-      <element id="extracted-dir" path="E:/Libraries/lwjgl_util.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="E:/Libraries/jnativehook-2.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="E:/Libraries/slick.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="E:/Libraries/slick-util.jar" path-in-jar="/" />
       <element id="extracted-dir" path="E:/Libraries/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/Libraries/lwjgl_util.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/Libraries/slick.jar" path-in-jar="/" />
       <element id="extracted-dir" path="E:/Libraries/joml-1.9.18.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/Libraries/commons-io-2.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/Libraries/dyn4j-v3.3.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="windows" />
     </root>
   </artifact>
 </component>
