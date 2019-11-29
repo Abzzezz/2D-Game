@@ -72,4 +72,28 @@ public class VectorUtil {
             return pos;
         }
     }
+
+    public static Vector2 getPreviousVector(Vector2 current) {
+        int index = ArrayUtil.indexOf(current, Main.getMain().getObjectManager().getLineBodies());
+
+        if(index <= 0)
+            return current;
+        else Main.getMain().getObjectManager().getLineBodies().get(index - 1).getTransform().getTranslation();
+
+        return new Vector2(0,0);
+    }
+
+    public static double processAngle(Vector2 p1, Vector2 p2) {
+        double distX = p1.x - p2.x;
+        double distY = p1.y - p2.y;
+        double alpha = Math.cos(distX /p1.distance(p2));
+
+        if (p2.y < p1.y) {
+            alpha = (2*Math.PI) - alpha;
+        }
+
+        double actualrot = ( alpha * 360 ) / ( 2 * Math.PI);
+        return actualrot;
+
+    }
 }

@@ -73,18 +73,22 @@ public class GameCycle {
     }
 
     public void mousePressed(int mousePressed) {
-        if (Main.getMain().getObjectManager().getLineBodies().size() <= 3) {
-            Vector2 vector2d = new Vector2(VectorUtil.getVec2FormVector(VectorUtil.getVectorFromArray(Collision.getMousePosition())));
+        if (Main.getMain().getObjectManager().getLineBodies().size() <= 5) {
+            Vector2 thisPos = new Vector2(VectorUtil.getVec2FormVector(VectorUtil.getVectorFromArray(Collision.getMousePosition())));
             Body body = new Body();
-            for (int i = 0; i < Main.getMain().getObjectManager().getLineBodies().size(); i++) {
-                body.addFixture(new Rectangle(LineUtil.getWidthByVectors(VectorUtil.getVector2ForLines(i), vector2d), Util.playerSize));
-                System.out.println(LineUtil.getWidthByVectors(VectorUtil.getVector2ForLines(i), vector2d));
-            }
-            body.translate(vector2d);
-           // body.rotate();
-            body.setMass(MassType.INFINITE);
-            Main.getMain().getObjectManager().getWorld().addBody(body);
+            body.translate(thisPos);
             Main.getMain().getObjectManager().getLineBodies().add(body);
+
+            Vector2 oldPos = VectorUtil.getPreviousVector(thisPos);
+            Body get = Main.getMain().getObjectManager().getLineBodies().get(Main.getMain().getObjectManager().getLineBodies().indexOf(body));
+            if(oldPos != thisPos) {
+                get.addFixture(new Rectangle(LineUtil.getWidthByVectors(oldPos, thisPos), Util.playerSize));
+                //get.rotate(VectorUtil.processAngle(oldPos, thisPos));
+                System.out.println(VectorUtil.processAngle(oldPos, thisPos));
+                get.translate(oldPos);
+                get.setMass(MassType.INFINITE);
+            }
+            Main.getMain().getObjectManager().getWorld().addBody(get);
         }
     }
 }

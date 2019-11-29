@@ -20,7 +20,7 @@ public class LineUtil {
     Difference is 10.
      */
     public static float getWidthByVectors(Vector2 fist, Vector2 second) {
-        float calc  =  (float) (second.x - fist.x);
+        float calc  =  (float) (fist.x - second.x);
         return calc < 0 ? calc * (-1) : calc;
     }
 }
