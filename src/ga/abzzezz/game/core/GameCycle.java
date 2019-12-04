@@ -62,7 +62,16 @@ public class GameCycle {
         }
 
         for (int i = 0; i < Main.getMain().getObjectManager().getLineBodies().size(); i++) {
-            RenderHelper.drawLine(VectorUtil.getVector2fFromVec2(VectorUtil.getVector2ForLines(i)), VectorUtil.getVector2fFromVec2(VectorUtil.getFromTransForm(Main.getMain().getObjectManager().getLineBodies().get(i).getTransform())), Color.WHITE);
+            Body b = Main.getMain().getObjectManager().getLineBodies().get(i);
+            float width =  LineUtil.getWidthByVectors(b.getTransform().getTranslation(), VectorUtil.getPreviousVector(b.getTransform().getTranslation()));
+            double xPos = b.getTransform().getTranslation().x;
+            double yPos = b.getTransform().getTranslation().y;
+            GL11.glPushMatrix();
+            GL11.glTranslated(xPos, yPos, 1);
+            GL11.glRotated(b.getTransform().getRotation(), 0,0, 1);
+            GL11.glTranslated(-xPos, -yPos, -1);
+            RenderHelper.drawQuad((float)VectorUtil.getPreviousVector(b.getTransform().getTranslation()).x, (float)yPos, width, 10, Color.BLUE);
+            GL11.glPopMatrix();
         }
     }
 
@@ -83,7 +92,7 @@ public class GameCycle {
             Body get = Main.getMain().getObjectManager().getLineBodies().get(Main.getMain().getObjectManager().getLineBodies().indexOf(body));
             if(oldPos != thisPos) {
                 get.addFixture(new Rectangle(LineUtil.getWidthByVectors(oldPos, thisPos), Util.playerSize));
-                //get.rotate(VectorUtil.processAngle(oldPos, thisPos));
+                get.rotate(VectorUtil.processAngle(oldPos, thisPos));
                 System.out.println(VectorUtil.processAngle(oldPos, thisPos));
                 get.translate(oldPos);
                 get.setMass(MassType.INFINITE);
