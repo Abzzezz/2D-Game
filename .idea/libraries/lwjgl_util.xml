@@ -4,10 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../../Libraries/lwjgl.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../Libraries/lwjgl_util.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../Libraries/slick.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../Libraries/joml-1.9.19.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../Libraries/commons-io-2.6.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../Libraries/jbox2d-library-2.1.2.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../Libraries/slf4j-api-1.8.0-beta4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Libraries/dyn4j-3.3.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
