@@ -10,8 +10,11 @@ import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.collision.Collision;
 import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
+import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.utility.ColorHelper;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.FontUtil;
+import ga.abzzezz.game.maingame.utility.FontUtilHelper;
 import org.lwjgl.input.Mouse;
 
 import java.awt.*;
@@ -19,39 +22,44 @@ import java.io.File;
 
 public class LevelSelector extends GuiScreen {
 
-    /*
-    Not pretty jet, just functional
-     */
-
-    FontUtil levelFont = new FontUtil(20, "OpenSans");
-    FontUtil bigText = new FontUtil(40, "BrutalType");
+    File[] level;
+    @Override
+    public void initialiseGui() {
+        level = Main.getMain().getLevelSystem().getLevels();
+        super.initialiseGui();
+    }
 
     @Override
     public void drawScreen() {
-        bigText.drawText("Levels", display()[0] / 2 - bigText.getStringWidth("Levels") / 2, 20, Color.BLACK);
+        FontUtilHelper.drawMiddleMenu("LEVELS");
 
         int yBuffer = 100;
-        for (File level : Main.getMain().getLevelSystem().getLevels()) {
+        for (File level : level) {
+
             String name = level.getName().substring(0, level.getName().length() - 4);
+            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText("Level 0");
+            int yPos = yBuffer + FontUtilHelper.FONT_MENU / 4;
 
-            /*
-            Really basic solution... TODO: Move into @mousePress method
-             */
-            if (Collision.mouseHovered(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, display()[0] / 2 - levelFont.centerText(name) * 4, levelFont.getFontSize() * 2) && Mouse.isButtonDown(0)) {
-                Main.getMain().getLevelSystem().loadLevel(level.getName());
-                Main.getMain().setCurrentScreen(null);
-            }
+            RenderHelper.drawQuad(xPos - 10, yBuffer, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
+            FontUtilHelper.MENU_UTIL.drawText(name, xPos, yPos, Color.BLACK);
 
-            levelFont.drawText(name, display()[0] / 2 - levelFont.centerText(name), yBuffer +  levelFont.getFontSize() / 4, Color.BLACK);
-
-            RenderHelper.drawQuad(display()[0] / 2 - levelFont.centerText(name) * 2, yBuffer, levelFont.centerText(name) * 4, levelFont.getFontSize() * 2, ColorHelper.makeColorTranslucent(Color.BLACK, 20));
-            yBuffer += levelFont.getFontSize() + 30;
+            yBuffer += FontUtilHelper.FONT_MENU * 2;
         }
         super.drawScreen();
     }
 
     @Override
     public void mousePress(int mouseButton) {
+        int yBuffer = 100;
+        for (File level : level) {
+            String name = level.getName().substring(0, level.getName().length() - 4);
+            int xPos = getHalfWidth() - FontUtilHelper.MENU_UTIL.centerText("Level 0");
+            int yPos = yBuffer + FontUtilHelper.FONT_MENU / 4;
+            if(Collision.mouseHovered(xPos, yPos, FontUtilHelper.MENU_UTIL.getStringWidth("Level 0") + 20, FontUtilHelper.FONT_MENU * 2) && Mouse.isButtonDown(0)) {
+                Main.getMain().getLevelSystem().loadLevel(level.getName());
+            }
+            yBuffer += FontUtilHelper.FONT_MENU * 2;
+        }
         super.mousePress(mouseButton);
     }
 }

@@ -27,12 +27,25 @@ import java.util.ArrayList;
 
 public class LevelSystem {
 
+    final File levelDir = new File(Main.getMain().getDir(), "Levels");
+
+    public void init() {
+        if(!levelDir.exists()) levelDir.mkdir();
+        Logger.log("Level System initialised", Logger.LogType.INFO);
+    }
+
     public void loadLevel(String level) {
-        File levelFile = new File(Main.getMain().getDir(), level);
+        File levelFile = new File(levelDir, level);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(levelFile));
-
+            Util.currentLevel = level;
             String line;
+            /*
+            Remove all objects to prevent interference with other levels
+             */
+            Main.getMain().getObjectManager().getWorld().removeAllBodies();
+            Main.getMain().getObjectManager().getLineBodies().clear();
+
             while ((line = bufferedReader.readLine()) != null) {
                 String[] splitLine = line.split(":");
                 if (splitLine.length > 6) {
@@ -64,21 +77,15 @@ public class LevelSystem {
                 }
             }
             bufferedReader.close();
+            Main.getMain().setCurrentScreen(null);
         } catch (IOException e) {
             e.printStackTrace();
             Logger.log("Error while reading level file: " + level, Logger.LogType.ERROR);
         }
     }
 
-    public ArrayList<File> getLevels() {
-        ArrayList<File> filesOut = new ArrayList<>();
-        File[] file = Main.getMain().getDir().listFiles();
-        for (int i = 0; i < file.length; i++) {
-            if (!file[i].isDirectory()) {
-                filesOut.add(file[i]);
-            }
-        }
-        return filesOut;
+    public File[] getLevels() {
+        return levelDir.listFiles();
     }
 
     private String getDate() {
@@ -89,7 +96,7 @@ public class LevelSystem {
         Method to save a level, All Objects that are input are saved with their syntax
          */
     public void saveLevel(ArrayList<Prevent> in) {
-        File file = new File(Main.getMain().getDir(), "Level " + (Main.getMain().getDir().listFiles().length + 1) + ".txt");
+        File file = new File(levelDir, "Level " + (getLevels().length + 1) + ".DAT");
         Logger.log("Saving level: " + file.getName(), Logger.LogType.INFO);
         try {
             if (!file.exists()) file.createNewFile();

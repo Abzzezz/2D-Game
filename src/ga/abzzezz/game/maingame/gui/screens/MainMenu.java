@@ -9,7 +9,10 @@ package ga.abzzezz.game.maingame.gui.screens;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.maingame.gui.basis.GuiButton;
 import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
+import ga.abzzezz.game.maingame.utility.CrashHandler;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.FontUtil;
+import ga.abzzezz.game.maingame.utility.FontUtilHelper;
 
 import java.awt.*;
 
@@ -23,6 +26,14 @@ public class MainMenu extends GuiScreen {
             Main.getMain().setCurrentScreen(new LevelSelector());
         } else if (buttonID == 1) {
             Main.getMain().setCurrentScreen(new LevelBuilder());
+        }else if (buttonID == 2) {
+            CrashHandler.customLine();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.exit(8);
         }
         super.buttonPressed(buttonID);
     }
@@ -30,16 +41,16 @@ public class MainMenu extends GuiScreen {
     @Override
     public void initialiseGui() {
         int buttonWidth = 100;
-        guiButtons.add(new GuiButton("Play", display()[0] / 2 - buttonWidth / 2, display()[1] / 2, buttonWidth, 30, 0));
-        guiButtons.add(new GuiButton("Build", display()[0] / 2 - buttonWidth / 2, display()[1] / 2 + 50, buttonWidth, 30, 1));
+        guiButtons.add(new GuiButton("Play", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight(), buttonWidth, 30, 0));
+        guiButtons.add(new GuiButton("Build", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight() + 50, buttonWidth, 30, 1));
+        guiButtons.add(new GuiButton("Quit", DisplayHelper.getHalfWidth() - buttonWidth / 2, DisplayHelper.getHalfHeight() + 100, buttonWidth, 30, 2));
 
         super.initialiseGui();
     }
 
     @Override
     public void drawScreen() {
-        fontUtil.drawText("PONG", display()[0] / 2 - fontUtil.getStringWidth("PONG") / 2, display()[1] / 6, Color.BLACK);
-
+        FontUtilHelper.drawMiddleMenu("PONG!");
         super.drawScreen();
     }
 }

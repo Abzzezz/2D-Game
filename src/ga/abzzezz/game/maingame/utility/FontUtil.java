@@ -7,6 +7,7 @@
 package ga.abzzezz.game.maingame.utility;
 
 import ga.abzzezz.game.Main;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
@@ -45,8 +46,26 @@ public class FontUtil {
         }
     }
 
+    public void drawCenteredText(String text, float xPos, float yPos, Color color) {
+        try {
+            GL11.glEnable(GL11.GL_BLEND);
+            unicodeFont.addAsciiGlyphs();
+            unicodeFont.getEffects().add(new ColorEffect(color));
+            unicodeFont.loadGlyphs();
+            unicodeFont.drawString(xPos - centerText(text), yPos, text);
+            GL11.glDisable(GL11.GL_BLEND);
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public int centerText(String text) {
         return getStringWidth(text) / 2;
+    }
+
+    public int centerTextMiddle(String text) {
+        return Display.getWidth() / 2 - getStringWidth(text) / 2;
     }
 
     public int getFontSize() {

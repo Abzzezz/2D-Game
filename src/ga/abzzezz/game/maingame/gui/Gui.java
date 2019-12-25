@@ -29,6 +29,7 @@ public class Gui {
 
     public void keyPressed(int keyCode, char keyChar, boolean hold) {
         if (keyCode == Keyboard.KEY_F1) {
+            if(Main.getMain().getOldScreen() != null)
             Main.getMain().setCurrentScreen(Main.getMain().getOldScreen());
         }
 

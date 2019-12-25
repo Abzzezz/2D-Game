@@ -12,6 +12,7 @@ package ga.abzzezz.game.core;
 import ga.abzzezz.game.Main;
 import ga.abzzezz.game.core.rendering.Renderer;
 import ga.abzzezz.game.core.utils.Logger;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -51,7 +52,7 @@ public class EngineCore {
 
     public void startCore() {
         registerHandlers();
-        initGL(800, 600);
+        initGL(DisplayHelper.getWidth(), DisplayHelper.getHeight());
         setupCores();
         Logger.log("Engine Set up...", Logger.LogType.INFO);
         while (true) {
@@ -83,12 +84,11 @@ public class EngineCore {
 
         Display.setTitle("PONG!");
         glEnable(GL_TEXTURE_2D);
-        Color uiColor = new Color(0x9e9e9e);
+        Color uiColor = new Color(0xc3e50);
         float red = uiColor.getRed() / 255.0F;
         float green = uiColor.getGreen() / 255.0F;
         float blue = uiColor.getBlue() / 255.0F;
         glClearColor(red, green, blue, 1.0f);
-        // enable alpha blending
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glViewport(0, 0, width, height);
@@ -111,13 +111,31 @@ public class EngineCore {
             gameCycle.cycle();
             renderer.render();
         } else {
+            if (main.isSliding()) {
+                /*
+                Very nice to show acceleration when sliding.
+                x = 10 * e.g (200 / 100) * 1.2
+                x = 36
+                slide = x
+                 */
+                main.setSlide(10 * (main.getSlide() / 100) * 1.2F);
+                if (main.getSlide()  <= 0) main.stopSliding();
+            }
+            glPushMatrix();
+            //Pretty bad way to do it, please don`t judge
+            main.getCurrentScreen().drawBars();
+            //
+            glTranslatef(Main.getMain().getSlide(), 0, 0);
             main.getCurrentScreen().drawScreen();
+            glPopMatrix();
         }
 
         while (Mouse.next()) {
             if (Mouse.getEventButtonState()) {
                 if (main.getCurrentScreen() != null) {
                     main.getCurrentScreen().mousePress(Mouse.getEventButton());
+                } else {
+                    gameCycle.mousePressed(Mouse.getEventButton());
                 }
             }
         }
@@ -125,7 +143,7 @@ public class EngineCore {
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState())
                 if (main.getCurrentScreen() == null) {
-                    renderer.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
+                    gameCycle.keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter());
                 } else {
                     main.getCurrentScreen().keyPressed(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.isRepeatEvent());
                 }

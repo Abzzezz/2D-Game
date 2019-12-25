@@ -13,7 +13,10 @@ import ga.abzzezz.game.maingame.gui.basis.GuiScreen;
 import ga.abzzezz.game.maingame.gui.screens.MainMenu;
 import ga.abzzezz.game.maingame.level.LevelSystem;
 import ga.abzzezz.game.maingame.object.ObjectManager;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
 import ga.abzzezz.game.maingame.utility.InternetConnection;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
 import java.io.File;
 
@@ -33,7 +36,8 @@ public class Main {
     private byte version;
     private File dir;
     private InternetConnection internetConnection;
-
+    private float slide;
+    private boolean isSlide;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -82,6 +86,8 @@ public class Main {
          */
         internetConnection.initConnections();
 
+        levelSystem.init();
+
         /*
         Current Screen, so menus can be displayed
          */
@@ -96,14 +102,29 @@ public class Main {
     Sets the current Screen(Class) to render, old screen is cleaned before and new screen is initialised
      */
     public void setCurrentScreen(GuiScreen currentScreen) {
-        if (this.currentScreen != null) {
-            this.currentScreen.onGuiClosed();
-        }
+        /*
+        Set current Screen to old Screen to later overwrite it
+         */
         this.oldScreen = this.currentScreen;
-        this.currentScreen = currentScreen;
+        if (this.currentScreen != null) this.currentScreen.onGuiClosed();
 
-        if (currentScreen != null)
-            currentScreen.initialiseGui();
+        /*
+        Check if display is created if not proceed without slide
+         */
+        if (Display.isCreated()) {
+            slide = DisplayHelper.getWidth();
+            isSlide = true;
+        }
+        this.currentScreen = currentScreen;
+        if (currentScreen != null) currentScreen.initialiseGui();
+    }
+
+    /*
+    Set the slide to x = 0 then set isslide to false to stop sliding
+     */
+    public void stopSliding() {
+        slide = 0;
+        isSlide = false;
     }
 
     public ObjectManager getObjectManager() {
@@ -128,5 +149,17 @@ public class Main {
 
     public InternetConnection getInternetConnection() {
         return internetConnection;
+    }
+
+    public boolean isSliding() {
+        return isSlide;
+    }
+
+    public float getSlide() {
+        return slide;
+    }
+
+    public void setSlide(float amount) {
+        slide -= amount;
     }
 }

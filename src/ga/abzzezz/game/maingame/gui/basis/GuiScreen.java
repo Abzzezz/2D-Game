@@ -6,7 +6,11 @@
 
 package ga.abzzezz.game.maingame.gui.basis;
 
+import ga.abzzezz.game.core.rendering.RenderHelper;
 import ga.abzzezz.game.maingame.gui.Gui;
+import ga.abzzezz.game.maingame.utility.ColorHelper;
+import ga.abzzezz.game.maingame.utility.DisplayHelper;
+import org.lwjgl.opengl.GL11;
 
 public class GuiScreen extends Gui {
 
@@ -31,8 +35,25 @@ public class GuiScreen extends Gui {
         super.drawScreen();
     }
 
-
-    public int[] display() {
-        return new int[]{800, 600};
+    public void drawBars() {
+        RenderHelper.drawQuad(0, 0, getWidth(), 100, ColorHelper.getBlackTransparent());
+        RenderHelper.drawQuad(0, getHeight() - 50, getWidth(), 50, ColorHelper.getBlackTransparent());
     }
+
+    public int getWidth() {
+        return DisplayHelper.getWidth();
+    }
+
+    public int getHeight() {
+        return DisplayHelper.getHeight();
+    }
+
+    public int getHalfWidth() {
+        return DisplayHelper.getHalfWidth();
+    }
+
+    public int getHalfHeight() {
+        return DisplayHelper.getHalfHeight();
+    }
+
 }
