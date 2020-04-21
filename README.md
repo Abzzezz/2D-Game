@@ -13,7 +13,7 @@
 
 ## Contact:
 > Discord: Abzze$$#1562
-> Twitter: https://twitter.com/Abzzezz1
+> Twitter: https://twitter.com/aimyugata
 
 ## Libraries used: 
 
